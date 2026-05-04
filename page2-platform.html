@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一带一路跨境经济协作融合平台</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  font-family:'Noto Sans SC','Inter',-apple-system,sans-serif;
+  background:
+    radial-gradient(ellipse 100% 50% at 50% 0%,rgba(91,158,255,.06) 0%,transparent 60%),
+    radial-gradient(ellipse 70% 50% at 0% 100%,rgba(80,60,200,.05) 0%,transparent 60%),
+    radial-gradient(ellipse 70% 50% at 100% 100%,rgba(0,150,180,.04) 0%,transparent 60%),
+    linear-gradient(165deg,#050d1f 0%,#0a1a35 35%,#0f2347 70%,#0a1a35 100%);
+  min-height:100vh;color:#fff;overflow-x:hidden;
+}
+
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:radial-gradient(circle at 1px 1px, rgba(255,255,255,.015) 1px, transparent 1px);
+  background-size:3px 3px;pointer-events:none;z-index:0;
+}
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:
+    radial-gradient(circle at 12% 18%,rgba(160,200,255,.6) 0%,transparent 1.2%),
+    radial-gradient(circle at 88% 22%,rgba(180,160,255,.5) 0%,transparent 1.2%),
+    radial-gradient(circle at 78% 82%,rgba(140,210,235,.5) 0%,transparent 1.2%),
+    radial-gradient(circle at 22% 78%,rgba(160,180,255,.5) 0%,transparent 1.2%),
+    radial-gradient(circle at 50% 50%,rgba(180,200,255,.4) 0%,transparent .8%);
+  pointer-events:none;z-index:0;
+}
+
+/* 顶部导航栏 - Logo + 返回按钮 */
+.top-nav{
+  position:fixed;top:0;left:0;right:0;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:20px 40px;z-index:20;
+  background:linear-gradient(180deg,rgba(5,12,25,.85),rgba(5,12,25,0));
+  backdrop-filter:blur(8px);
+}
+
+.logo-top{
+  display:flex;align-items:center;gap:12px;
+  text-decoration:none;color:inherit;
+}
+.logo-emblem{
+  width:42px;height:42px;border-radius:50%;
+  background:linear-gradient(135deg,#5b9eff,#3b7dd8);
+  color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:16px;font-weight:700;
+  box-shadow:0 4px 14px rgba(91,158,255,.4);position:relative;
+}
+.logo-emblem::before{
+  content:'';position:absolute;inset:-3px;border-radius:50%;
+  border:1px solid rgba(91,158,255,.25);
+}
+.logo-text-cn{font-size:15px;font-weight:600;color:#fff;letter-spacing:1px;line-height:1;}
+.logo-text-en{font-size:10px;color:rgba(180,210,255,.6);margin-top:5px;letter-spacing:1.6px;}
+
+/* 返回按钮 */
+.back-btn{
+  display:flex;align-items:center;gap:8px;
+  padding:9px 18px;
+  background:rgba(91,158,255,.08);
+  border:1px solid rgba(91,158,255,.25);
+  border-radius:8px;
+  color:rgba(220,235,255,.85);
+  font-size:13px;font-weight:500;
+  text-decoration:none;
+  transition:all .25s;
+  font-family:inherit;
+  cursor:pointer;
+}
+.back-btn:hover{
+  background:rgba(91,158,255,.18);
+  border-color:rgba(160,200,255,.4);
+  color:#fff;
+  transform:translateX(-2px);
+}
+.back-btn::before{
+  content:'←';font-size:16px;
+}
+
+.container{
+  max-width:1300px;margin:0 auto;
+  padding:110px 48px 80px;
+  position:relative;z-index:1;
+}
+
+.page-header{text-align:center;margin-bottom:64px;}
+.page-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(91,158,255,.10);
+  border:1px solid rgba(91,158,255,.25);
+  border-radius:24px;padding:7px 18px;
+  font-size:11.5px;color:#a8c9ff;font-weight:500;
+  margin-bottom:24px;letter-spacing:1.5px;
+  backdrop-filter:blur(8px);
+}
+.page-tag-dot{
+  width:6px;height:6px;border-radius:50%;background:#5b9eff;
+  box-shadow:0 0 8px #5b9eff;animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+.title-main{
+  font-size:38px;font-weight:800;color:#fff;
+  letter-spacing:1.5px;margin-bottom:16px;
+  background:linear-gradient(180deg,#fff 50%,rgba(180,210,255,.65));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;text-shadow:0 2px 20px rgba(91,158,255,.2);
+}
+.title-sub{font-size:15px;color:rgba(180,210,255,.7);letter-spacing:1px;font-weight:300;}
+
+.grid-box{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+
+.card-item{
+  background:linear-gradient(165deg,rgba(30,55,100,.32) 0%,rgba(15,35,71,.45) 50%,rgba(10,26,53,.52) 100%);
+  border:1px solid rgba(120,180,255,.18);
+  border-radius:18px;padding:32px 30px;
+  position:relative;overflow:hidden;
+  backdrop-filter:blur(28px) saturate(150%);
+  -webkit-backdrop-filter:blur(28px) saturate(150%);
+  transition:all .35s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 8px 24px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.08),inset 0 0 0 1px rgba(120,180,255,.04);
+}
+.card-item::before{
+  content:'';position:absolute;inset:0;border-radius:18px;padding:1px;
+  background:linear-gradient(135deg,rgba(160,200,255,.25) 0%,transparent 35%,transparent 65%,rgba(160,180,255,.15) 100%);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;
+}
+.card-item::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:50%;
+  background:radial-gradient(ellipse 80% 100% at 50% 0%,rgba(120,180,255,.06) 0%,transparent 70%);
+  pointer-events:none;border-radius:18px 18px 0 0;
+}
+.card-item:hover{
+  border-color:rgba(160,200,255,.35);
+  background:linear-gradient(165deg,rgba(40,70,125,.4) 0%,rgba(20,45,85,.5) 50%,rgba(15,32,62,.55) 100%);
+  transform:translateY(-4px);
+  box-shadow:0 16px 40px rgba(0,0,0,.35),0 0 32px rgba(91,158,255,.12),inset 0 1px 0 rgba(255,255,255,.1);
+}
+
+.card-head{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:20px;padding:4px 0 18px 0;
+  border-bottom:1px solid rgba(120,180,255,.12);
+  cursor:pointer;position:relative;
+}
+.card-head::after{
+  content:'';position:absolute;bottom:-1px;left:0;width:60px;height:2px;
+  background:linear-gradient(90deg,#7fc4ff,#a89eff);
+  border-radius:2px;box-shadow:0 0 8px rgba(127,196,255,.5);transition:width .3s;
+}
+.card-head:hover::after{width:120px;}
+
+.card-title{
+  font-size:18px;font-weight:600;color:#fff;letter-spacing:.5px;
+  display:flex;align-items:center;gap:14px;
+}
+.card-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:9px;
+  background:linear-gradient(135deg,#5b9eff,#3b7dd8);
+  font-size:12px;font-weight:700;font-family:'Inter',monospace;
+  color:#fff;flex-shrink:0;letter-spacing:.5px;
+  box-shadow:0 4px 12px rgba(91,158,255,.4);
+}
+
+.arrow{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 16px;
+  background:linear-gradient(135deg,rgba(127,196,255,.25),rgba(91,158,255,.15));
+  border:1.5px solid rgba(180,220,255,.6);
+  border-radius:24px;
+  font-size:13px;color:#ffffff;
+  font-weight:600;letter-spacing:.5px;
+  font-family:'Noto Sans SC',sans-serif;
+  cursor:pointer;
+  transition:all .3s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 0 14px rgba(127,196,255,.3),inset 0 1px 0 rgba(255,255,255,.2);
+  flex-shrink:0;white-space:nowrap;
+}
+.arrow::before{content:'展开详情';}
+.arrow::after{
+  content:'▾';font-size:14px;display:inline-block;
+  transition:transform .3s;line-height:1;
+}
+.card-head:hover .arrow{
+  background:linear-gradient(135deg,rgba(180,220,255,.4),rgba(127,196,255,.25));
+  border-color:rgba(200,230,255,.9);
+  box-shadow:0 0 22px rgba(127,196,255,.55),inset 0 1px 0 rgba(255,255,255,.35);
+  transform:translateY(-1px);
+}
+.card-item.open .arrow{
+  background:linear-gradient(135deg,rgba(127,196,255,.4),rgba(91,158,255,.25));
+  border-color:rgba(180,220,255,.9);
+}
+.card-item.open .arrow::before{content:'收起';}
+.card-item.open .arrow::after{transform:rotate(180deg);}
+
+.card-desc{font-size:13.5px;color:rgba(220,235,255,.62);line-height:1.8;margin-bottom:24px;padding:0 4px;font-weight:300;}
+
+.btn-dark{
+  background:linear-gradient(135deg,rgba(8,20,42,.95),rgba(13,32,68,.95));
+  color:#fff;border:1px solid rgba(120,180,255,.32);
+  padding:12px 26px;border-radius:10px;
+  font-size:13.5px;font-weight:500;letter-spacing:1px;
+  cursor:pointer;font-family:inherit;
+  transition:all .25s;
+  display:inline-flex;align-items:center;gap:10px;
+  box-shadow:0 4px 14px rgba(0,0,0,.3);
+}
+.btn-dark:hover{
+  background:linear-gradient(135deg,rgba(13,32,68,.98),rgba(26,53,104,.98));
+  border-color:rgba(160,200,255,.55);
+  transform:translateY(-1px);
+  box-shadow:0 6px 18px rgba(0,0,0,.4),0 0 16px rgba(91,158,255,.18);
+}
+.btn-dark::after{content:'→';font-size:14px;}
+
+.drop-wrap{max-height:0;overflow:hidden;transition:max-height .45s ease;}
+.card-item.open .drop-wrap{max-height:1400px;}
+.drop-content{margin-top:28px;padding-top:24px;border-top:1px solid rgba(120,180,255,.12);}
+.drop-title{
+  font-size:11.5px;color:rgba(168,201,255,.85);letter-spacing:1.5px;margin-bottom:18px;
+  display:flex;align-items:center;gap:10px;font-weight:600;text-transform:uppercase;
+}
+.drop-title::before{
+  content:'';width:3px;height:14px;
+  background:linear-gradient(180deg,#7fc4ff,#a89eff);border-radius:2px;
+  box-shadow:0 0 6px rgba(127,196,255,.5);
+}
+
+.sub-modules{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.sub-modules.cols-1{grid-template-columns:1fr;}
+.sub-mod{
+  background:rgba(91,158,255,.05);border:1px solid rgba(91,158,255,.12);
+  border-radius:10px;padding:14px 16px;
+  display:flex;align-items:center;gap:12px;cursor:pointer;
+  transition:all .25s;font-size:13px;color:rgba(220,235,255,.85);
+  position:relative;overflow:hidden;
+}
+.sub-mod::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(91,158,255,.1),transparent);
+  opacity:0;transition:opacity .3s;
+}
+.sub-mod:hover::before{opacity:1;}
+.sub-mod:hover{
+  border-color:rgba(160,200,255,.4);transform:translateX(3px);
+  color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.15);
+}
+.sub-mod-num{
+  flex-shrink:0;width:24px;height:24px;border-radius:50%;
+  background:rgba(91,158,255,.18);border:1px solid rgba(91,158,255,.32);
+  display:flex;align-items:center;justify-content:center;
+  font-size:10.5px;font-weight:700;color:#a8c9ff;
+  font-family:'Inter',monospace;position:relative;z-index:1;
+}
+.sub-mod-text{flex:1;line-height:1.5;font-weight:400;position:relative;z-index:1;}
+.sub-mod-arrow{font-size:11px;color:rgba(168,201,255,.4);transition:all .25s;position:relative;z-index:1;}
+.sub-mod:hover .sub-mod-arrow{color:#a8c9ff;transform:translateX(3px);}
+
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(5,12,25,.82);
+  backdrop-filter:blur(12px);display:none;
+  align-items:center;justify-content:center;z-index:100;padding:20px;
+  animation:fadeIn .25s;
+}
+.modal-overlay.show{display:flex;}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+.modal{
+  background:linear-gradient(165deg,rgba(30,55,100,.55),rgba(10,26,53,.92));
+  border:1px solid rgba(160,200,255,.3);
+  border-radius:18px;max-width:540px;width:100%;padding:36px;
+  backdrop-filter:blur(28px) saturate(160%);
+  box-shadow:0 24px 60px rgba(0,0,0,.5),0 0 40px rgba(91,158,255,.12),inset 0 1px 0 rgba(255,255,255,.1);
+  position:relative;animation:slideUp .3s;
+}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+.modal-close{
+  position:absolute;top:18px;right:18px;width:34px;height:34px;border-radius:50%;
+  background:rgba(160,210,255,.12);border:1.5px solid rgba(180,220,255,.4);
+  color:#fff;font-size:16px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all .2s;
+}
+.modal-close:hover{background:rgba(180,220,255,.28);transform:rotate(90deg);}
+
+.modal-tag{
+  display:inline-block;font-size:11px;color:#a8c9ff;letter-spacing:1.8px;font-weight:600;
+  background:rgba(91,158,255,.12);border:1px solid rgba(91,158,255,.3);
+  border-radius:5px;padding:4px 12px;margin-bottom:16px;
+}
+.modal-title{font-size:23px;font-weight:700;color:#fff;letter-spacing:.5px;margin-bottom:16px;line-height:1.4;}
+.modal-desc{font-size:14px;color:rgba(220,235,255,.78);line-height:1.85;margin-bottom:26px;font-weight:300;}
+.modal-features{
+  background:rgba(91,158,255,.05);border:1px solid rgba(91,158,255,.15);
+  border-radius:12px;padding:20px;margin-bottom:28px;
+}
+.modal-feat-item{
+  display:flex;gap:14px;align-items:flex-start;
+  font-size:13px;color:rgba(220,235,255,.85);line-height:1.6;padding:9px 0;
+}
+.modal-feat-item::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:linear-gradient(135deg,#7fc4ff,#a89eff);
+  flex-shrink:0;margin-top:8px;box-shadow:0 0 6px rgba(127,196,255,.5);
+}
+.modal-actions{display:flex;gap:12px;}
+.modal-btn-primary{
+  flex:1;padding:13px;
+  background:linear-gradient(135deg,#1a3a68,#2a5293);
+  color:#fff;border:none;border-radius:10px;
+  font-size:14px;font-weight:500;letter-spacing:2px;
+  cursor:pointer;font-family:inherit;
+  transition:all .2s;box-shadow:0 4px 14px rgba(26,58,104,.4);
+}
+.modal-btn-primary:hover{opacity:.92;transform:translateY(-1px);}
+.modal-btn-secondary{
+  padding:13px 22px;background:rgba(91,158,255,.08);
+  color:#a8c9ff;border:1px solid rgba(91,158,255,.3);
+  border-radius:10px;font-size:14px;cursor:pointer;font-family:inherit;transition:all .2s;
+}
+.modal-btn-secondary:hover{background:rgba(91,158,255,.18);color:#fff;}
+
+@media (max-width:900px){
+  .top-nav{padding:14px 20px;}
+  .container{padding:90px 16px 40px;}
+  .title-main{font-size:25px;}
+  .title-sub{font-size:13px;}
+  .grid-box{grid-template-columns:1fr;gap:18px;}
+  .card-item{padding:24px 22px;}
+  .card-title{font-size:16px;}
+  .sub-modules{grid-template-columns:1fr;}
+  .arrow{padding:6px 12px;font-size:12px;}
+}
+</style>
+</head>
+<body>
+
+<!-- 顶部导航：Logo + 返回按钮 -->
+<div class="top-nav">
+  <a href="page1-login.html" class="logo-top">
+    <div class="logo-emblem">联</div>
+    <div>
+      <div class="logo-text-cn">联合国采购投标专家平台</div>
+      <div class="logo-text-en">UN PROCUREMENT EXPERT</div>
+    </div>
+  </a>
+  <a href="page1-login.html" class="back-btn">返回登录</a>
+</div>
+
+<div class="container">
+
+  <div class="page-header">
+    <div class="page-tag">
+      <div class="page-tag-dot"></div>
+      OFFICIAL PROCUREMENT GATEWAY · 官方授权平台
+    </div>
+    <h1 class="title-main">一带一路跨境经济协作融合平台</h1>
+    <p class="title-sub">合规跨境经济协作服务 · 全球资源互联互通</p>
+  </div>
+
+  <div class="grid-box">
+
+    <div class="card-item" data-card="1">
+      <div class="card-head" onclick="toggleCard(this)">
+        <div class="card-title">
+          <span class="card-num">01</span>
+          AI大模型智能投标服务平台
+        </div>
+        <div class="arrow"></div>
+      </div>
+      <div class="card-desc">全链路智能合规服务、风控分析、资源对接、全球跨境一站式服务</div>
+      <button class="btn-dark">立即入驻开通</button>
+
+      <div class="drop-wrap">
+        <div class="drop-content">
+          <div class="drop-title">十大核心服务模块</div>
+          <div class="sub-modules">
+            <div class="sub-mod" onclick="openModal('1-1')"><div class="sub-mod-num">01</div><div class="sub-mod-text">联合国主体注册</div><div class="sub-mod-arrow">→</div></div>
+            <div class="sub-mod" onclick="openModal('1-2')"><div class="sub-mod-num">02</div><div class="sub-mod-text">八大企业质量运营管理体系</div><div class="sub-mod-arrow">→</div></div>
+            <div class="sub-mod" onclick="openModal('1-3')"><div class="sub-mod-num">03</div><div class="sub-mod-text">29个采购平台标讯获取</div><div class="sub-mod-arrow">→</div></div>
+            <div class="sub-mod" onclick="openModal('1-4')"><div class="sub-mod-num">04</div><div class="sub-mod-text">6种官方语言译制</div><div class="sub-mod-arrow">→</div></div>
+            <div class="sub-mod" onclick="openModal('1-5')"><div class="sub-mod-num">05</div><div class="sub-mod-text">中文信息即时推送</div><div class="sub-mod-arrow">→</div></div>
+            <div class="sub-mod" onclick="openModal('1-6')"><div class="sub-mod-num">06</div><div class="sub-mod-text">AI智能投标分析</div><div class="sub-mod-arrow">→</div></div>
+            <div class="sub-mod" onclick="openModal('1-7')"><div class="sub-mod-num">07</div><div class="sub-mod-text">投标策略与价格建议</div><div class="sub-mod-arrow">→</div></div>
+            <div class="sub-mod" onclick="openModal('1-8')"><div class="sub-mod-num">08</div><div class="sub-mod-text">合规风控审查</div><div class="sub-mod-arrow">→</div></div>
+            <div class="sub-mod" onclick="openModal('1-9')"><div class="sub-mod-num">09</div><div class="sub-mod-text">企业资料数字备案</div><div class="sub-mod-arrow">→</div></div>
+            <div class="sub-mod" onclick="openModal('1-10')"><div class="sub-mod-num">10</div><div class="sub-mod-text">全流程配套服务</div><div class="sub-mod-arrow">→</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-item" data-card="2">
+      <div class="card-head" onclick="toggleCard(this)">
+        <div class="card-title">
+          <span class="card-num">02</span>
+          联合国采购官方直通平台
+        </div>
+        <div class="arrow"></div>
+      </div>
+      <div class="card-desc">千亿级联合国采购渠道、政企优质资源官方对接门户</div>
+      <button class="btn-dark">立即入驻开通</button>
+
+      <div class="drop-wrap">
+        <div class="drop-content">
+          <div class="drop-title">四大核心体系</div>
+          <div class="sub-modules cols-1">
+            <div class="sub-mod" onclick="openModal('2-1')"><div class="sub-mod-num">01</div><div class="sub-mod-text">11条官方采购通道直送高级官员信箱</div><div class="sub-mod-arrow">→</div></div>
+            <div class="sub-mod" onclick="openModal('2-2')"><div class="sub-mod-num">02</div><div class="sub-mod-text">联合国采购官员入驻平台数据库</div><div class="sub-mod-arrow">→</div></div>
+            <div class="sub-mod" onclick="openModal('2-3')"><div class="sub-mod-num">03</div><div class="sub-mod-text">企业与官员专属互动沟通平台</div><div class="sub-mod-arrow">→</div></div>
+            <div class="sub-mod" onclick="openModal('2-4')"><div class="sub-mod-num">04</div><div class="sub-mod-text">对接联合国官方企业培训系统</div><div class="sub-mod-arrow">→</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-item" data-card="3">
+      <div class="card-head" onclick="toggleCard(this)">
+        <div class="card-title">
+          <span class="card-num">03</span>
+          联合国采购国际投标代理平台
+        </div>
+        <div class="arrow"></div>
+      </div>
+      <div class="card-desc">全流程联合国投标代理、全球属地机构深度赋能</div>
+      <button class="btn-dark">立即入驻开通</button>
+
+      <div class="drop-wrap">
+        <div class="drop-content">
+          <div class="drop-title">五大核心板块</div>
+          <div class="sub-modules cols-1">
+            <div class="sub-mod" onclick="openModal('3-1')"><div class="sub-mod-num">01</div><div class="sub-mod-text">合规联合国采购投标代理全流程服务</div><div class="sub-mod-arrow">→</div></div>
+            <div class="sub-mod" onclick="openModal('3-2')"><div class="sub-mod-num">02</div><div class="sub-mod-text">全球20个重点国家属地机构代理</div><div class="sub-mod-arrow">→</div></div>
+            <div class="sub-mod" onclick="openModal('3-3')"><div class="sub-mod-num">03</div><div class="sub-mod-text">联合国高级采购官员专家团队赋能</div><div class="sub-mod-arrow">→</div></div>
+            <div class="sub-mod" onclick="openModal('3-4')"><div class="sub-mod-num">04</div><div class="sub-mod-text">对接18,630家联合国签约供应商</div><div class="sub-mod-arrow">→</div></div>
+            <div class="sub-mod" onclick="openModal('3-5')"><div class="sub-mod-num">05</div><div class="sub-mod-text">联合国采购合同获取专属特殊通道</div><div class="sub-mod-arrow">→</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-item" data-card="4">
+      <div class="card-head" onclick="toggleCard(this)">
+        <div class="card-title">
+          <span class="card-num">04</span>
+          一带一路跨境经济协作融合平台
+        </div>
+        <div class="arrow"></div>
+      </div>
+      <div class="card-desc">2.0版本 待开发</div>
+      <button class="btn-dark">立即入驻开通</button>
+
+      <div class="drop-wrap">
+        <div class="drop-content">
+          <div class="drop-title">八大全球采购市场</div>
+          <div class="sub-modules">
+            <div class="sub-mod" onclick="openModal('4-1')"><div class="sub-mod-num">①</div><div class="sub-mod-text">东南亚国家及地区</div><div class="sub-mod-arrow">→</div></div>
+            <div class="sub-mod" onclick="openModal('4-2')"><div class="sub-mod-num">②</div><div class="sub-mod-text">中东国家及地区</div><div class="sub-mod-arrow">→</div></div>
+            <div class="sub-mod" onclick="openModal('4-3')"><div class="sub-mod-num">③</div><div class="sub-mod-text">非洲国家及地区</div><div class="sub-mod-arrow">→</div></div>
+            <div class="sub-mod" onclick="openModal('4-4')"><div class="sub-mod-num">④</div><div class="sub-mod-text">欧洲及欧盟采购国家地区</div><div class="sub-mod-arrow">→</div></div>
+            <div class="sub-mod" onclick="openModal('4-5')"><div class="sub-mod-num">⑤</div><div class="sub-mod-text">南美国家及地区</div><div class="sub-mod-arrow">→</div></div>
+            <div class="sub-mod" onclick="openModal('4-6')"><div class="sub-mod-num">⑥</div><div class="sub-mod-text">北美国家及地区</div><div class="sub-mod-arrow">→</div></div>
+            <div class="sub-mod" onclick="openModal('4-7')"><div class="sub-mod-num">⑦</div><div class="sub-mod-text">太平洋国家及地区</div><div class="sub-mod-arrow">→</div></div>
+            <div class="sub-mod" onclick="openModal('4-8')"><div class="sub-mod-num">⑧</div><div class="sub-mod-text">全球其他国际组织合作平台</div><div class="sub-mod-arrow">→</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalIfBg(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-tag" id="modalTag">SERVICE MODULE</div>
+    <div class="modal-title" id="modalTitle"></div>
+    <div class="modal-desc" id="modalDesc"></div>
+    <div class="modal-features" id="modalFeatures"></div>
+    <div class="modal-actions">
+      <button class="modal-btn-primary">立即入驻开通</button>
+      <button class="modal-btn-secondary" onclick="closeModal()">稍后了解</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleCard(head){
+  const card = head.closest('.card-item');
+  card.classList.toggle('open');
+}
+
+const modalData = {
+  '1-1': {tag:'CHANNEL 01 · MODULE 01', title:'联合国主体注册', desc:'专业团队全程辅助企业完成UNGM联合国全球采购市场供应商注册，打通联合国官方采购准入通道。', features:['UNGM注册全流程辅助','企业资质智能审核与优化','注册材料专业翻译与整理','官方审核进度跟进与反馈']},
+  '1-2': {tag:'CHANNEL 01 · MODULE 02', title:'八大企业质量运营管理体系', desc:'按照联合国供应商标准，为企业建立八大运营管理质量体系，并出具专项合规报告。', features:['劳动用工管理体系','社会责任管理体系','职业健康安全管理体系','反童工与未成年工保护体系','反强迫劳动管理体系','环境保护与低碳管理体系','反歧视与平等就业管理体系','反腐败与商业道德管理体系']},
+  '1-3': {tag:'CHANNEL 01 · MODULE 03', title:'29个采购平台标讯获取', desc:'7×24小时不间断扫描联合国及关联机构29个官方采购平台，实时获取最新采购标讯。', features:['全量标讯实时抓取','按企业产品智能匹配','商机优先级智能分级','重要标讯优先推送']},
+  '1-4': {tag:'CHANNEL 01 · MODULE 04', title:'6种官方语言译制', desc:'AI智能翻译联合国6种官方工作语言（英、法、西、阿、俄、中）的招标文件与采购公告。', features:['英语 / 法语 / 西班牙语','阿拉伯语 / 俄语 / 中文','专业术语精准翻译','原文+译文对照展示']},
+  '1-5': {tag:'CHANNEL 01 · MODULE 05', title:'中文信息即时推送', desc:'通过系统专属邮箱、企业微信、飞书等多渠道，将翻译后的标讯第一时间推送给入驻企业。', features:['多渠道同步推送','按行业分类精准触达','重要标讯优先推送','推送频率自定义']},
+  '1-6': {tag:'CHANNEL 01 · MODULE 06', title:'AI智能投标分析', desc:'依托大模型分析企业资质与历史中标合同数据，给出投标可行性、胜率预测等专业建议。', features:['投标可行性深度分析','胜率智能预测','竞品分析报告','SWOT分析建议']},
+  '1-7': {tag:'CHANNEL 01 · MODULE 07', title:'投标策略与价格建议', desc:'基于3-5年历史中标合同大数据，AI生成最优报价区间与投标策略方案。', features:['历史中标价格区间分析','最优报价智能建议','投标策略定制方案','谈判要点提示']},
+  '1-8': {tag:'CHANNEL 01 · MODULE 08', title:'合规风控审查', desc:'投标前进行全面合规审查，提前识别风险点，避免废标，保障投标成功率。', features:['资质合规审查','文件完整性检查','法律风险预警','合规建议报告']},
+  '1-9': {tag:'CHANNEL 01 · MODULE 09', title:'企业资料数字备案', desc:'企业资质证书、产品参数、技术文档全面数字化存档，投标时一键调取使用。', features:['资质证书数字化','产品技术参数库','投标历史档案','一键智能调取']},
+  '1-10': {tag:'CHANNEL 01 · MODULE 10', title:'全流程配套服务', desc:'从投标准备到中标交付的全流程配套服务，包括资质代办、合同审核、履约跟进等。', features:['资质代办服务','合同条款审核','履约进度管理','售后跟进服务']},
+  '2-1': {tag:'CHANNEL 02 · MODULE 01', title:'11条官方采购通道直送高级官员信箱', desc:'联合国年度采购体量超千亿美元，内设11条官方采购通道，平台提供采购立项书标准模板，可直送联合国高级官员官方信箱。', features:['11条官方采购通道全覆盖','采购立项书标准模板','高级官员官方信箱直送','官方回执跟踪']},
+  '2-2': {tag:'CHANNEL 02 · MODULE 02', title:'联合国采购官员入驻平台数据库', desc:'联合国采购官员可入驻平台数据库，参考企业采购立项报告资料，实现供需精准匹配。', features:['官员实名入驻','企业资料快速查阅','供需智能匹配','数据库实时更新']},
+  '2-3': {tag:'CHANNEL 02 · MODULE 03', title:'企业与官员专属互动沟通平台', desc:'搭建企业与联合国采购官员专属互动沟通平台，支持双轨沟通：邮件文字 + 视频连线。', features:['邮件 / 文字双轨沟通','一对一视频连线','专属咨询时段预约','沟通记录全程留档']},
+  '2-4': {tag:'CHANNEL 02 · MODULE 04', title:'对接联合国官方企业培训系统', desc:'全线对接联合国官方企业培训系统，企业入驻后可享受官方采购培训资源。', features:['联合国官方培训资源','采购流程深度培训','合规管理培训','投标技巧实战培训']},
+  '3-1': {tag:'CHANNEL 03 · MODULE 01', title:'合规联合国采购投标代理全流程服务', desc:'专业团队提供从招标解读、标书编制、商务谈判到合同签订的全流程合规代理服务。', features:['招标文件深度解读','专业标书精编服务','全程投标代理','合同签订辅导']},
+  '3-2': {tag:'CHANNEL 03 · MODULE 02', title:'全球20个重点国家属地机构代理', desc:'平台在全球20个重点国家地区设立属地机构，聘用本土母语人员提供驻地代理服务。', features:['全球20个属地机构','本土母语驻地团队','本地法律合规支持','属地化运营服务']},
+  '3-3': {tag:'CHANNEL 03 · MODULE 03', title:'联合国高级采购官员专家团队赋能', desc:'由联合国退休高级采购官员组建专家团队，深度赋能企业项目运作，专家拥有20-30年从业经验。', features:['联合国退休资深官员','20-30年从业经验','项目深度咨询','专家1对1辅导']},
+  '3-4': {tag:'CHANNEL 03 · MODULE 04', title:'对接18,630家联合国签约供应商', desc:'对接联合国在册的18,630家签约合作供应商，构建全球供应链协作网络，实现资源整合。', features:['18,630家签约供应商','全球供应链整合','资源对接撮合','合作网络共享']},
+  '3-5': {tag:'CHANNEL 03 · MODULE 05', title:'联合国采购合同获取专属特殊通道', desc:'通过平台专属特殊通道，大幅提升企业获取联合国采购合同的成功率。', features:['专属投标特殊通道','优先级智能调度','合同获取保障','成功率显著提升']},
+  '4-1': {tag:'GLOBAL MARKET · 01', title:'东南亚国家及地区', desc:'覆盖东盟10国政府采购及国际机构本地采购市场，深度对接东南亚区域经济一体化采购体系。', features:['东盟10国全覆盖','本地化对接服务','东南亚区域经济整合','本币结算支持']},
+  '4-2': {tag:'GLOBAL MARKET · 02', title:'中东国家及地区', desc:'对接中东海湾合作委员会（GCC）成员国及周边国家政府采购与基建项目市场。', features:['GCC海合会成员国','基建项目对接','石油化工采购','本地合规支持']},
+  '4-3': {tag:'GLOBAL MARKET · 03', title:'非洲国家及地区', desc:'对接非洲联盟（AU）54个成员国及非洲开发银行项目采购市场。', features:['非洲联盟54国','非洲开发银行项目','本地化运营网络','政府采购对接']},
+  '4-4': {tag:'GLOBAL MARKET · 04', title:'欧洲及欧盟采购国家地区', desc:'对接欧盟TED（Tenders Electronic Daily）官方采购平台，覆盖欧盟27国万亿级采购市场。', features:['欧盟TED平台对接','27国全域覆盖','欧元结算支持','欧盟合规体系']},
+  '4-5': {tag:'GLOBAL MARKET · 05', title:'南美国家及地区', desc:'对接南美洲国家联盟成员国及泛美开发银行项目采购市场。', features:['南美联盟成员国','泛美开发银行项目','西语市场服务','本地代理网络']},
+  '4-6': {tag:'GLOBAL MARKET · 06', title:'北美国家及地区', desc:'对接北美自由贸易协定（USMCA）成员国政府采购及国际机构采购市场。', features:['美加墨USMCA市场','北美政府采购','国际机构对接','英语合规支持']},
+  '4-7': {tag:'GLOBAL MARKET · 07', title:'太平洋国家及地区', desc:'对接太平洋岛国论坛成员国及大洋洲区域采购市场。', features:['太平洋岛国论坛','大洋洲采购市场','澳新地区对接','区域合作平台']},
+  '4-8': {tag:'GLOBAL MARKET · 08', title:'全球其他国际组织合作平台', desc:'对接世界银行、IMF、亚洲开发银行等全球主要国际组织采购合作平台。', features:['世界银行采购','IMF合作项目','亚洲开发银行','其他多边机构对接']},
+};
+
+function openModal(key){
+  const data = modalData[key];
+  if(!data) return;
+  document.getElementById('modalTag').textContent = data.tag;
+  document.getElementById('modalTitle').textContent = data.title;
+  document.getElementById('modalDesc').textContent = data.desc;
+  const featuresHtml = data.features.map(f => `<div class="modal-feat-item">${f}</div>`).join('');
+  document.getElementById('modalFeatures').innerHTML = featuresHtml;
+  document.getElementById('modalOverlay').classList.add('show');
+}
+
+function closeModal(){
+  document.getElementById('modalOverlay').classList.remove('show');
+}
+
+function closeModalIfBg(e){
+  if(e.target.id === 'modalOverlay') closeModal();
+}
+
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape') closeModal();
+});
+</script>
+
+</body>
+</html>

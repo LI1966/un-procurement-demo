@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI自动注册UNGM联合国供应商 - 联合国采购投标专家平台</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  font-family:'Noto Sans SC','Inter',-apple-system,sans-serif;
+  background:
+    radial-gradient(ellipse 100% 50% at 50% 0%,rgba(91,158,255,.06) 0%,transparent 60%),
+    radial-gradient(ellipse 70% 50% at 0% 100%,rgba(80,60,200,.05) 0%,transparent 60%),
+    linear-gradient(165deg,#050d1f 0%,#0a1a35 35%,#0f2347 70%,#0a1a35 100%);
+  min-height:100vh;color:#fff;overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:radial-gradient(circle at 1px 1px, rgba(255,255,255,.015) 1px, transparent 1px);
+  background-size:3px 3px;pointer-events:none;z-index:0;
+}
+
+/* 顶部导航 */
+.top-nav{
+  position:fixed;top:0;left:0;right:0;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:20px 40px;z-index:20;
+  background:linear-gradient(180deg,rgba(5,12,25,.85),rgba(5,12,25,0));
+  backdrop-filter:blur(8px);
+}
+.logo-top{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;}
+.logo-emblem{
+  width:42px;height:42px;border-radius:50%;
+  background:linear-gradient(135deg,#5b9eff,#3b7dd8);
+  color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:16px;font-weight:700;
+  box-shadow:0 4px 14px rgba(91,158,255,.4);position:relative;
+}
+.logo-emblem::before{
+  content:'';position:absolute;inset:-3px;border-radius:50%;
+  border:1px solid rgba(91,158,255,.25);
+}
+.logo-text-cn{font-size:15px;font-weight:600;color:#fff;letter-spacing:1px;line-height:1;}
+.logo-text-en{font-size:10px;color:rgba(180,210,255,.6);margin-top:5px;letter-spacing:1.6px;}
+.back-btn{
+  display:flex;align-items:center;gap:8px;
+  padding:9px 18px;background:rgba(91,158,255,.08);
+  border:1px solid rgba(91,158,255,.25);border-radius:8px;
+  color:rgba(220,235,255,.85);font-size:13px;font-weight:500;
+  text-decoration:none;transition:all .25s;font-family:inherit;cursor:pointer;
+}
+.back-btn:hover{
+  background:rgba(91,158,255,.18);border-color:rgba(160,200,255,.4);color:#fff;
+}
+.back-btn::before{content:'←';font-size:16px;}
+
+/* 主体 */
+.container{
+  max-width:1100px;margin:0 auto;
+  padding:100px 32px 60px;
+  position:relative;z-index:1;
+}
+
+/* 页面标题 */
+.page-header{text-align:center;margin-bottom:40px;}
+.page-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(127,196,255,.10);
+  border:1px solid rgba(127,196,255,.25);
+  border-radius:24px;padding:6px 16px;
+  font-size:11.5px;color:#a8d4ff;font-weight:500;
+  margin-bottom:20px;letter-spacing:1.5px;
+}
+.page-tag-icon{
+  width:5px;height:5px;border-radius:50%;background:#7fc4ff;
+  box-shadow:0 0 8px #7fc4ff;
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.title-main{
+  font-size:32px;font-weight:700;color:#fff;
+  letter-spacing:1px;margin-bottom:12px;
+  background:linear-gradient(180deg,#fff 50%,rgba(180,210,255,.65));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.title-sub{font-size:14px;color:rgba(180,210,255,.7);letter-spacing:.5px;font-weight:300;}
+
+/* 进度条 */
+.steps-wrap{
+  background:rgba(20,40,75,.4);
+  border:1px solid rgba(120,180,255,.16);
+  border-radius:16px;padding:28px 36px;
+  margin-bottom:28px;
+  backdrop-filter:blur(20px);
+}
+.steps{
+  display:flex;justify-content:space-between;align-items:center;
+  position:relative;
+}
+.steps::before{
+  content:'';position:absolute;
+  top:18px;left:36px;right:36px;height:2px;
+  background:rgba(120,180,255,.15);
+  z-index:1;
+}
+.step-progress-line{
+  position:absolute;top:18px;left:36px;height:2px;
+  background:linear-gradient(90deg,#5b9eff,#a89eff);
+  z-index:2;transition:width .4s;
+  box-shadow:0 0 8px rgba(91,158,255,.5);
+}
+.step{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  position:relative;z-index:3;flex:1;
+}
+.step-circle{
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(20,40,75,.85);
+  border:2px solid rgba(120,180,255,.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;color:rgba(180,210,255,.6);
+  font-family:'Inter',monospace;
+  transition:all .3s;
+}
+.step.active .step-circle{
+  background:linear-gradient(135deg,#5b9eff,#3b7dd8);
+  border-color:#a8c9ff;color:#fff;
+  box-shadow:0 0 16px rgba(91,158,255,.5);
+  transform:scale(1.1);
+}
+.step.done .step-circle{
+  background:linear-gradient(135deg,#5b9eff,#3b7dd8);
+  border-color:#7fc4ff;color:#fff;
+}
+.step.done .step-circle::before{
+  content:'✓';font-size:16px;font-weight:700;
+}
+.step.done .step-circle .num{display:none;}
+.step-label{
+  font-size:12px;color:rgba(180,210,255,.65);
+  letter-spacing:.5px;text-align:center;
+  white-space:nowrap;
+}
+.step.active .step-label{color:#fff;font-weight:600;}
+.step.done .step-label{color:rgba(168,201,255,.85);}
+
+/* 表单卡片 */
+.form-card{
+  background:rgba(20,40,75,.42);
+  border:1px solid rgba(120,180,255,.16);
+  border-radius:18px;padding:36px 40px;
+  backdrop-filter:blur(24px) saturate(140%);
+  box-shadow:0 8px 24px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.06);
+  margin-bottom:24px;
+}
+.form-step-title{
+  font-size:20px;font-weight:600;color:#fff;
+  letter-spacing:.5px;margin-bottom:6px;
+}
+.form-step-desc{
+  font-size:13px;color:rgba(180,210,255,.65);
+  margin-bottom:28px;line-height:1.7;font-weight:300;
+}
+
+/* 表单项 */
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px;}
+.form-row.cols-1{grid-template-columns:1fr;}
+.fg{display:flex;flex-direction:column;}
+.fl{
+  font-size:12.5px;color:rgba(220,235,255,.85);font-weight:500;
+  margin-bottom:8px;letter-spacing:.3px;
+}
+.fl .req{color:#ff7a8a;margin-left:3px;}
+.fl .ai-tag{
+  display:inline-block;font-size:10px;
+  background:rgba(127,196,255,.12);color:#a8d4ff;
+  padding:2px 8px;border-radius:10px;
+  margin-left:6px;letter-spacing:.5px;
+  border:1px solid rgba(127,196,255,.25);
+}
+.fi,.fs,.ft{
+  width:100%;padding:11px 14px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(120,180,255,.18);
+  border-radius:8px;color:#fff;font-size:14px;
+  font-family:inherit;outline:none;
+  transition:all .2s;
+}
+.fi::placeholder,.ft::placeholder{color:rgba(180,210,255,.35);}
+.fi:focus,.fs:focus,.ft:focus{
+  border-color:rgba(160,200,255,.5);
+  background:rgba(91,158,255,.08);
+  box-shadow:0 0 0 3px rgba(91,158,255,.1);
+}
+.fs{cursor:pointer;appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a8c9ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;
+  padding-right:36px;
+}
+.fs option{background:#0a1a35;color:#fff;}
+.ft{min-height:90px;resize:vertical;font-family:inherit;}
+
+/* 上传文件 */
+.upload-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.upload-box{
+  background:rgba(91,158,255,.04);
+  border:1.5px dashed rgba(120,180,255,.3);
+  border-radius:10px;
+  padding:24px 18px;
+  text-align:center;cursor:pointer;
+  transition:all .25s;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.upload-box:hover{
+  background:rgba(91,158,255,.08);
+  border-color:rgba(160,200,255,.5);
+  transform:translateY(-2px);
+}
+.upload-icon{
+  width:42px;height:42px;border-radius:50%;
+  background:rgba(91,158,255,.15);
+  border:1px solid rgba(120,180,255,.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;color:#a8c9ff;
+}
+.upload-title{font-size:13px;color:#fff;font-weight:500;}
+.upload-title .req{color:#ff7a8a;}
+.upload-meta{font-size:11px;color:rgba(180,210,255,.55);font-weight:300;}
+.upload-box.uploaded .upload-icon{background:rgba(60,200,140,.18);border-color:rgba(60,200,140,.4);color:#5fe8a8;}
+.upload-box.uploaded .upload-meta{color:#5fe8a8;}
+
+/* 8大体系自检 */
+.qms-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.qms-item{
+  background:rgba(91,158,255,.05);
+  border:1px solid rgba(120,180,255,.15);
+  border-radius:10px;
+  padding:14px 16px;
+  display:flex;align-items:center;gap:12px;
+  cursor:pointer;transition:all .2s;
+}
+.qms-item:hover{border-color:rgba(160,200,255,.35);background:rgba(91,158,255,.08);}
+.qms-item.checked{
+  background:rgba(60,200,140,.08);
+  border-color:rgba(60,200,140,.4);
+}
+.qms-check{
+  width:22px;height:22px;border-radius:6px;
+  border:1.5px solid rgba(120,180,255,.4);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:all .2s;
+}
+.qms-item.checked .qms-check{
+  background:linear-gradient(135deg,#5fe8a8,#2dd476);
+  border-color:#5fe8a8;
+}
+.qms-item.checked .qms-check::before{
+  content:'✓';color:#fff;font-size:13px;font-weight:700;
+}
+.qms-name{flex:1;font-size:13px;color:#fff;font-weight:500;}
+.qms-meta{font-size:11px;color:rgba(180,210,255,.55);}
+
+/* 提交确认页 */
+.summary-box{
+  background:rgba(91,158,255,.05);
+  border:1px solid rgba(120,180,255,.18);
+  border-radius:12px;
+  padding:24px;margin-bottom:18px;
+}
+.summary-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:10px 0;border-bottom:1px solid rgba(120,180,255,.1);
+  font-size:13px;
+}
+.summary-row:last-child{border-bottom:none;}
+.summary-label{color:rgba(180,210,255,.7);}
+.summary-value{color:#fff;font-weight:500;text-align:right;}
+.ai-badge{
+  display:flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,rgba(127,196,255,.12),rgba(168,158,255,.08));
+  border:1px solid rgba(127,196,255,.3);
+  border-radius:12px;padding:16px 20px;margin-bottom:24px;
+}
+.ai-badge-icon{
+  width:42px;height:42px;border-radius:50%;
+  background:linear-gradient(135deg,#7fc4ff,#a89eff);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+  box-shadow:0 0 14px rgba(127,196,255,.4);
+}
+.ai-badge-text{flex:1;}
+.ai-badge-title{font-size:14px;color:#fff;font-weight:600;margin-bottom:3px;}
+.ai-badge-desc{font-size:12px;color:rgba(180,210,255,.7);font-weight:300;line-height:1.5;}
+
+/* 操作按钮 */
+.actions{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:14px;
+}
+.btn-prev{
+  padding:13px 28px;
+  background:rgba(91,158,255,.08);
+  color:rgba(220,235,255,.85);
+  border:1px solid rgba(120,180,255,.25);
+  border-radius:10px;
+  font-size:14px;font-weight:500;letter-spacing:1px;
+  cursor:pointer;font-family:inherit;
+  transition:all .2s;
+}
+.btn-prev:hover{background:rgba(91,158,255,.18);color:#fff;}
+.btn-prev:disabled{opacity:.4;cursor:not-allowed;}
+.btn-next{
+  padding:13px 36px;
+  background:linear-gradient(135deg,#5b9eff,#3b7dd8);
+  color:#fff;border:none;border-radius:10px;
+  font-size:14px;font-weight:600;letter-spacing:2px;
+  cursor:pointer;font-family:inherit;
+  transition:all .25s;
+  box-shadow:0 4px 14px rgba(91,158,255,.35);
+}
+.btn-next:hover{
+  transform:translateY(-1px);
+  box-shadow:0 6px 18px rgba(91,158,255,.5);
+}
+.btn-submit{
+  padding:14px 44px;
+  background:linear-gradient(135deg,#5fe8a8,#2dd476);
+  color:#fff;border:none;border-radius:10px;
+  font-size:14px;font-weight:600;letter-spacing:2px;
+  cursor:pointer;font-family:inherit;
+  transition:all .25s;
+  box-shadow:0 4px 14px rgba(60,200,140,.35);
+}
+.btn-submit:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(60,200,140,.5);}
+
+/* 提示信息 */
+.help-box{
+  display:flex;gap:10px;
+  background:rgba(127,196,255,.05);
+  border:1px solid rgba(127,196,255,.18);
+  border-radius:8px;padding:12px 14px;margin-top:14px;
+  font-size:12px;color:rgba(180,210,255,.75);
+  line-height:1.6;
+}
+.help-box::before{content:'💡';font-size:14px;flex-shrink:0;}
+
+/* 响应式 */
+@media (max-width:768px){
+  .top-nav{padding:14px 20px;}
+  .container{padding:90px 16px 40px;}
+  .form-card{padding:24px 20px;}
+  .form-row{grid-template-columns:1fr;}
+  .upload-grid{grid-template-columns:1fr;}
+  .qms-grid{grid-template-columns:1fr;}
+  .step-label{font-size:10px;}
+  .steps-wrap{padding:20px 16px;}
+  .actions{flex-direction:column-reverse;}
+  .btn-prev,.btn-next,.btn-submit{width:100%;}
+}
+</style>
+</head>
+<body>
+
+<!-- 顶部导航 -->
+<div class="top-nav">
+  <a href="page2-platform.html" class="logo-top">
+    <div class="logo-emblem">联</div>
+    <div>
+      <div class="logo-text-cn">联合国采购投标专家平台</div>
+      <div class="logo-text-en">UN PROCUREMENT EXPERT</div>
+    </div>
+  </a>
+  <a href="page2-platform.html" class="back-btn">返回平台</a>
+</div>
+
+<div class="container">
+
+  <!-- 页面标题 -->
+  <div class="page-header">
+    <div class="page-tag">
+      <div class="page-tag-icon"></div>
+      AI 智能注册系统 · UNGM SUPPLIER REGISTRATION
+    </div>
+    <h1 class="title-main">AI自动注册UNGM联合国供应商</h1>
+    <p class="title-sub">中文填写 · AI智能翻译 · 自动生成符合UNGM标准的英文资料包</p>
+  </div>
+
+  <!-- 步骤进度 -->
+  <div class="steps-wrap">
+    <div class="steps">
+      <div class="step-progress-line" id="progressLine" style="width:0%"></div>
+      <div class="step active" data-step="1">
+        <div class="step-circle"><span class="num">1</span></div>
+        <div class="step-label">基本信息</div>
+      </div>
+      <div class="step" data-step="2">
+        <div class="step-circle"><span class="num">2</span></div>
+        <div class="step-label">业务范围</div>
+      </div>
+      <div class="step" data-step="3">
+        <div class="step-circle"><span class="num">3</span></div>
+        <div class="step-label">资质上传</div>
+      </div>
+      <div class="step" data-step="4">
+        <div class="step-circle"><span class="num">4</span></div>
+        <div class="step-label">8大体系</div>
+      </div>
+      <div class="step" data-step="5">
+        <div class="step-circle"><span class="num">5</span></div>
+        <div class="step-label">确认提交</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 表单内容 -->
+  <div class="form-card">
+
+    <!-- ═══ 第1步 基本信息 ═══ -->
+    <div class="form-content" data-step="1">
+      <div class="form-step-title">企业基本信息</div>
+      <div class="form-step-desc">请按照营业执照填写企业信息，所有字段我们将自动翻译为英文</div>
+
+      <div class="form-row">
+        <div class="fg">
+          <label class="fl">企业名称（中文）<span class="req">*</span><span class="ai-tag">AI翻译</span></label>
+          <input class="fi" type="text" placeholder="例：上海中外贸易有限公司">
+        </div>
+        <div class="fg">
+          <label class="fl">企业英文名称<span class="ai-tag">AI生成</span></label>
+          <input class="fi" type="text" placeholder="留空将自动翻译生成">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="fg">
+          <label class="fl">统一社会信用代码<span class="req">*</span></label>
+          <input class="fi" type="text" placeholder="91310000XXXXXXXXXX" maxlength="18">
+        </div>
+        <div class="fg">
+          <label class="fl">企业类型<span class="req">*</span></label>
+          <select class="fs">
+            <option value="">请选择企业类型</option>
+            <option>有限责任公司</option>
+            <option>股份有限公司</option>
+            <option>外商投资企业</option>
+            <option>国有企业</option>
+            <option>合伙企业</option>
+            <option>个体工商户</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="fg">
+          <label class="fl">注册资本（人民币）<span class="req">*</span></label>
+          <input class="fi" type="text" placeholder="例：5000 万元">
+        </div>
+        <div class="fg">
+          <label class="fl">成立日期<span class="req">*</span></label>
+          <input class="fi" type="date">
+        </div>
+      </div>
+
+      <div class="form-row cols-1">
+        <div class="fg">
+          <label class="fl">注册地址（中文）<span class="req">*</span><span class="ai-tag">AI翻译</span></label>
+          <input class="fi" type="text" placeholder="例：上海市浦东新区世纪大道100号">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="fg">
+          <label class="fl">联系人姓名<span class="req">*</span></label>
+          <input class="fi" type="text" placeholder="联合国对接负责人">
+        </div>
+        <div class="fg">
+          <label class="fl">联系人职位</label>
+          <input class="fi" type="text" placeholder="例：国际业务总监">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="fg">
+          <label class="fl">联系电话<span class="req">*</span></label>
+          <input class="fi" type="tel" placeholder="+86 13X XXXX XXXX">
+        </div>
+        <div class="fg">
+          <label class="fl">邮箱<span class="req">*</span></label>
+          <input class="fi" type="email" placeholder="contact@company.com">
+        </div>
+      </div>
+
+      <div class="help-box">
+        所有中文信息将由AI自动翻译为符合联合国UNGM标准的英文格式，您也可以在第5步审核确认翻译结果。
+      </div>
+    </div>
+
+    <!-- ═══ 第2步 业务范围 ═══ -->
+    <div class="form-content" data-step="2" style="display:none;">
+      <div class="form-step-title">业务范围与产品类别</div>
+      <div class="form-step-desc">选择您的主营产品和服务，AI将自动匹配UNGM标准产品分类（UNSPSC编码）</div>
+
+      <div class="form-row">
+        <div class="fg">
+          <label class="fl">主营行业<span class="req">*</span></label>
+          <select class="fs">
+            <option value="">请选择主营行业</option>
+            <option>医疗设备与耗材</option>
+            <option>食品与农产品</option>
+            <option>建筑工程与建材</option>
+            <option>新能源与电力</option>
+            <option>运输物流</option>
+            <option>信息技术与软件</option>
+            <option>纺织服装</option>
+            <option>办公用品与文具</option>
+            <option>化工与环保</option>
+            <option>其他</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label class="fl">企业规模<span class="req">*</span></label>
+          <select class="fs">
+            <option value="">请选择企业规模</option>
+            <option>小型企业（员工 < 100人）</option>
+            <option>中型企业（员工 100-500人）</option>
+            <option>大型企业（员工 500-2000人）</option>
+            <option>超大型企业（员工 > 2000人）</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="fg">
+          <label class="fl">年营业额（人民币）<span class="req">*</span></label>
+          <select class="fs">
+            <option value="">请选择年营业额</option>
+            <option>500万 - 2000万</option>
+            <option>2000万 - 5000万</option>
+            <option>5000万 - 1亿</option>
+            <option>1亿 - 5亿</option>
+            <option>5亿以上</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label class="fl">出口经验<span class="req">*</span></label>
+          <select class="fs">
+            <option value="">请选择出口经验</option>
+            <option>无出口经验</option>
+            <option>1-3年</option>
+            <option>3-5年</option>
+            <option>5-10年</option>
+            <option>10年以上</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row cols-1">
+        <div class="fg">
+          <label class="fl">主营产品/服务详细描述<span class="req">*</span><span class="ai-tag">AI智能匹配UNSPSC</span></label>
+          <textarea class="ft" placeholder="请详细描述您的主营产品或服务，包括规格、型号、应用领域等。AI将自动匹配UNGM的UNSPSC标准产品分类编码。"></textarea>
+        </div>
+      </div>
+
+      <div class="form-row cols-1">
+        <div class="fg">
+          <label class="fl">主要海外市场（如有）</label>
+          <input class="fi" type="text" placeholder="例：东南亚、非洲、中东、欧盟">
+        </div>
+      </div>
+
+      <div class="help-box">
+        UNGM采用UNSPSC标准产品分类编码，AI将根据您的描述自动匹配最合适的编码（最多可选择15个分类）。
+      </div>
+    </div>
+
+    <!-- ═══ 第3步 资质上传 ═══ -->
+    <div class="form-content" data-step="3" style="display:none;">
+      <div class="form-step-title">资质证书上传</div>
+      <div class="form-step-desc">上传企业资质证书，AI将自动识别、翻译并整理为符合UNGM要求的资料包</div>
+
+      <div class="upload-grid">
+        <div class="upload-box" onclick="toggleUpload(this)">
+          <div class="upload-icon">📄</div>
+          <div class="upload-title">营业执照<span class="req">*</span></div>
+          <div class="upload-meta">点击上传 · PDF/JPG · 最大10MB</div>
+        </div>
+        <div class="upload-box" onclick="toggleUpload(this)">
+          <div class="upload-icon">📄</div>
+          <div class="upload-title">税务登记证<span class="req">*</span></div>
+          <div class="upload-meta">点击上传 · PDF/JPG · 最大10MB</div>
+        </div>
+        <div class="upload-box" onclick="toggleUpload(this)">
+          <div class="upload-icon">🏆</div>
+          <div class="upload-title">ISO 9001 质量管理</div>
+          <div class="upload-meta">点击上传（可选）</div>
+        </div>
+        <div class="upload-box" onclick="toggleUpload(this)">
+          <div class="upload-icon">🌱</div>
+          <div class="upload-title">ISO 14001 环境管理</div>
+          <div class="upload-meta">点击上传（可选）</div>
+        </div>
+        <div class="upload-box" onclick="toggleUpload(this)">
+          <div class="upload-icon">🛡️</div>
+          <div class="upload-title">ISO 45001 职业健康</div>
+          <div class="upload-meta">点击上传（可选）</div>
+        </div>
+        <div class="upload-box" onclick="toggleUpload(this)">
+          <div class="upload-icon">🚢</div>
+          <div class="upload-title">出口资质证书</div>
+          <div class="upload-meta">点击上传（可选）</div>
+        </div>
+        <div class="upload-box" onclick="toggleUpload(this)">
+          <div class="upload-icon">📊</div>
+          <div class="upload-title">近3年审计报告<span class="req">*</span></div>
+          <div class="upload-meta">点击上传 · PDF · 最大20MB</div>
+        </div>
+        <div class="upload-box" onclick="toggleUpload(this)">
+          <div class="upload-icon">🏢</div>
+          <div class="upload-title">公司宣传册</div>
+          <div class="upload-meta">点击上传（推荐）</div>
+        </div>
+      </div>
+
+      <div class="help-box">
+        AI将自动识别证书内容、翻译为英文、并按UNGM格式归档。所有文件均加密存储，符合GDPR标准。
+      </div>
+    </div>
+
+    <!-- ═══ 第4步 8大体系 ═══ -->
+    <div class="form-content" data-step="4" style="display:none;">
+      <div class="form-step-title">8大企业运营管理质量体系自检</div>
+      <div class="form-step-desc">勾选您企业已建立的管理体系，AI将自动生成符合UNGM审核要求的合规报告</div>
+
+      <div class="qms-grid">
+        <div class="qms-item" onclick="toggleQms(this)">
+          <div class="qms-check"></div>
+          <div>
+            <div class="qms-name">劳动用工管理体系</div>
+            <div class="qms-meta">劳动手册、用工合规</div>
+          </div>
+        </div>
+        <div class="qms-item" onclick="toggleQms(this)">
+          <div class="qms-check"></div>
+          <div>
+            <div class="qms-name">社会责任管理体系</div>
+            <div class="qms-meta">人权、员工关怀、社区责任</div>
+          </div>
+        </div>
+        <div class="qms-item" onclick="toggleQms(this)">
+          <div class="qms-check"></div>
+          <div>
+            <div class="qms-name">职业健康安全管理体系</div>
+            <div class="qms-meta">安全防护、工伤、消防</div>
+          </div>
+        </div>
+        <div class="qms-item" onclick="toggleQms(this)">
+          <div class="qms-check"></div>
+          <div>
+            <div class="qms-name">反童工与未成年工保护体系</div>
+            <div class="qms-meta">UNGM必查项</div>
+          </div>
+        </div>
+        <div class="qms-item" onclick="toggleQms(this)">
+          <div class="qms-check"></div>
+          <div>
+            <div class="qms-name">反强迫劳动管理体系</div>
+            <div class="qms-meta">不扣证件、不强制加班</div>
+          </div>
+        </div>
+        <div class="qms-item" onclick="toggleQms(this)">
+          <div class="qms-check"></div>
+          <div>
+            <div class="qms-name">环境保护与低碳管理体系</div>
+            <div class="qms-meta">碳达峰、碳中和、节能减排</div>
+          </div>
+        </div>
+        <div class="qms-item" onclick="toggleQms(this)">
+          <div class="qms-check"></div>
+          <div>
+            <div class="qms-name">反歧视与平等就业管理体系</div>
+            <div class="qms-meta">UNGM必查项</div>
+          </div>
+        </div>
+        <div class="qms-item" onclick="toggleQms(this)">
+          <div class="qms-check"></div>
+          <div>
+            <div class="qms-name">反腐败与商业道德管理体系</div>
+            <div class="qms-meta">禁止行贿、回扣、利益输送</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="help-box">
+        UNGM审核会重点检查这8项体系。如有未建立的体系，AI将为您提供建设方案模板，并出具专项合规报告。
+      </div>
+    </div>
+
+    <!-- ═══ 第5步 确认提交 ═══ -->
+    <div class="form-content" data-step="5" style="display:none;">
+      <div class="form-step-title">确认信息并提交</div>
+      <div class="form-step-desc">请最后核对资料，AI将自动生成符合UNGM标准的英文资料包并提交注册</div>
+
+      <div class="ai-badge">
+        <div class="ai-badge-icon">🤖</div>
+        <div class="ai-badge-text">
+          <div class="ai-badge-title">AI 智能预审完成</div>
+          <div class="ai-badge-desc">所有材料已通过AI预审，符合UNGM注册标准。预计1-3个工作日完成官方审核。</div>
+        </div>
+      </div>
+
+      <div class="summary-box">
+        <div class="summary-row">
+          <span class="summary-label">企业名称</span>
+          <span class="summary-value">上海中外贸易有限公司</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">英文名称（AI生成）</span>
+          <span class="summary-value">Shanghai Sino-Foreign Trading Co., Ltd.</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">企业类型</span>
+          <span class="summary-value">有限责任公司</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">主营行业</span>
+          <span class="summary-value">医疗设备与耗材</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">UNSPSC分类（AI匹配）</span>
+          <span class="summary-value">42 / 12 / 41 三大类</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">资质证书</span>
+          <span class="summary-value">已上传 6 份文件</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">8大管理体系</span>
+          <span class="summary-value">已建立 7 项 / 待完善 1 项</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">AI预审评分</span>
+          <span class="summary-value" style="color:#5fe8a8;">92 分 · 通过</span>
+        </div>
+      </div>
+
+      <div class="help-box">
+        提交后，您可在「我的UNGM注册」页面实时跟踪注册进度，专属客户经理也将主动联系您协助审核。
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 操作按钮 -->
+  <div class="actions">
+    <button class="btn-prev" onclick="prevStep()" id="btnPrev" disabled>← 上一步</button>
+    <button class="btn-next" onclick="nextStep()" id="btnNext">下一步 →</button>
+    <button class="btn-submit" onclick="submitForm()" id="btnSubmit" style="display:none;">✓ 确认提交注册</button>
+  </div>
+
+</div>
+
+<script>
+let currentStep = 1;
+const totalSteps = 5;
+
+function updateUI(){
+  // 更新步骤
+  document.querySelectorAll('.step').forEach(s => {
+    const step = parseInt(s.dataset.step);
+    s.classList.remove('active','done');
+    if(step < currentStep) s.classList.add('done');
+    if(step === currentStep) s.classList.add('active');
+  });
+  
+  // 更新进度条
+  const progress = ((currentStep - 1) / (totalSteps - 1)) * 100;
+  document.getElementById('progressLine').style.width = progress + '%';
+  
+  // 切换内容
+  document.querySelectorAll('.form-content').forEach(c => {
+    c.style.display = (parseInt(c.dataset.step) === currentStep) ? 'block' : 'none';
+  });
+  
+  // 按钮状态
+  document.getElementById('btnPrev').disabled = (currentStep === 1);
+  if(currentStep === totalSteps){
+    document.getElementById('btnNext').style.display = 'none';
+    document.getElementById('btnSubmit').style.display = 'block';
+  } else {
+    document.getElementById('btnNext').style.display = 'block';
+    document.getElementById('btnSubmit').style.display = 'none';
+  }
+  
+  // 滚动到顶部
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function nextStep(){
+  if(currentStep < totalSteps){
+    currentStep++;
+    updateUI();
+  }
+}
+
+function prevStep(){
+  if(currentStep > 1){
+    currentStep--;
+    updateUI();
+  }
+}
+
+function toggleUpload(box){
+  box.classList.toggle('uploaded');
+  const meta = box.querySelector('.upload-meta');
+  if(box.classList.contains('uploaded')){
+    box.querySelector('.upload-icon').textContent = '✓';
+    meta.textContent = '已上传 · AI识别中';
+  } else {
+    // 还原图标和提示
+    location.reload();
+  }
+}
+
+function toggleQms(item){
+  item.classList.toggle('checked');
+}
+
+function submitForm(){
+  alert('🎉 注册资料已成功提交！\n\nAI正在自动处理您的UNGM注册申请。\n您将在3个工作日内收到官方反馈，专属客户经理也会主动联系您。\n\n（演示版本，实际功能需对接Supabase后端）');
+}
+
+// 初始化
+updateUI();
+</script>
+
+</body>
+</html>

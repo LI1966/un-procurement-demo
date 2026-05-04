@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>联合国采购投标专家平台 - 登录</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;overflow:hidden;}
+body{font-family:'Noto Sans SC','Inter',-apple-system,sans-serif;color:#333;}
+
+.login-main{display:grid;grid-template-columns:1fr 1fr;height:100vh;overflow:hidden;}
+
+.login-left{
+  position:relative;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(64,156,255,.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 0% 100%, rgba(100,80,220,.10) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 60% at 100% 50%, rgba(0,180,200,.06) 0%, transparent 60%),
+    linear-gradient(135deg,#0a1730 0%,#0f2347 50%,#1a3568 100%);
+  display:flex;flex-direction:column;overflow:hidden;
+  padding:32px 48px;
+}
+.login-left::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(120,180,255,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(120,180,255,.04) 1px,transparent 1px);
+  background-size:48px 48px;pointer-events:none;
+  -webkit-mask-image:radial-gradient(ellipse 70% 80% at 50% 50%,#000 30%,transparent 80%);
+  mask-image:radial-gradient(ellipse 70% 80% at 50% 50%,#000 30%,transparent 80%);
+}
+.login-left::after{
+  content:'';position:absolute;inset:0;
+  background-image:
+    radial-gradient(circle at 15% 20%,rgba(120,180,255,.5) 0%,transparent 1.5%),
+    radial-gradient(circle at 85% 30%,rgba(180,140,255,.4) 0%,transparent 1.5%),
+    radial-gradient(circle at 70% 80%,rgba(100,200,220,.4) 0%,transparent 1.5%),
+    radial-gradient(circle at 25% 75%,rgba(140,160,255,.4) 0%,transparent 1.5%);
+  pointer-events:none;
+}
+.login-left-inner{
+  position:relative;z-index:2;display:flex;flex-direction:column;
+  height:100%;width:100%;
+}
+
+.brand{display:flex;align-items:center;gap:14px;}
+.brand-emblem{
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,#5b9eff,#3b7dd8);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;font-weight:700;
+  box-shadow:0 4px 14px rgba(91,158,255,.35);position:relative;flex-shrink:0;
+}
+.brand-emblem::before{
+  content:'';position:absolute;inset:-3px;border-radius:50%;
+  border:1px solid rgba(91,158,255,.25);
+}
+.brand-text-cn{font-size:15px;font-weight:600;color:#fff;letter-spacing:1px;line-height:1;}
+.brand-text-en{font-size:10px;color:rgba(180,210,255,.6);margin-top:4px;letter-spacing:1.5px;}
+
+.title-block{
+  text-align:center;margin-top:90px;margin-bottom:28px;padding:0 20px;
+}
+.main-title{font-size:22px;font-weight:600;color:#fff;line-height:1.5;letter-spacing:1px;margin-bottom:10px;}
+.main-title .accent{
+  background:linear-gradient(90deg,#7fb8ff,#a89eff);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;font-weight:700;
+}
+.sub-title{font-size:13.5px;color:rgba(220,235,255,.8);line-height:1.6;font-weight:300;letter-spacing:.5px;}
+
+.channels{
+  display:flex;flex-direction:column;gap:0;
+  max-width:480px;width:100%;margin:0 auto;
+}
+.channel{
+  display:flex;align-items:center;gap:18px;padding:14px 0;
+  border-top:1px solid rgba(180,210,255,.08);
+  cursor:pointer;transition:all .3s;position:relative;
+  text-decoration:none;color:inherit;
+}
+.channel:last-child{border-bottom:1px solid rgba(180,210,255,.08);}
+.channel::before{
+  content:'';position:absolute;left:-30px;top:50%;
+  width:3px;height:0;
+  background:linear-gradient(180deg,#5b9eff,#a89eff);
+  transition:height .3s;transform:translateY(-50%);border-radius:2px;
+}
+.channel:hover::before{height:60%;}
+.channel:hover{padding-left:8px;}
+.channel-num{
+  font-family:'Inter',monospace;font-size:11px;font-weight:500;
+  color:rgba(180,210,255,.45);letter-spacing:1.5px;width:28px;flex-shrink:0;
+}
+.channel-icon-wrap{
+  width:34px;height:34px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.channel-icon-wrap svg{
+  width:22px;height:22px;stroke:rgba(180,210,255,.7);
+  fill:none;stroke-width:1.5;transition:all .3s;
+}
+.channel:hover .channel-icon-wrap svg{stroke:#a8c9ff;transform:scale(1.1);}
+.channel-content{flex:1;}
+.channel-title{font-size:14.5px;font-weight:500;color:#fff;letter-spacing:.5px;margin-bottom:2px;}
+.channel-meta{font-size:11.5px;color:rgba(180,210,255,.55);letter-spacing:.3px;font-weight:300;line-height:1.5;}
+.channel-arrow{font-size:13px;color:rgba(180,210,255,.3);transition:all .3s;font-weight:300;}
+.channel:hover .channel-arrow{color:#a8c9ff;transform:translateX(4px);}
+
+.login-right{
+  background:#f4f7fb;display:flex;align-items:center;justify-content:center;
+  padding:32px;position:relative;overflow:hidden;
+}
+
+.login-card{
+  width:100%;max-width:400px;
+  background:#fff;border-radius:16px;
+  padding:32px 36px 24px;
+  box-shadow:
+    0 20px 60px rgba(10,23,48,0.10),
+    0 8px 20px rgba(10,23,48,0.06),
+    0 0 0 1px rgba(26,58,104,0.04);
+  display:flex;flex-direction:column;
+}
+
+.welcome-title{font-size:24px;font-weight:600;color:#1a2332;margin-bottom:4px;letter-spacing:.5px;}
+.welcome-sub{font-size:12.5px;color:#7a8699;margin-bottom:22px;}
+
+.tabs{display:flex;border-bottom:1px solid #e5e9ef;margin-bottom:22px;}
+.tab{
+  flex:1;padding:10px 0;text-align:center;font-size:14.5px;font-weight:500;cursor:pointer;
+  color:#7a8699;border:none;background:transparent;font-family:inherit;
+  border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s;
+}
+.tab.on{color:#1a3a68;border-bottom-color:#1a3a68;}
+
+.fg{margin-bottom:13px;position:relative;}
+.fi{
+  width:100%;padding:11px 14px 11px 40px;
+  border:1px solid #e0e6ee;border-radius:8px;
+  background:#f9fafc;color:#1a2332;font-size:13.5px;
+  font-family:inherit;outline:none;transition:all .2s;
+}
+.fi::placeholder{color:#b8bfcc;}
+.fi:focus{border-color:#1a3a68;background:#fff;box-shadow:0 0 0 3px rgba(26,58,104,.08);}
+.fi-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#aab3c0;font-size:15px;pointer-events:none;}
+.fi-icon-right{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:#aab3c0;font-size:15px;cursor:pointer;}
+
+.row-2{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;margin-bottom:18px;}
+.remember{display:flex;align-items:center;gap:6px;color:#5a6678;cursor:pointer;}
+.remember input{accent-color:#1a3a68;}
+.forgot{color:#1a3a68;text-decoration:none;}
+.forgot:hover{text-decoration:underline;}
+
+/* 登录按钮 - 跳转到第二页 */
+.btn-login{
+  width:100%;padding:12px;
+  background:linear-gradient(135deg,#1a3a68,#2a5293);
+  color:#fff;font-size:14.5px;font-weight:500;letter-spacing:6px;
+  border:none;border-radius:8px;cursor:pointer;font-family:inherit;
+  transition:all .2s;box-shadow:0 4px 12px rgba(26,58,104,0.2);
+  text-decoration:none;display:flex;align-items:center;justify-content:center;
+}
+.btn-login:hover{opacity:.92;transform:translateY(-1px);box-shadow:0 6px 16px rgba(26,58,104,0.25);}
+
+.btn-verify{
+  white-space:nowrap;padding:0 14px;background:#fff;color:#1a3a68;
+  border:1px solid #1a3a68;border-radius:8px;cursor:pointer;font-size:12.5px;font-family:inherit;
+}
+
+.terms-row{display:flex;align-items:center;gap:6px;margin-top:11px;font-size:11.5px;color:#7a8699;}
+.terms-row input{accent-color:#1a3a68;}
+.terms-row a{color:#1a3a68;text-decoration:none;}
+
+.thirds-section{margin-top:18px;padding-top:16px;border-top:1px solid #f0f3f8;}
+.thirds-label{text-align:center;font-size:11.5px;color:#9aa3b3;margin-bottom:12px;letter-spacing:.5px;}
+.thirds{display:flex;justify-content:center;gap:18px;}
+.third-circle{
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:#fff;font-weight:700;transition:transform .2s;
+  box-shadow:0 2px 6px rgba(0,0,0,0.08);
+  text-decoration:none;
+}
+.third-circle:hover{transform:translateY(-3px);box-shadow:0 4px 10px rgba(0,0,0,0.15);}
+.tc-wx{background:#07C160;font-size:12px;}
+.tc-fs{background:#3370FF;font-size:11px;}
+.tc-ph{background:#5b6ee1;font-size:14px;}
+.tc-em{background:#E84040;font-size:12px;}
+</style>
+</head>
+<body>
+
+<div class="login-main">
+
+  <div class="login-left">
+    <div class="login-left-inner">
+
+      <div class="brand">
+        <div class="brand-emblem">联</div>
+        <div>
+          <div class="brand-text-cn">联合国采购投标专家平台</div>
+          <div class="brand-text-en">UN PROCUREMENT EXPERT</div>
+        </div>
+      </div>
+
+      <div class="title-block">
+        <div class="main-title">打造<span class="accent">"八大"联合国供应商</span>标准质量体系</div>
+        <div class="sub-title">三大专属投标服务平台，确保企业获取联合国采购合同</div>
+      </div>
+
+      <div class="channels">
+
+        <a href="page2-platform.html" class="channel">
+          <div class="channel-num">01</div>
+          <div class="channel-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none">
+              <rect x="4" y="6" width="16" height="12" rx="2" stroke-linejoin="round"/>
+              <circle cx="8.5" cy="12" r="1" fill="currentColor"/>
+              <circle cx="15.5" cy="12" r="1" fill="currentColor"/>
+              <line x1="12" y1="3" x2="12" y2="6"/>
+              <circle cx="12" cy="2.5" r="0.8" fill="currentColor"/>
+            </svg>
+          </div>
+          <div class="channel-content">
+            <div class="channel-title">AI大模型智能投标服务平台</div>
+            <div class="channel-meta">十大功能模块・全流程投标自动化赋能</div>
+          </div>
+          <div class="channel-arrow">→</div>
+        </a>
+
+        <a href="page2-platform.html" class="channel">
+          <div class="channel-num">02</div>
+          <div class="channel-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M3 21h18" stroke-linecap="round"/>
+              <path d="M5 21V10l7-5 7 5v11" stroke-linejoin="round"/>
+              <line x1="9" y1="21" x2="9" y2="13"/>
+              <line x1="15" y1="21" x2="15" y2="13"/>
+              <line x1="12" y1="13" x2="12" y2="21"/>
+            </svg>
+          </div>
+          <div class="channel-content">
+            <div class="channel-title">联合国采购官员智通平台</div>
+            <div class="channel-meta">四大功能模块，直通联合国采购官方官员深度沟通</div>
+          </div>
+          <div class="channel-arrow">→</div>
+        </a>
+
+        <a href="page2-platform.html" class="channel">
+          <div class="channel-num">03</div>
+          <div class="channel-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="9"/>
+              <ellipse cx="12" cy="12" rx="9" ry="3.5"/>
+              <path d="M12 3 Q 8 12, 12 21"/>
+              <path d="M12 3 Q 16 12, 12 21"/>
+            </svg>
+          </div>
+          <div class="channel-content">
+            <div class="channel-title">联合国采购国际投标代理平台</div>
+            <div class="channel-meta">五大功能模块，专业团队全程护航企业投标落地</div>
+          </div>
+          <div class="channel-arrow">→</div>
+        </a>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="login-right">
+
+    <div class="login-card">
+
+      <div class="welcome-title">欢迎登录</div>
+      <div class="welcome-sub" id="welcomeSub">登录您的账号，开启联合国采购之旅</div>
+
+      <div class="tabs">
+        <button class="tab on" onclick="switchTab('login',this)">账号登录</button>
+        <button class="tab" onclick="switchTab('reg',this)">免费注册</button>
+      </div>
+
+      <div id="loginForm">
+        <div class="fg">
+          <span class="fi-icon">👤</span>
+          <input class="fi" type="text" placeholder="邮箱 / 手机号">
+        </div>
+        <div class="fg">
+          <span class="fi-icon">🔒</span>
+          <input class="fi" type="password" placeholder="密码">
+          <span class="fi-icon-right">👁</span>
+        </div>
+        <div class="row-2">
+          <label class="remember"><input type="checkbox" checked> 记住账号</label>
+          <a href="#" class="forgot">忘记密码</a>
+        </div>
+        <a href="page2-platform.html" class="btn-login">登 录</a>
+        <div class="terms-row">
+          <input type="checkbox" id="agree" checked>
+          <label for="agree">我已阅读并同意 <a href="#">《服务条款》</a> 和 <a href="#">《隐私政策》</a></label>
+        </div>
+      </div>
+
+      <div id="regForm" style="display:none;">
+        <div class="fg">
+          <span class="fi-icon">📱</span>
+          <input class="fi" type="tel" placeholder="请输入手机号码">
+        </div>
+        <div class="fg" style="display:flex;gap:8px;">
+          <div style="flex:1;position:relative;">
+            <span class="fi-icon">🔐</span>
+            <input class="fi" type="text" placeholder="6位验证码">
+          </div>
+          <button class="btn-verify" onclick="startCD(this)">获取验证码</button>
+        </div>
+        <div class="fg">
+          <span class="fi-icon">🔒</span>
+          <input class="fi" type="password" placeholder="设置密码（8位以上）">
+        </div>
+        <a href="page2-platform.html" class="btn-login">立即免费注册</a>
+        <div class="terms-row">
+          <input type="checkbox" id="agree2" checked>
+          <label for="agree2">我已阅读并同意 <a href="#">《服务条款》</a> 和 <a href="#">《隐私政策》</a></label>
+        </div>
+      </div>
+
+      <div class="thirds-section">
+        <div class="thirds-label">或使用以下方式登录</div>
+        <div class="thirds">
+          <a href="page2-platform.html" class="third-circle tc-wx" title="微信登录">微</a>
+          <a href="page2-platform.html" class="third-circle tc-fs" title="飞书登录">飞</a>
+          <a href="page2-platform.html" class="third-circle tc-ph" title="手机登录">📱</a>
+          <a href="page2-platform.html" class="third-circle tc-em" title="邮箱登录">@</a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+function switchTab(t, btn){
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('loginForm').style.display = (t==='login') ? 'block' : 'none';
+  document.getElementById('regForm').style.display = (t==='reg') ? 'block' : 'none';
+  document.getElementById('welcomeSub').textContent = (t==='login') ? '登录您的账号，开启联合国采购之旅' : '3分钟创建账号，开启全球采购';
+}
+let cd=0;
+function startCD(btn){
+  if(cd>0)return;
+  cd=60;
+  const t=setInterval(()=>{
+    btn.textContent=cd+'s后重发';btn.disabled=true;
+    cd--;
+    if(cd<0){clearInterval(t);btn.textContent='获取验证码';btn.disabled=false;}
+  },1000);
+}
+</script>
+</body>
+</html>
