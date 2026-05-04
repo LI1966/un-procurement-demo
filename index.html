@@ -7,10 +7,10 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap');
 *{margin:0;padding:0;box-sizing:border-box;}
-html,body{height:100%;overflow:hidden;}
+html,body{height:100%;}
 body{font-family:'Noto Sans SC','Inter',-apple-system,sans-serif;color:#333;}
 
-.login-main{display:grid;grid-template-columns:1fr 1fr;height:100vh;overflow:hidden;}
+.login-main{display:grid;grid-template-columns:1fr 1fr;height:100vh;}
 
 .login-left{
   position:relative;
@@ -189,6 +189,117 @@ body{font-family:'Noto Sans SC','Inter',-apple-system,sans-serif;color:#333;}
 .tc-fs{background:#3370FF;font-size:11px;}
 .tc-ph{background:#5b6ee1;font-size:14px;}
 .tc-em{background:#E84040;font-size:12px;}
+
+/* ═══════════════════════════════════════════
+   手机端响应式（上下布局：先品牌+三通道，再登录卡）
+   ═══════════════════════════════════════════ */
+@media (max-width: 900px){
+  html,body{overflow:auto;}
+  
+  .login-main{
+    grid-template-columns:1fr;
+    height:auto;
+    min-height:100vh;
+  }
+  
+  .login-left{
+    padding:32px 24px 36px;
+    min-height:auto;
+  }
+  
+  .login-left-inner{
+    max-width:540px;margin:0 auto;
+  }
+  
+  .brand{justify-content:flex-start;}
+  
+  .title-block{
+    margin-top:36px;
+    margin-bottom:32px;
+    padding:0;
+  }
+  .main-title{
+    font-size:20px;line-height:1.55;
+  }
+  .sub-title{
+    font-size:12.5px;line-height:1.7;
+  }
+  
+  .channels{
+    max-width:100%;
+  }
+  .channel{
+    padding:16px 0;gap:14px;
+  }
+  .channel:hover{padding-left:0;}
+  .channel::before{display:none;}
+  .channel-num{
+    font-size:10.5px;width:24px;
+  }
+  .channel-icon-wrap{
+    width:30px;height:30px;
+  }
+  .channel-icon-wrap svg{
+    width:20px;height:20px;
+  }
+  .channel-title{
+    font-size:14px;margin-bottom:3px;
+  }
+  .channel-meta{
+    font-size:11px;line-height:1.5;
+  }
+  
+  .login-right{
+    padding:32px 20px 40px;
+    background:#f4f7fb;
+  }
+  
+  .login-card{
+    max-width:100%;
+    padding:28px 24px 22px;
+    border-radius:14px;
+  }
+  
+  .welcome-title{
+    font-size:22px;
+  }
+  .welcome-sub{
+    font-size:12px;
+  }
+  
+  .tabs{margin-bottom:18px;}
+  .tab{
+    font-size:14px;padding:9px 0;
+  }
+  
+  .fi{
+    font-size:14px;padding:11px 14px 11px 38px;
+  }
+  
+  .btn-login{
+    padding:13px;font-size:14px;letter-spacing:4px;
+  }
+  
+  .thirds-section{
+    margin-top:14px;padding-top:14px;
+  }
+  .thirds{gap:14px;}
+  .third-circle{
+    width:34px;height:34px;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   小屏手机（iPhone SE 等）
+   ═══════════════════════════════════════════ */
+@media (max-width: 380px){
+  .login-left{padding:24px 18px 30px;}
+  .login-right{padding:24px 16px 30px;}
+  .login-card{padding:24px 18px 20px;}
+  .main-title{font-size:18px;}
+  .brand-text-cn{font-size:14px;}
+  .channel-num{display:none;}
+}
 </style>
 </head>
 <body>
