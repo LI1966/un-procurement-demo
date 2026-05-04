@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI自动注册UNGM联合国供应商 - 联合国采购投标专家平台</title>
+<title>AI自动注册联合国供应商 - 联合国采购投标专家平台</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap');
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -262,6 +262,344 @@ body::before{
 .qms-name{flex:1;font-size:13px;color:#fff;font-weight:500;}
 .qms-meta{font-size:11px;color:rgba(180,210,255,.55);}
 
+/* ═══ 保密版 - 警告卡 ═══ */
+.warning-card{
+  display:flex;gap:14px;
+  background:linear-gradient(135deg,rgba(255,170,80,.10),rgba(255,170,80,.04));
+  border:1px solid rgba(255,170,80,.32);
+  border-radius:12px;
+  padding:16px 18px;
+  margin-bottom:24px;
+}
+.warning-icon{font-size:22px;flex-shrink:0;line-height:1.4;}
+.warning-content{flex:1;}
+.warning-title{
+  font-size:14px;font-weight:600;color:#ffc56e;
+  margin-bottom:5px;letter-spacing:.5px;
+}
+.warning-text{
+  font-size:12.5px;color:rgba(220,235,255,.78);
+  line-height:1.65;font-weight:300;
+}
+
+/* ═══ 8大维度可视化（不显示名称） ═══ */
+.qms-overview{
+  background:rgba(91,158,255,.05);
+  border:1px solid rgba(120,180,255,.15);
+  border-radius:14px;
+  padding:24px;margin-bottom:22px;
+}
+.qms-overview-title{
+  font-size:13px;color:rgba(220,235,255,.85);
+  font-weight:500;margin-bottom:16px;
+  letter-spacing:.3px;
+}
+.qms-progress-grid{
+  display:grid;grid-template-columns:repeat(8,1fr);gap:10px;
+  margin-bottom:16px;
+}
+.qms-cell{
+  aspect-ratio:1;
+  background:rgba(91,158,255,.06);
+  border:1px solid rgba(120,180,255,.18);
+  border-radius:10px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:4px;position:relative;
+  cursor:pointer;
+  transition:all .25s;
+}
+.qms-cell:hover{
+  background:rgba(127,196,255,.14);
+  border-color:rgba(160,200,255,.5);
+  transform:translateY(-2px);
+  box-shadow:0 4px 14px rgba(91,158,255,.2);
+}
+.qms-cell:hover .qms-cell-status{
+  filter:none;opacity:1;transform:scale(1.15);
+}
+.qms-cell-num{
+  font-family:'Inter',monospace;font-size:14px;
+  color:rgba(168,201,255,.45);font-weight:600;
+}
+.qms-cell-status{font-size:14px;transition:all .25s;}
+.qms-cell-status.locked{filter:grayscale(.3);opacity:.6;}
+
+.qms-locked-tip{
+  text-align:center;font-size:12px;
+  color:rgba(180,210,255,.7);
+  padding:10px 0;
+  border-top:1px dashed rgba(120,180,255,.2);
+}
+.qms-locked-tip strong{color:#a8d4ff;font-weight:600;}
+
+/* AI评估区 */
+.ai-eval-section{
+  background:rgba(20,40,75,.3);
+  border:1px solid rgba(120,180,255,.15);
+  border-radius:14px;
+  padding:22px;margin-bottom:22px;
+}
+.ai-eval-title{
+  display:flex;align-items:center;gap:10px;
+  font-size:14px;font-weight:600;color:#fff;
+  margin-bottom:6px;
+}
+.ai-eval-icon{
+  width:28px;height:28px;border-radius:50%;
+  background:linear-gradient(135deg,#7fc4ff,#a89eff);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;
+}
+.ai-eval-desc{
+  font-size:12px;color:rgba(180,210,255,.65);
+  margin-bottom:16px;line-height:1.6;font-weight:300;
+}
+.self-check-grid{
+  display:flex;flex-direction:column;gap:10px;
+}
+.self-check-item{
+  background:rgba(91,158,255,.04);
+  border:1px solid rgba(120,180,255,.12);
+  border-radius:8px;
+  padding:12px 14px;
+  display:flex;align-items:center;gap:12px;
+  cursor:pointer;transition:all .2s;
+}
+.self-check-item:hover{
+  border-color:rgba(160,200,255,.3);
+  background:rgba(91,158,255,.07);
+}
+.self-check-item.checked{
+  background:rgba(60,200,140,.08);
+  border-color:rgba(60,200,140,.35);
+}
+.self-check-item.checked .qms-check{
+  background:linear-gradient(135deg,#5fe8a8,#2dd476);
+  border-color:#5fe8a8;
+}
+.self-check-item.checked .qms-check::before{
+  content:'✓';color:#fff;font-size:13px;font-weight:700;
+}
+.self-check-text{
+  flex:1;font-size:13px;color:rgba(220,235,255,.85);
+  font-weight:400;
+}
+
+/* ═══ 付费提示弹窗 ═══ */
+.pay-modal-overlay{
+  position:fixed;inset:0;
+  background:rgba(5,12,25,.82);
+  backdrop-filter:blur(12px);
+  display:none;align-items:center;justify-content:center;
+  z-index:1000;padding:20px;
+  animation:fadeIn .25s;
+}
+.pay-modal-overlay.show{display:flex;}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+.pay-modal{
+  background:linear-gradient(165deg,rgba(40,75,130,.6),rgba(15,32,68,.95));
+  border:1px solid rgba(160,200,255,.35);
+  border-radius:20px;
+  max-width:480px;width:100%;
+  padding:36px 32px 28px;
+  backdrop-filter:blur(28px) saturate(160%);
+  box-shadow:
+    0 24px 60px rgba(0,0,0,.5),
+    0 0 60px rgba(127,196,255,.15),
+    inset 0 1px 0 rgba(255,255,255,.1);
+  position:relative;
+  animation:slideUp .3s;
+  text-align:center;
+}
+@keyframes slideUp{
+  from{opacity:0;transform:translateY(30px) scale(.95);}
+  to{opacity:1;transform:translateY(0) scale(1);}
+}
+
+.pay-modal-close{
+  position:absolute;top:16px;right:16px;
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(160,210,255,.1);
+  border:1px solid rgba(180,220,255,.3);
+  color:#fff;font-size:14px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;
+}
+.pay-modal-close:hover{background:rgba(180,220,255,.25);transform:rotate(90deg);}
+
+.pay-modal-icon{
+  width:72px;height:72px;border-radius:50%;
+  background:linear-gradient(135deg,#7fc4ff,#a89eff);
+  display:flex;align-items:center;justify-content:center;
+  font-size:32px;margin:0 auto 18px;
+  box-shadow:0 0 30px rgba(127,196,255,.5);
+  animation:pulse-glow 2s infinite;
+}
+@keyframes pulse-glow{
+  0%,100%{box-shadow:0 0 30px rgba(127,196,255,.5);}
+  50%{box-shadow:0 0 50px rgba(127,196,255,.8);}
+}
+
+.pay-modal-title{
+  font-size:22px;font-weight:700;color:#fff;
+  margin-bottom:10px;letter-spacing:.5px;
+  background:linear-gradient(180deg,#fff,#a8d4ff);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.pay-modal-subtitle{
+  font-size:13px;color:rgba(180,210,255,.75);
+  margin-bottom:24px;line-height:1.7;font-weight:300;
+}
+
+.pay-features{
+  background:rgba(91,158,255,.06);
+  border:1px solid rgba(120,180,255,.18);
+  border-radius:12px;
+  padding:18px 22px;margin-bottom:24px;
+  text-align:left;
+}
+.pay-feature-item{
+  display:flex;align-items:center;gap:10px;
+  font-size:13px;color:rgba(220,235,255,.88);
+  padding:8px 0;font-weight:400;
+}
+.pay-feature-item::before{
+  content:'✓';
+  width:20px;height:20px;border-radius:50%;
+  background:linear-gradient(135deg,#5fe8a8,#2dd476);
+  color:#fff;font-size:12px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  box-shadow:0 0 8px rgba(95,232,168,.4);
+}
+
+.pay-price-tag{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  background:linear-gradient(135deg,rgba(255,200,80,.12),rgba(255,170,80,.06));
+  border:1px solid rgba(255,200,80,.3);
+  border-radius:10px;padding:10px 14px;
+  margin-bottom:20px;font-size:12px;color:#ffd28a;
+  font-weight:500;
+}
+.pay-price-tag::before{content:'🎁';font-size:14px;}
+
+/* ═══ 价格区 ═══ */
+.pay-price-box{
+  background:linear-gradient(135deg,rgba(255,200,80,.10),rgba(255,170,80,.04));
+  border:1px solid rgba(255,200,80,.32);
+  border-radius:14px;
+  padding:18px 20px;margin-bottom:20px;
+  text-align:center;
+}
+.pay-price-label{
+  font-size:12px;color:rgba(255,210,138,.85);
+  letter-spacing:1px;margin-bottom:8px;font-weight:500;
+}
+.pay-price-value{
+  display:flex;align-items:baseline;justify-content:center;gap:2px;
+  margin-bottom:8px;
+  background:linear-gradient(180deg,#ffd28a,#ffb84a);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.pay-price-currency{font-size:22px;font-weight:600;}
+.pay-price-num{font-size:42px;font-weight:800;letter-spacing:1px;font-family:'Inter',sans-serif;}
+.pay-price-unit{font-size:18px;font-weight:600;margin-left:4px;}
+.pay-price-note{
+  font-size:11.5px;color:rgba(255,210,138,.7);
+  font-weight:300;letter-spacing:.3px;
+}
+
+/* ═══ 支付方式 ═══ */
+.pay-methods{
+  background:rgba(91,158,255,.04);
+  border:1px solid rgba(120,180,255,.15);
+  border-radius:12px;
+  padding:14px 16px;margin-bottom:22px;
+}
+.pay-methods-label{
+  font-size:11px;color:rgba(180,210,255,.6);
+  text-align:center;margin-bottom:12px;
+  letter-spacing:1px;font-weight:500;
+}
+.pay-methods-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:10px;
+}
+.pay-method-icon{
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  cursor:pointer;
+  transition:transform .2s;
+}
+.pay-method-icon:hover{transform:translateY(-2px);}
+.pm-icon{
+  width:38px;height:38px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:15px;font-weight:700;
+  box-shadow:0 3px 10px rgba(0,0,0,.25);
+}
+.pm-text{font-size:11px;color:rgba(220,235,255,.75);font-weight:500;}
+
+.pay-modal-actions{
+  display:flex;gap:10px;
+}
+.pay-btn-primary{
+  flex:2;padding:13px;
+  background:linear-gradient(135deg,#5b9eff,#a89eff);
+  color:#fff;border:none;border-radius:10px;
+  font-size:14px;font-weight:600;letter-spacing:1.5px;
+  cursor:pointer;font-family:inherit;
+  transition:all .25s;
+  box-shadow:0 4px 14px rgba(91,158,255,.4);
+}
+.pay-btn-primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 20px rgba(91,158,255,.6);
+}
+.pay-btn-secondary{
+  flex:1;padding:13px;
+  background:rgba(91,158,255,.08);
+  color:rgba(220,235,255,.8);
+  border:1px solid rgba(120,180,255,.25);
+  border-radius:10px;
+  font-size:13px;cursor:pointer;font-family:inherit;
+  transition:all .2s;
+}
+.pay-btn-secondary:hover{background:rgba(91,158,255,.18);color:#fff;}
+
+/* 价值钩子 */
+.value-hook{
+  display:flex;gap:14px;
+  background:linear-gradient(135deg,rgba(127,196,255,.12),rgba(168,158,255,.06));
+  border:1px solid rgba(127,196,255,.3);
+  border-radius:14px;
+  padding:18px 20px;margin-bottom:18px;
+}
+.value-hook-icon{font-size:24px;flex-shrink:0;line-height:1.5;}
+.value-hook-content{flex:1;}
+.value-hook-title{
+  font-size:14px;font-weight:600;color:#fff;
+  margin-bottom:8px;letter-spacing:.5px;
+}
+.value-hook-list{
+  font-size:12.5px;color:rgba(220,235,255,.8);
+  line-height:1.85;font-weight:300;
+}
+  display:flex;gap:14px;
+  background:linear-gradient(135deg,rgba(127,196,255,.12),rgba(168,158,255,.06));
+  border:1px solid rgba(127,196,255,.3);
+  border-radius:14px;
+  padding:18px 20px;margin-bottom:18px;
+}
+.value-hook-icon{font-size:24px;flex-shrink:0;line-height:1.5;}
+.value-hook-content{flex:1;}
+.value-hook-title{
+  font-size:14px;font-weight:600;color:#fff;
+  margin-bottom:8px;letter-spacing:.5px;
+}
+.value-hook-list{
+  font-size:12.5px;color:rgba(220,235,255,.8);
+  line-height:1.85;font-weight:300;
+}
+
 /* 提交确认页 */
 .summary-box{
   background:rgba(91,158,255,.05);
@@ -346,18 +684,83 @@ body::before{
 }
 .help-box::before{content:'💡';font-size:14px;flex-shrink:0;}
 
-/* 响应式 */
-@media (max-width:768px){
-  .top-nav{padding:14px 20px;}
-  .container{padding:90px 16px 40px;}
-  .form-card{padding:24px 20px;}
-  .form-row{grid-template-columns:1fr;}
-  .upload-grid{grid-template-columns:1fr;}
-  .qms-grid{grid-template-columns:1fr;}
-  .step-label{font-size:10px;}
-  .steps-wrap{padding:20px 16px;}
-  .actions{flex-direction:column-reverse;}
-  .btn-prev,.btn-next,.btn-submit{width:100%;}
+/* ═══════════════════════════════════════════
+   平板端（≤900px）
+   ═══════════════════════════════════════════ */
+@media (max-width:900px){
+  .top-nav{padding:14px 18px;}
+  .logo-text-cn{font-size:13px;}
+  .logo-text-en{font-size:9px;}
+  .logo-emblem{width:36px;height:36px;font-size:13px;}
+  .back-btn{padding:7px 14px;font-size:12px;}
+  
+  .container{padding:90px 16px 36px;}
+  .page-title{font-size:24px;}
+  .page-sub{font-size:13px;}
+  
+  .form-card{padding:26px 22px;}
+  .form-row{grid-template-columns:1fr;gap:14px;}
+  .upload-grid{grid-template-columns:1fr 1fr;gap:12px;}
+  .qms-grid{grid-template-columns:1fr 1fr;gap:10px;}
+}
+
+/* ═══════════════════════════════════════════
+   手机端（≤600px）
+   ═══════════════════════════════════════════ */
+@media (max-width:600px){
+  .top-nav{padding:12px 14px;}
+  .logo-text-cn{font-size:12px;letter-spacing:.5px;}
+  .logo-text-en{display:none;}
+  .logo-emblem{width:32px;height:32px;font-size:12px;}
+  .back-btn{padding:6px 11px;font-size:11px;}
+  
+  .container{padding:78px 12px 28px;}
+  .page-title{font-size:20px;line-height:1.35;}
+  .page-sub{font-size:12px;}
+  
+  .steps-wrap{padding:18px 12px 14px;border-radius:14px;}
+  .step-line{display:none;}
+  .step-circle{width:30px;height:30px;font-size:12px;}
+  .step-label{font-size:10px;line-height:1.3;}
+  
+  .form-card{padding:22px 16px;border-radius:14px;}
+  .form-section-title{font-size:14px;margin-bottom:14px;}
+  .form-row{grid-template-columns:1fr;gap:12px;}
+  .form-label{font-size:12.5px;}
+  .form-input,.form-select,.form-textarea{
+    padding:11px 14px;font-size:13.5px;
+  }
+  
+  .upload-grid{grid-template-columns:1fr;gap:10px;}
+  .upload-item{padding:14px;}
+  .upload-name{font-size:12.5px;}
+  
+  .qms-grid{grid-template-columns:1fr 1fr;gap:8px;}
+  .qms-item{padding:14px 8px;border-radius:10px;}
+  .qms-icon{font-size:18px;}
+  .qms-text{font-size:11px;line-height:1.3;}
+  
+  .qms-progress-grid{grid-template-columns:repeat(2,1fr);gap:8px;}
+  
+  .actions{flex-direction:column-reverse;gap:10px;margin-top:24px;}
+  .btn-prev,.btn-next,.btn-submit{
+    width:100%;padding:13px;font-size:14px;
+  }
+  
+  .modal{padding:28px 22px 24px;border-radius:18px;}
+  .modal-title{font-size:20px;}
+  .modal-price-num{font-size:32px;}
+}
+
+/* ═══════════════════════════════════════════
+   小屏手机（≤380px）
+   ═══════════════════════════════════════════ */
+@media (max-width:380px){
+  .container{padding:72px 10px 24px;}
+  .page-title{font-size:18px;}
+  .form-card{padding:18px 14px;}
+  .qms-icon{font-size:16px;}
+  .qms-text{font-size:10.5px;}
 }
 </style>
 </head>
@@ -381,10 +784,10 @@ body::before{
   <div class="page-header">
     <div class="page-tag">
       <div class="page-tag-icon"></div>
-      AI 智能注册系统 · UNGM SUPPLIER REGISTRATION
+      AI 智能注册系统 · UN SUPPLIER REGISTRATION
     </div>
-    <h1 class="title-main">AI自动注册UNGM联合国供应商</h1>
-    <p class="title-sub">中文填写 · AI智能翻译 · 自动生成符合UNGM标准的英文资料包</p>
+    <h1 class="title-main">AI自动注册联合国供应商</h1>
+    <p class="title-sub">中文填写 · AI智能翻译 · 自动生成符合联合国标准的英文资料包</p>
   </div>
 
   <!-- 步骤进度 -->
@@ -493,14 +896,14 @@ body::before{
       </div>
 
       <div class="help-box">
-        所有中文信息将由AI自动翻译为符合联合国UNGM标准的英文格式，您也可以在第5步审核确认翻译结果。
+        所有中文信息将由AI自动翻译为符合联合国标准的英文格式，您也可以在第5步审核确认翻译结果。
       </div>
     </div>
 
     <!-- ═══ 第2步 业务范围 ═══ -->
     <div class="form-content" data-step="2" style="display:none;">
       <div class="form-step-title">业务范围与产品类别</div>
-      <div class="form-step-desc">选择您的主营产品和服务，AI将自动匹配UNGM标准产品分类（UNSPSC编码）</div>
+      <div class="form-step-desc">选择您的主营产品和服务，AI将自动匹配联合国标准产品分类（UNSPSC编码）</div>
 
       <div class="form-row">
         <div class="fg">
@@ -559,7 +962,7 @@ body::before{
       <div class="form-row cols-1">
         <div class="fg">
           <label class="fl">主营产品/服务详细描述<span class="req">*</span><span class="ai-tag">AI智能匹配UNSPSC</span></label>
-          <textarea class="ft" placeholder="请详细描述您的主营产品或服务，包括规格、型号、应用领域等。AI将自动匹配UNGM的UNSPSC标准产品分类编码。"></textarea>
+          <textarea class="ft" placeholder="请详细描述您的主营产品或服务，包括规格、型号、应用领域等。AI将自动匹配联合国的UNSPSC标准产品分类编码。"></textarea>
         </div>
       </div>
 
@@ -571,14 +974,14 @@ body::before{
       </div>
 
       <div class="help-box">
-        UNGM采用UNSPSC标准产品分类编码，AI将根据您的描述自动匹配最合适的编码（最多可选择15个分类）。
+        联合国采用UNSPSC标准产品分类编码，AI将根据您的描述自动匹配最合适的编码（最多可选择15个分类）。
       </div>
     </div>
 
     <!-- ═══ 第3步 资质上传 ═══ -->
     <div class="form-content" data-step="3" style="display:none;">
       <div class="form-step-title">资质证书上传</div>
-      <div class="form-step-desc">上传企业资质证书，AI将自动识别、翻译并整理为符合UNGM要求的资料包</div>
+      <div class="form-step-desc">上传企业资质证书，AI将自动识别、翻译并整理为符合联合国要求的资料包</div>
 
       <div class="upload-grid">
         <div class="upload-box" onclick="toggleUpload(this)">
@@ -624,89 +1027,107 @@ body::before{
       </div>
 
       <div class="help-box">
-        AI将自动识别证书内容、翻译为英文、并按UNGM格式归档。所有文件均加密存储，符合GDPR标准。
+        AI将自动识别证书内容、翻译为英文、并按联合国格式归档。所有文件均加密存储，符合GDPR标准。
       </div>
     </div>
 
     <!-- ═══ 第4步 8大体系 ═══ -->
     <div class="form-content" data-step="4" style="display:none;">
-      <div class="form-step-title">8大企业运营管理质量体系自检</div>
-      <div class="form-step-desc">勾选您企业已建立的管理体系，AI将自动生成符合UNGM审核要求的合规报告</div>
+      <div class="form-step-title">企业管理体系合规评估</div>
+      <div class="form-step-desc">联合国审核要求企业建立八大核心管理体系，AI将基于您上传的资料评估当前合规度</div>
 
-      <div class="qms-grid">
-        <div class="qms-item" onclick="toggleQms(this)">
-          <div class="qms-check"></div>
-          <div>
-            <div class="qms-name">劳动用工管理体系</div>
-            <div class="qms-meta">劳动手册、用工合规</div>
+      <!-- 价值提示 -->
+      <div class="warning-card">
+        <div class="warning-icon">⚠️</div>
+        <div class="warning-content">
+          <div class="warning-title">联合国审核·关键卡点</div>
+          <div class="warning-text">90%的中国企业首次注册被退回，主要原因是<strong style="color:#ffc56e;">"八大企业管理质量体系"未达标</strong>。这是联合国对全球供应商的统一标准，覆盖企业治理的8大核心维度。</div>
+        </div>
+      </div>
+
+      <!-- 8大维度可视化（不显示名称） -->
+      <div class="qms-overview">
+        <div class="qms-overview-title">您的企业合规度评估</div>
+        <div class="qms-progress-grid">
+          <div class="qms-cell" onclick="showLockedTip()"><div class="qms-cell-num">①</div><div class="qms-cell-status locked">🔒</div></div>
+          <div class="qms-cell" onclick="showLockedTip()"><div class="qms-cell-num">②</div><div class="qms-cell-status locked">🔒</div></div>
+          <div class="qms-cell" onclick="showLockedTip()"><div class="qms-cell-num">③</div><div class="qms-cell-status locked">🔒</div></div>
+          <div class="qms-cell" onclick="showLockedTip()"><div class="qms-cell-num">④</div><div class="qms-cell-status locked">🔒</div></div>
+          <div class="qms-cell" onclick="showLockedTip()"><div class="qms-cell-num">⑤</div><div class="qms-cell-status locked">🔒</div></div>
+          <div class="qms-cell" onclick="showLockedTip()"><div class="qms-cell-num">⑥</div><div class="qms-cell-status locked">🔒</div></div>
+          <div class="qms-cell" onclick="showLockedTip()"><div class="qms-cell-num">⑦</div><div class="qms-cell-status locked">🔒</div></div>
+          <div class="qms-cell" onclick="showLockedTip()"><div class="qms-cell-num">⑧</div><div class="qms-cell-status locked">🔒</div></div>
+        </div>
+        <div class="qms-locked-tip" onclick="showLockedTip()" style="cursor:pointer;">
+          <span>🔐 完整体系详情仅向<strong>付费会员</strong>开放（点击查看）</span>
+        </div>
+      </div>
+
+      <!-- AI评估区 -->
+      <div class="ai-eval-section">
+        <div class="ai-eval-title">
+          <span class="ai-eval-icon">🤖</span>
+          AI 智能评估您的合规情况
+        </div>
+        <div class="ai-eval-desc">请如实勾选您企业当前已建立的管理类目（不必担心，所有信息严格保密）</div>
+
+        <div class="self-check-grid">
+          <div class="self-check-item" onclick="toggleQms(this)">
+            <div class="qms-check"></div>
+            <div class="self-check-text">企业有完整的人力资源管理制度</div>
+          </div>
+          <div class="self-check-item" onclick="toggleQms(this)">
+            <div class="qms-check"></div>
+            <div class="self-check-text">企业已通过国家级合规认证</div>
+          </div>
+          <div class="self-check-item" onclick="toggleQms(this)">
+            <div class="qms-check"></div>
+            <div class="self-check-text">企业有ESG环境社会治理报告</div>
+          </div>
+          <div class="self-check-item" onclick="toggleQms(this)">
+            <div class="qms-check"></div>
+            <div class="self-check-text">企业建立了风险防控体系</div>
+          </div>
+          <div class="self-check-item" onclick="toggleQms(this)">
+            <div class="qms-check"></div>
+            <div class="self-check-text">企业每年开展第三方独立审计</div>
+          </div>
+          <div class="self-check-item" onclick="toggleQms(this)">
+            <div class="qms-check"></div>
+            <div class="self-check-text">以上情况均不完全符合</div>
           </div>
         </div>
-        <div class="qms-item" onclick="toggleQms(this)">
-          <div class="qms-check"></div>
-          <div>
-            <div class="qms-name">社会责任管理体系</div>
-            <div class="qms-meta">人权、员工关怀、社区责任</div>
-          </div>
-        </div>
-        <div class="qms-item" onclick="toggleQms(this)">
-          <div class="qms-check"></div>
-          <div>
-            <div class="qms-name">职业健康安全管理体系</div>
-            <div class="qms-meta">安全防护、工伤、消防</div>
-          </div>
-        </div>
-        <div class="qms-item" onclick="toggleQms(this)">
-          <div class="qms-check"></div>
-          <div>
-            <div class="qms-name">反童工与未成年工保护体系</div>
-            <div class="qms-meta">UNGM必查项</div>
-          </div>
-        </div>
-        <div class="qms-item" onclick="toggleQms(this)">
-          <div class="qms-check"></div>
-          <div>
-            <div class="qms-name">反强迫劳动管理体系</div>
-            <div class="qms-meta">不扣证件、不强制加班</div>
-          </div>
-        </div>
-        <div class="qms-item" onclick="toggleQms(this)">
-          <div class="qms-check"></div>
-          <div>
-            <div class="qms-name">环境保护与低碳管理体系</div>
-            <div class="qms-meta">碳达峰、碳中和、节能减排</div>
-          </div>
-        </div>
-        <div class="qms-item" onclick="toggleQms(this)">
-          <div class="qms-check"></div>
-          <div>
-            <div class="qms-name">反歧视与平等就业管理体系</div>
-            <div class="qms-meta">UNGM必查项</div>
-          </div>
-        </div>
-        <div class="qms-item" onclick="toggleQms(this)">
-          <div class="qms-check"></div>
-          <div>
-            <div class="qms-name">反腐败与商业道德管理体系</div>
-            <div class="qms-meta">禁止行贿、回扣、利益输送</div>
+      </div>
+
+      <!-- 价值钩子 -->
+      <div class="value-hook">
+        <div class="value-hook-icon">💎</div>
+        <div class="value-hook-content">
+          <div class="value-hook-title">付费会员专享：八大体系完整建设方案</div>
+          <div class="value-hook-list">
+            ✓ 解锁完整的8大核心体系框架与要求清单<br>
+            ✓ 获取符合联合国标准的体系建设模板（中英双语）<br>
+            ✓ 联合国退休专家1对1辅导体系建设落地<br>
+            ✓ 出具专项合规报告，联合国审核通过率提升至95%
           </div>
         </div>
       </div>
 
       <div class="help-box">
-        UNGM审核会重点检查这8项体系。如有未建立的体系，AI将为您提供建设方案模板，并出具专项合规报告。
+        本评估为<strong style="color:#a8d4ff;">免费基础诊断</strong>，最终联合国注册通过率取决于您的体系建设完整度。详细方案及辅导服务为付费内容。
       </div>
     </div>
 
     <!-- ═══ 第5步 确认提交 ═══ -->
     <div class="form-content" data-step="5" style="display:none;">
       <div class="form-step-title">确认信息并提交</div>
-      <div class="form-step-desc">请最后核对资料，AI将自动生成符合UNGM标准的英文资料包并提交注册</div>
+      <div class="form-step-desc">请最后核对资料，AI将自动生成符合联合国标准的英文资料包并提交注册</div>
 
       <div class="ai-badge">
         <div class="ai-badge-icon">🤖</div>
         <div class="ai-badge-text">
-          <div class="ai-badge-title">AI 智能预审完成</div>
-          <div class="ai-badge-desc">所有材料已通过AI预审，符合UNGM注册标准。预计1-3个工作日完成官方审核。</div>
+          <div class="ai-badge-title">AI 智能预审完成 · 您的联合国注册材料已准备就绪</div>
+          <div class="ai-badge-desc">基础注册资料齐全，预计1-3个工作日完成联合国审核。如需提升审核通过率与中标率，建议升级付费会员，解锁8大体系完整建设方案。</div>
         </div>
       </div>
 
@@ -736,8 +1157,8 @@ body::before{
           <span class="summary-value">已上传 6 份文件</span>
         </div>
         <div class="summary-row">
-          <span class="summary-label">8大管理体系</span>
-          <span class="summary-value">已建立 7 项 / 待完善 1 项</span>
+          <span class="summary-label">企业管理体系合规度</span>
+          <span class="summary-value" style="color:#ffc56e;">部分项待完善 · <span style="color:#a8d4ff;text-decoration:underline;cursor:pointer;" onclick="showLockedTip()">查看付费方案</span></span>
         </div>
         <div class="summary-row">
           <span class="summary-label">AI预审评分</span>
@@ -746,7 +1167,7 @@ body::before{
       </div>
 
       <div class="help-box">
-        提交后，您可在「我的UNGM注册」页面实时跟踪注册进度，专属客户经理也将主动联系您协助审核。
+        提交后，您可在「我的联合国注册」页面实时跟踪注册进度，专属客户经理也将主动联系您协助审核。
       </div>
     </div>
 
@@ -759,6 +1180,68 @@ body::before{
     <button class="btn-submit" onclick="submitForm()" id="btnSubmit" style="display:none;">✓ 确认提交注册</button>
   </div>
 
+</div>
+
+<!-- 付费提示弹窗 -->
+<div class="pay-modal-overlay" id="payModal" onclick="closePayModalIfBg(event)">
+  <div class="pay-modal">
+    <button class="pay-modal-close" onclick="closePayModal()">✕</button>
+    
+    <div class="pay-modal-icon">🇺🇳</div>
+    
+    <div class="pay-modal-title">注册成为联合国供应商</div>
+    <div class="pay-modal-subtitle">
+      解锁完整八大企业管理质量体系<br>
+      AI智能辅助注册联合国官方供应商资质
+    </div>
+    
+    <div class="pay-features">
+      <div class="pay-feature-item">解锁完整八大体系框架与详细要求</div>
+      <div class="pay-feature-item">中英双语合规建设模板（即下即用）</div>
+      <div class="pay-feature-item">联合国退休专家1对1辅导建设</div>
+      <div class="pay-feature-item">出具联合国专项合规评估报告</div>
+      <div class="pay-feature-item">官方审核通过率提升至 95%</div>
+    </div>
+    
+    <!-- 价格区 -->
+    <div class="pay-price-box">
+      <div class="pay-price-label">联合国供应商注册服务费</div>
+      <div class="pay-price-value">
+        <span class="pay-price-currency">¥</span>
+        <span class="pay-price-num">5,000</span>
+        <span class="pay-price-unit">元</span>
+      </div>
+      <div class="pay-price-note">一次性收费 · 含全套AI注册服务 · 失败全额退款</div>
+    </div>
+    
+    <!-- 支付方式 -->
+    <div class="pay-methods">
+      <div class="pay-methods-label">支持以下支付方式</div>
+      <div class="pay-methods-grid">
+        <div class="pay-method-icon" title="微信支付">
+          <span class="pm-icon" style="background:#07C160;">微</span>
+          <span class="pm-text">微信支付</span>
+        </div>
+        <div class="pay-method-icon" title="支付宝">
+          <span class="pm-icon" style="background:#1677FF;">支</span>
+          <span class="pm-text">支付宝</span>
+        </div>
+        <div class="pay-method-icon" title="银联">
+          <span class="pm-icon" style="background:#E60012;">银</span>
+          <span class="pm-text">银联支付</span>
+        </div>
+        <div class="pay-method-icon" title="企业转账">
+          <span class="pm-icon" style="background:#5b6ee1;">企</span>
+          <span class="pm-text">企业转账</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="pay-modal-actions">
+      <button class="pay-btn-primary" onclick="goToPayment()">立即开通注册服务</button>
+      <button class="pay-btn-secondary" onclick="closePayModal()">稍后再说</button>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -828,8 +1311,28 @@ function toggleQms(item){
 }
 
 function submitForm(){
-  alert('🎉 注册资料已成功提交！\n\nAI正在自动处理您的UNGM注册申请。\n您将在3个工作日内收到官方反馈，专属客户经理也会主动联系您。\n\n（演示版本，实际功能需对接Supabase后端）');
+  alert('🎉 联合国供应商注册资料已成功提交！\n\nAI正在自动处理您的联合国注册申请。\n您将在3个工作日内收到官方反馈。\n\n━━━━━━━━━━━━━━━━━━\n💎 提升中标率 · 付费服务\n━━━━━━━━━━━━━━━━━━\n\n注册成功只是第一步。要真正拿到联合国采购合同，您还需要：\n\n✓ 解锁完整8大企业管理体系建设方案\n✓ 接入29个采购平台标讯实时推送\n✓ 联合国退休专家1对1辅导\n✓ AI智能投标分析与价格策略\n\n（演示版本，正式服务即将开放）');
 }
+
+// ═══ 付费弹窗 ═══
+function showLockedTip(){
+  document.getElementById('payModal').classList.add('show');
+}
+function closePayModal(){
+  document.getElementById('payModal').classList.remove('show');
+}
+function closePayModalIfBg(e){
+  if(e.target.id === 'payModal') closePayModal();
+}
+function goToPayment(){
+  alert('🇺🇳 联合国供应商注册服务 · ¥5,000 元\n\n━━━━━━━━━━━━━━━━━━\n💳 请选择您的支付方式：\n━━━━━━━━━━━━━━━━━━\n\n✅ 微信支付 — 扫码即付\n✅ 支付宝 — 扫码即付\n✅ 银联支付 — 银行卡支付\n✅ 企业转账 — 对公账户\n\n━━━━━━━━━━━━━━━━━━\n📜 服务保障：\n━━━━━━━━━━━━━━━━━━\n\n✓ 一次性收费 ¥5,000 元\n✓ 全套AI注册 + 专家辅导\n✓ 3-7工作日完成全流程\n✓ 注册失败全额退款\n\n（演示版本，正式版本将跳转支付收银台）');
+  closePayModal();
+}
+
+// ESC关闭
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape') closePayModal();
+});
 
 // 初始化
 updateUI();
