@@ -532,18 +532,108 @@ body::before{
 }
 .modal-btn-secondary:hover{background:rgba(91,158,255,.18);color:#fff;}
 
-@media (max-width:768px){
-  .top-nav{padding:14px 20px;}
-  .container{padding:80px 16px 20px;}
-  .welcome-title{font-size:26px;}
-  .welcome-sub{font-size:13px;}
-  .ai-avatar{width:64px;height:64px;font-size:28px;}
-  .suggest-grid{grid-template-columns:1fr;}
-  .power-stats{flex-direction:column;gap:8px;}
+/* ═══════════════════════════════════════════
+   平板端（≤900px）
+   ═══════════════════════════════════════════ */
+@media (max-width:900px){
+  .top-nav{padding:14px 18px;}
+  .logo-text-cn{font-size:13px;}
+  .logo-text-en{font-size:9px;}
+  .logo-emblem{width:36px;height:36px;font-size:13px;}
+  .back-btn{padding:7px 14px;font-size:12px;}
+  
+  .container{padding:90px 16px 24px;}
+  
+  .welcome-title{font-size:30px;letter-spacing:.5px;}
+  .welcome-sub{font-size:14px;}
+  .ai-avatar{width:72px;height:72px;font-size:32px;}
+  
+  .suggest-grid{grid-template-columns:1fr 1fr;gap:12px;}
+  .suggest-card{padding:16px 18px;}
+  .suggest-text{font-size:13px;}
+}
+
+/* ═══════════════════════════════════════════
+   手机端（≤600px）
+   ═══════════════════════════════════════════ */
+@media (max-width:600px){
+  .top-nav{padding:12px 14px;}
+  .logo-text-cn{font-size:12px;letter-spacing:.5px;}
+  .logo-text-en{display:none;}
+  .logo-emblem{width:32px;height:32px;font-size:12px;}
+  .back-btn{padding:6px 11px;font-size:11px;}
+  
+  .container{padding:74px 14px 16px;}
+  
+  .welcome-screen{padding:30px 0 20px;}
+  .welcome-title{font-size:23px;letter-spacing:0;line-height:1.3;}
+  .welcome-sub{font-size:12.5px;line-height:1.65;margin-bottom:24px;}
+  .ai-avatar{width:60px;height:60px;font-size:26px;margin-bottom:18px;}
+  
+  .suggest-grid{grid-template-columns:1fr;gap:10px;margin-bottom:24px;}
+  .suggest-card{padding:14px 16px;border-radius:12px;}
+  .suggest-icon{font-size:20px;margin-bottom:6px;}
+  .suggest-text{font-size:12.5px;line-height:1.55;}
+  .suggest-meta{font-size:10.5px;margin-top:4px;}
+  
+  .power-stats{flex-direction:column;gap:6px;font-size:11px;}
   .power-stats-divider{display:none;}
-  .input-bar{padding:6px 6px 6px 14px;}
-  .chat-input{font-size:14px;}
+  
+  .chat-area{padding:20px 0;gap:14px;}
+  .msg-avatar{width:32px;height:32px;font-size:13px;}
+  .msg-avatar.ai{font-size:16px;}
+  .msg-body{padding:11px 14px;font-size:13px;line-height:1.6;}
+  
+  .ai-process{padding:12px 14px;font-size:12px;}
+  .process-step{font-size:11.5px;}
+  
+  .tender-result{padding:12px 14px;border-radius:10px;}
+  .tender-result-title{font-size:13px;line-height:1.45;}
+  .tender-org-tag{font-size:10.5px;padding:2px 7px;}
+  .tender-badge-mini{font-size:9px;padding:2px 6px;}
+  .tender-meta-row{font-size:11px;gap:10px;}
+  
+  .unlock-cta{
+    padding:12px 14px;flex-direction:column;
+    align-items:flex-start;gap:10px;
+  }
+  .unlock-cta-icon{width:32px;height:32px;font-size:14px;}
+  .unlock-cta-title{font-size:12.5px;}
+  .unlock-cta-desc{font-size:11px;}
+  .unlock-cta-btn{
+    width:100%;padding:10px;font-size:12px;
+  }
+  
+  .input-zone{padding:12px 0 16px;}
+  .input-bar{padding:5px 5px 5px 14px;gap:8px;}
+  .input-icon{margin-bottom:9px;}
+  .chat-input{font-size:14px;padding:10px 0;}
+  .voice-btn{width:36px;height:36px;font-size:14px;}
   .voice-tag{display:none;}
+  .send-btn{width:36px;height:36px;font-size:14px;}
+  .input-hint{font-size:10px;}
+  
+  .modal{padding:30px 22px 22px;border-radius:18px;}
+  .modal-title{font-size:21px;}
+  .modal-subtitle{font-size:12.5px;}
+  .modal-price-num{font-size:34px;}
+  .modal-feat-item{font-size:12.5px;}
+  .pay-method-icon{width:32px;height:32px;font-size:12.5px;}
+  .pay-method-text{font-size:9.5px;}
+}
+
+/* ═══════════════════════════════════════════
+   小屏手机（≤380px）
+   ═══════════════════════════════════════════ */
+@media (max-width:380px){
+  .container{padding:70px 10px 14px;}
+  .welcome-title{font-size:20px;}
+  .welcome-sub{font-size:12px;}
+  .suggest-card{padding:12px 14px;}
+  .suggest-text{font-size:12px;}
+  .modal{padding:24px 18px 20px;}
+  .modal-title{font-size:19px;}
+  .pay-methods-row{gap:8px;}
 }
 </style>
 </head>
