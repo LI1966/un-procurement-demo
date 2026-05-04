@@ -331,16 +331,75 @@ body::after{
 }
 .modal-btn-secondary:hover{background:rgba(91,158,255,.18);color:#fff;}
 
+/* ═══════════════════════════════════════════
+   平板端（≤900px）
+   ═══════════════════════════════════════════ */
 @media (max-width:900px){
-  .top-nav{padding:14px 20px;}
-  .container{padding:90px 16px 40px;}
-  .title-main{font-size:25px;}
+  .top-nav{padding:14px 18px;}
+  .logo-text-cn{font-size:13px;}
+  .logo-text-en{font-size:9px;}
+  .logo-emblem{width:36px;height:36px;font-size:13px;}
+  .back-btn{padding:7px 14px;font-size:12px;}
+  
+  .container{padding:90px 16px 36px;}
+  
+  .page-tag{
+    font-size:10.5px;padding:6px 14px;
+    letter-spacing:1px;
+  }
+  .title-main{font-size:24px;line-height:1.3;letter-spacing:.5px;}
   .title-sub{font-size:13px;}
-  .grid-box{grid-template-columns:1fr;gap:18px;}
-  .card-item{padding:24px 22px;}
-  .card-title{font-size:16px;}
-  .sub-modules{grid-template-columns:1fr;}
-  .arrow{padding:6px 12px;font-size:12px;}
+  
+  .grid-box{grid-template-columns:1fr;gap:14px;}
+  .card-item{padding:22px 20px;}
+  .card-title{font-size:15.5px;letter-spacing:.3px;}
+  .card-num{font-size:11.5px;}
+  
+  .sub-modules{grid-template-columns:1fr 1fr;gap:8px;}
+  .sub-module{padding:12px 10px;font-size:12px;}
+  
+  .arrow{padding:6px 12px;font-size:11.5px;}
+}
+
+/* ═══════════════════════════════════════════
+   手机端（≤600px）
+   ═══════════════════════════════════════════ */
+@media (max-width:600px){
+  .top-nav{padding:12px 14px;}
+  .logo-text-cn{font-size:12px;letter-spacing:.5px;}
+  .logo-text-en{display:none;}
+  .logo-emblem{width:32px;height:32px;font-size:12px;}
+  .back-btn{padding:6px 11px;font-size:11px;}
+  
+  .container{padding:80px 14px 30px;}
+  
+  .page-tag{
+    font-size:9.5px;padding:5px 11px;
+    letter-spacing:.8px;margin-bottom:14px;
+  }
+  .title-main{font-size:20px;line-height:1.35;}
+  .title-sub{font-size:12px;}
+  
+  .card-item{padding:18px 16px;border-radius:12px;}
+  .card-title{font-size:14px;}
+  .card-num{font-size:10.5px;margin-right:8px;}
+  
+  .sub-modules{grid-template-columns:1fr;gap:6px;}
+  .sub-module{padding:11px 12px;font-size:12.5px;}
+  
+  .modal{padding:24px 20px 20px;border-radius:16px;}
+  .modal-title{font-size:18px;}
+  .modal-body{font-size:13px;}
+}
+
+/* ═══════════════════════════════════════════
+   小屏手机（≤380px，iPhone SE 等）
+   ═══════════════════════════════════════════ */
+@media (max-width:380px){
+  .container{padding:74px 10px 24px;}
+  .title-main{font-size:18px;}
+  .card-item{padding:16px 14px;}
+  .card-title{font-size:13.5px;}
 }
 </style>
 </head>
@@ -348,14 +407,14 @@ body::after{
 
 <!-- 顶部导航：Logo + 返回按钮 -->
 <div class="top-nav">
-  <a href="page1-login.html" class="logo-top">
+  <a href="index.html" class="logo-top">
     <div class="logo-emblem">联</div>
     <div>
       <div class="logo-text-cn">联合国采购投标专家平台</div>
       <div class="logo-text-en">UN PROCUREMENT EXPERT</div>
     </div>
   </a>
-  <a href="page1-login.html" class="back-btn">返回登录</a>
+  <a href="index.html" class="back-btn">返回登录</a>
 </div>
 
 <div class="container">
@@ -503,7 +562,7 @@ function toggleCard(head){
 
 const modalData = {
   '1-1': {tag:'CHANNEL 01 · MODULE 01', title:'联合国主体注册', desc:'专业团队全程辅助企业完成UNGM联合国全球采购市场供应商注册，打通联合国官方采购准入通道。', features:['UNGM注册全流程辅助','企业资质智能审核与优化','注册材料专业翻译与整理','官方审核进度跟进与反馈']},
-  '1-2': {tag:'CHANNEL 01 · MODULE 02', title:'八大企业质量运营管理体系', desc:'按照联合国供应商标准，为企业建立八大运营管理质量体系，并出具专项合规报告。', features:['劳动用工管理体系','社会责任管理体系','职业健康安全管理体系','反童工与未成年工保护体系','反强迫劳动管理体系','环境保护与低碳管理体系','反歧视与平等就业管理体系','反腐败与商业道德管理体系']},
+  '1-2': {tag:'CHANNEL 01 · MODULE 02', title:'八大企业质量运营管理体系', desc:'按照联合国供应商标准，为企业建立八大运营管理质量体系，覆盖企业治理全维度。这是UNGM审核的核心要求，90%中国企业因体系不达标被退回，本服务可大幅提升通过率。', features:['UNGM审核必查项核心体系','涵盖人力、合规、ESG、风控等八大维度','出具专项合规评估报告','开通付费服务后查看完整方案','专家1对1辅导体系建设','中国首家联合国标准对标体系']},
   '1-3': {tag:'CHANNEL 01 · MODULE 03', title:'29个采购平台标讯获取', desc:'7×24小时不间断扫描联合国及关联机构29个官方采购平台，实时获取最新采购标讯。', features:['全量标讯实时抓取','按企业产品智能匹配','商机优先级智能分级','重要标讯优先推送']},
   '1-4': {tag:'CHANNEL 01 · MODULE 04', title:'6种官方语言译制', desc:'AI智能翻译联合国6种官方工作语言（英、法、西、阿、俄、中）的招标文件与采购公告。', features:['英语 / 法语 / 西班牙语','阿拉伯语 / 俄语 / 中文','专业术语精准翻译','原文+译文对照展示']},
   '1-5': {tag:'CHANNEL 01 · MODULE 05', title:'中文信息即时推送', desc:'通过系统专属邮箱、企业微信、飞书等多渠道，将翻译后的标讯第一时间推送给入驻企业。', features:['多渠道同步推送','按行业分类精准触达','重要标讯优先推送','推送频率自定义']},
