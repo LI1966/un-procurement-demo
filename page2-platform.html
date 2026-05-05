@@ -403,14 +403,36 @@ body::after{
    手机端（≤600px）
    ═══════════════════════════════════════════ */
 @media (max-width:600px){
-  .top-nav{padding:12px 14px;}
+  .top-nav{
+    padding:10px 12px 8px;
+    flex-wrap:wrap;
+    gap:6px 0;
+  }
   .logo-text-cn{font-size:12px;letter-spacing:.5px;}
   .logo-text-en{display:none;}
-  .logo-emblem{width:32px;height:32px;font-size:12px;}
-  .back-btn{padding:6px 11px;font-size:11px;}
-  .nav-quick{display:none;}
+  .logo-emblem{width:30px;height:30px;font-size:11px;}
+  .back-btn{padding:5px 10px;font-size:10.5px;}
   
-  .container{padding:80px 14px 30px;}
+  /* 手机端：快捷导航换到第二行，胶囊紧凑显示 */
+  .nav-quick{
+    order:3;
+    width:100%;
+    justify-content:center;
+    gap:5px;
+    margin-top:4px;
+    padding-top:6px;
+    border-top:1px solid rgba(120,180,255,.1);
+  }
+  .nav-link{
+    padding:5px 10px;
+    font-size:11px;
+    border-radius:14px;
+    flex:1;
+    text-align:center;
+    max-width:32%;
+  }
+  
+  .container{padding:96px 14px 30px;}
   
   .page-tag{
     font-size:9.5px;padding:5px 11px;
