@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>商业模式 - 联合国采购投标专家平台</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;600;700;800;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Noto Sans SC','Inter',-apple-system,sans-serif;
+  background:linear-gradient(165deg,#050d1f 0%,#0a1a35 35%,#0f2347 70%,#0a1a35 100%);
+  min-height:100vh;color:#fff;overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:radial-gradient(circle at 1px 1px, rgba(255,255,255,.012) 1px, transparent 1px);
+  background-size:3px 3px;pointer-events:none;z-index:0;
+}
+
+/* 顶部导航 */
+.top-nav{
+  position:fixed;top:0;left:0;right:0;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px 40px;z-index:50;
+  background:linear-gradient(180deg,rgba(5,12,25,.92),rgba(5,12,25,.4));
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(120,180,255,.08);
+}
+.logo-top{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;}
+.logo-emblem{
+  width:42px;height:42px;border-radius:50%;
+  background:linear-gradient(135deg,#5b9eff,#3b7dd8);
+  color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:16px;font-weight:700;
+  box-shadow:0 4px 14px rgba(91,158,255,.4);
+}
+.logo-text-cn{font-size:15px;font-weight:600;color:#fff;letter-spacing:1px;line-height:1;}
+.logo-text-en{font-size:10px;color:rgba(180,210,255,.6);margin-top:5px;letter-spacing:1.6px;}
+
+.nav-quick{display:flex;align-items:center;gap:6px;}
+.nav-link{
+  padding:8px 14px;background:transparent;
+  border:1px solid transparent;border-radius:8px;
+  color:rgba(180,210,255,.7);font-size:13px;font-weight:500;
+  text-decoration:none;transition:all .25s;letter-spacing:.3px;
+}
+.nav-link:hover{background:rgba(91,158,255,.1);color:#fff;}
+.nav-link.active{
+  background:rgba(91,158,255,.18);border-color:rgba(120,180,255,.35);
+  color:#fff;font-weight:600;
+}
+
+.back-btn{
+  display:flex;align-items:center;gap:8px;
+  padding:9px 18px;background:rgba(91,158,255,.08);
+  border:1px solid rgba(91,158,255,.25);border-radius:8px;
+  color:rgba(220,235,255,.85);font-size:13px;font-weight:500;
+  text-decoration:none;transition:all .25s;
+}
+.back-btn:hover{background:rgba(91,158,255,.18);color:#fff;}
+
+/* 容器 */
+.section{
+  position:relative;z-index:1;
+  padding:90px 40px 80px;
+  max-width:1280px;margin:0 auto;
+}
+.section.hero-section{padding-top:140px;}
+
+/* Hero 标题区 */
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 18px;
+  background:rgba(127,196,255,.10);
+  border:1px solid rgba(127,196,255,.25);border-radius:24px;
+  font-size:12px;color:#a8d4ff;font-weight:500;
+  letter-spacing:1.5px;margin-bottom:24px;
+  backdrop-filter:blur(8px);
+}
+.hero-tag::before{
+  content:'';width:6px;height:6px;border-radius:50%;background:#7fc4ff;
+  box-shadow:0 0 10px #7fc4ff;animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+.hero-title{
+  font-size:56px;font-weight:800;line-height:1.15;
+  letter-spacing:1px;margin-bottom:22px;
+  background:linear-gradient(180deg,#fff 30%,rgba(180,210,255,.7));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-title .gold{
+  background:linear-gradient(135deg,#ffd28a,#ffb84a);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{
+  font-size:17px;color:rgba(180,210,255,.7);
+  font-weight:300;line-height:1.8;max-width:780px;
+  letter-spacing:.5px;margin-bottom:36px;
+}
+
+/* Hero 数据 */
+.hero-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+  margin-top:36px;
+}
+.hero-stat{
+  background:rgba(20,40,75,.45);
+  border:1px solid rgba(120,180,255,.18);
+  border-radius:14px;padding:20px 18px;
+  backdrop-filter:blur(20px);
+  transition:all .3s;
+}
+.hero-stat:hover{
+  border-color:rgba(160,200,255,.4);
+  background:rgba(25,50,90,.55);
+  transform:translateY(-3px);
+}
+.hero-stat-num{
+  font-size:30px;font-weight:800;
+  background:linear-gradient(180deg,#fff,#a8d4ff);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  font-family:'Inter',sans-serif;letter-spacing:.5px;
+  margin-bottom:6px;
+}
+.hero-stat-label{
+  font-size:12px;color:rgba(180,210,255,.65);
+  letter-spacing:1px;line-height:1.5;
+}
+
+/* 章节标题 */
+.section-tag{
+  display:inline-block;
+  padding:5px 14px;background:rgba(91,158,255,.12);
+  border-left:3px solid #5b9eff;
+  font-size:11px;color:#a8d4ff;font-weight:600;
+  letter-spacing:3px;margin-bottom:20px;
+}
+.section-title{
+  font-size:38px;font-weight:800;color:#fff;
+  letter-spacing:1px;margin-bottom:14px;
+}
+.section-sub{
+  font-size:15px;color:rgba(180,210,255,.7);
+  font-weight:300;line-height:1.7;margin-bottom:48px;
+  max-width:820px;
+}
+
+/* ====== 第1节：国家战略 ====== */
+.strategy-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+}
+.strategy-card{
+  background:rgba(20,40,75,.42);
+  border:1.5px solid rgba(120,180,255,.18);
+  border-radius:18px;
+  padding:32px 28px;
+  position:relative;overflow:hidden;
+  transition:all .35s;
+  backdrop-filter:blur(20px);
+}
+.strategy-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:var(--card-color,#5b9eff);
+}
+.strategy-card:hover{
+  border-color:var(--card-color,#5b9eff);
+  transform:translateY(-5px);
+  box-shadow:0 16px 40px rgba(0,0,0,.3),0 0 32px var(--card-glow,rgba(91,158,255,.15));
+}
+.strategy-num{
+  font-size:42px;font-weight:800;font-family:'Inter',sans-serif;
+  color:var(--card-color,#5b9eff);
+  margin-bottom:8px;line-height:1;
+}
+.strategy-title{
+  font-size:24px;font-weight:700;color:#fff;
+  margin-bottom:6px;letter-spacing:.5px;
+}
+.strategy-en{
+  font-size:11px;color:var(--card-color,#5b9eff);
+  letter-spacing:3px;font-weight:500;
+  margin-bottom:18px;
+}
+.strategy-desc{
+  font-size:14px;color:rgba(220,235,255,.85);
+  line-height:1.8;margin-bottom:18px;
+}
+.strategy-detail{
+  background:rgba(10,24,51,.5);
+  border-left:3px solid var(--card-color,#5b9eff);
+  padding:14px 16px;border-radius:6px;
+  font-size:13px;color:rgba(180,210,255,.85);
+  line-height:1.7;font-style:italic;
+}
+
+/* ====== 第2节：困境与机遇 ====== */
+.crisis-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  background:rgba(255,107,138,.06);
+  border:2px solid rgba(255,107,138,.3);
+  border-radius:16px;
+  padding:28px 0;margin-bottom:36px;
+  position:relative;
+}
+.crisis-stat{
+  text-align:center;padding:0 20px;
+  border-right:1px solid rgba(255,107,138,.15);
+}
+.crisis-stat:last-child{border-right:none;}
+.crisis-stat-num{
+  font-size:42px;font-weight:800;
+  color:#ff7a8a;font-family:'Inter',sans-serif;
+  line-height:1;margin-bottom:10px;
+}
+.crisis-stat-label{
+  font-size:12px;color:rgba(220,235,255,.75);
+  line-height:1.5;
+}
+
+.compare-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:20px;
+}
+.compare-card{
+  border-radius:18px;padding:30px 28px;
+  backdrop-filter:blur(20px);
+  position:relative;
+}
+.compare-card.bad{
+  background:rgba(255,107,138,.08);
+  border:1.5px solid rgba(255,107,138,.3);
+}
+.compare-card.good{
+  background:rgba(95,232,168,.08);
+  border:1.5px solid rgba(95,232,168,.3);
+}
+.compare-header{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:22px;padding-bottom:16px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.compare-icon{
+  width:40px;height:40px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;font-weight:700;color:#fff;
+}
+.compare-card.bad .compare-icon{background:linear-gradient(135deg,#ff7a8a,#e84d6a);}
+.compare-card.good .compare-icon{background:linear-gradient(135deg,#5fe8a8,#2dd476);}
+.compare-title{font-size:18px;font-weight:700;color:#fff;letter-spacing:.5px;}
+
+.compare-list{list-style:none;}
+.compare-list li{
+  padding:12px 0;font-size:14px;color:rgba(220,235,255,.85);
+  display:flex;align-items:flex-start;gap:10px;line-height:1.6;
+}
+.compare-card.bad .compare-list li::before{content:'✗';color:#ff7a8a;font-weight:700;flex-shrink:0;}
+.compare-card.good .compare-list li::before{content:'✓';color:#5fe8a8;font-weight:700;flex-shrink:0;}
+
+/* ====== 第3节：双垄断破局 ====== */
+.duopoly-banner{
+  background:linear-gradient(135deg,rgba(168,158,255,.12),rgba(127,196,255,.08));
+  border:1.5px solid rgba(168,158,255,.3);
+  border-radius:14px;
+  padding:22px 28px;text-align:center;margin-bottom:32px;
+  font-size:18px;color:#fff;font-weight:500;
+  letter-spacing:1px;
+}
+.duopoly-banner .accent{color:#ffd28a;font-weight:700;font-size:22px;margin:0 6px;}
+
+.monopoly-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:20px;
+}
+.monopoly-card{
+  background:rgba(20,40,75,.45);
+  border:1.5px solid rgba(120,180,255,.2);
+  border-radius:18px;padding:32px 28px;
+  position:relative;backdrop-filter:blur(20px);
+}
+.monopoly-num-big{
+  position:absolute;top:24px;right:24px;
+  font-size:80px;font-weight:900;font-family:'Inter',sans-serif;
+  color:rgba(91,158,255,.08);line-height:1;
+  user-select:none;
+}
+.monopoly-num{
+  font-size:14px;color:#5b9eff;font-weight:700;
+  letter-spacing:3px;margin-bottom:8px;
+}
+.monopoly-title{
+  font-size:24px;font-weight:700;color:#fff;
+  margin-bottom:4px;letter-spacing:.5px;
+}
+.monopoly-en{
+  font-size:10.5px;color:rgba(180,210,255,.5);
+  letter-spacing:3px;margin-bottom:24px;
+}
+.monopoly-list{list-style:none;}
+.monopoly-list li{
+  padding:14px 0;border-bottom:1px solid rgba(120,180,255,.1);
+}
+.monopoly-list li:last-child{border-bottom:none;}
+.monopoly-li-title{
+  font-size:14px;font-weight:600;color:#fff;
+  margin-bottom:5px;
+}
+.monopoly-li-desc{
+  font-size:12.5px;color:rgba(180,210,255,.7);
+  line-height:1.6;
+}
+
+.duopoly-conclusion{
+  background:linear-gradient(135deg,rgba(255,210,138,.1),rgba(255,184,74,.05));
+  border:1px solid rgba(255,210,138,.35);
+  border-radius:12px;
+  padding:18px 24px;text-align:center;margin-top:24px;
+  font-size:15px;color:#ffd28a;font-style:italic;
+  letter-spacing:.5px;
+}
+
+/* ====== 第4节：两转两升 ====== */
+.transform-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:20px;
+}
+.transform-card{
+  background:rgba(20,40,75,.45);
+  border:1.5px solid rgba(120,180,255,.2);
+  border-radius:18px;padding:30px 28px;
+  position:relative;
+  border-left:5px solid var(--tf-color,#5b9eff);
+  transition:all .3s;
+  backdrop-filter:blur(20px);
+}
+.transform-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 32px rgba(0,0,0,.25);
+}
+.transform-tag{
+  display:inline-block;padding:4px 12px;
+  background:var(--tf-color,#5b9eff);color:#0a1730;
+  font-size:11px;font-weight:700;letter-spacing:1px;
+  border-radius:12px;margin-bottom:14px;
+}
+.transform-arrow{
+  font-size:22px;font-weight:700;color:#fff;
+  margin-bottom:14px;letter-spacing:.5px;
+}
+.transform-arrow .arrow{
+  color:var(--tf-color,#5b9eff);margin:0 8px;
+  font-family:'Inter',sans-serif;font-weight:300;
+}
+.transform-detail{
+  font-size:13.5px;color:rgba(180,210,255,.85);
+  line-height:1.85;
+}
+
+/* ====== 第5节：商业平台架构 ====== */
+.platforms-intro{
+  background:rgba(20,40,75,.42);
+  border:1px solid rgba(120,180,255,.2);
+  border-radius:14px;
+  padding:26px 30px;margin-bottom:32px;
+  display:grid;grid-template-columns:auto 1fr;gap:24px;
+  align-items:center;
+}
+.platforms-intro-icon{
+  width:64px;height:64px;border-radius:50%;
+  background:linear-gradient(135deg,#5b9eff,#a89eff);
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;flex-shrink:0;
+  box-shadow:0 0 24px rgba(91,158,255,.4);
+}
+.platforms-intro-text{font-size:14.5px;color:rgba(220,235,255,.9);line-height:1.8;}
+
+.platforms-grid{
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-bottom:18px;
+}
+.platforms-grid-2{
+  display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px;
+}
+.platforms-grid-1{display:block;}
+.platform-card{
+  background:rgba(20,40,75,.45);
+  border:1.5px solid rgba(120,180,255,.2);
+  border-radius:14px;padding:24px 22px;
+  position:relative;backdrop-filter:blur(20px);
+  transition:all .3s;
+}
+.platform-card:hover{
+  border-color:rgba(160,200,255,.45);
+  transform:translateY(-3px);
+}
+.platform-num{
+  display:inline-block;
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(91,158,255,.18);
+  color:#7fc4ff;font-weight:700;font-size:14px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:12px;font-family:'Inter',sans-serif;
+}
+.platform-title{
+  font-size:17px;font-weight:700;color:#fff;
+  margin-bottom:8px;letter-spacing:.3px;
+}
+.platform-meta{
+  font-size:11px;color:#7fc4ff;
+  letter-spacing:1.5px;font-weight:500;margin-bottom:16px;
+}
+.platform-info{display:flex;flex-direction:column;gap:9px;}
+.platform-info-row{display:flex;gap:8px;font-size:12.5px;line-height:1.55;}
+.platform-info-label{
+  color:rgba(168,212,255,.6);font-weight:500;
+  flex-shrink:0;min-width:50px;
+}
+.platform-info-value{color:rgba(220,235,255,.92);}
+
+/* ====== 第6节：收入模型 ====== */
+.revenue-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+}
+.revenue-card{
+  background:rgba(20,40,75,.45);
+  border:1.5px solid rgba(120,180,255,.2);
+  border-radius:18px;
+  padding:30px 26px;backdrop-filter:blur(20px);
+  position:relative;
+  transition:all .3s;
+}
+.revenue-card.featured{
+  border-color:rgba(255,210,138,.5);
+  background:linear-gradient(135deg,rgba(255,210,138,.06),rgba(20,40,75,.55));
+}
+.revenue-card.featured::before{
+  content:'核心收入';position:absolute;top:-12px;right:24px;
+  background:linear-gradient(135deg,#ffd28a,#ffb84a);
+  color:#0a1730;font-size:10.5px;font-weight:700;letter-spacing:1.5px;
+  padding:5px 12px;border-radius:14px;
+}
+.revenue-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 16px 40px rgba(0,0,0,.3);
+}
+.revenue-title{
+  font-size:18px;font-weight:700;color:#fff;
+  margin-bottom:6px;letter-spacing:.3px;
+}
+.revenue-en{
+  font-size:10.5px;color:rgba(180,210,255,.55);
+  letter-spacing:2.5px;margin-bottom:20px;
+}
+.revenue-price{
+  display:flex;align-items:baseline;gap:3px;
+  margin-bottom:16px;
+}
+.revenue-price-num{
+  font-size:42px;font-weight:800;font-family:'Inter',sans-serif;
+  color:#ffd28a;letter-spacing:.5px;
+}
+.revenue-price-unit{font-size:14px;color:rgba(180,210,255,.6);font-weight:500;}
+.revenue-card.featured .revenue-price-num{
+  background:linear-gradient(135deg,#ffd28a,#ffb84a);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.revenue-desc{
+  font-size:13px;color:rgba(220,235,255,.85);
+  line-height:1.75;margin-bottom:18px;
+}
+.revenue-target{
+  background:rgba(10,24,51,.6);
+  border:1px solid rgba(120,180,255,.2);
+  border-radius:8px;padding:10px 14px;
+  font-size:12px;color:#7fc4ff;
+  font-weight:600;text-align:center;
+}
+
+/* ====== 第7节：财务预测 ====== */
+.finance-table{
+  background:rgba(20,40,75,.4);
+  border:1px solid rgba(120,180,255,.18);
+  border-radius:14px;
+  overflow:hidden;backdrop-filter:blur(20px);
+}
+.finance-row{
+  display:grid;grid-template-columns:140px repeat(5,1fr);
+  align-items:center;
+}
+.finance-row.head{
+  background:rgba(91,158,255,.12);
+  border-bottom:1px solid rgba(120,180,255,.2);
+}
+.finance-row.head .finance-cell{
+  padding:16px 20px;
+  font-size:12px;color:#a8d4ff;font-weight:600;
+  letter-spacing:1.5px;text-align:center;
+}
+.finance-row.head .finance-cell.first{text-align:left;}
+.finance-row.body{
+  border-bottom:1px solid rgba(120,180,255,.08);
+}
+.finance-row.body:last-child{border-bottom:none;}
+.finance-cell{padding:22px 20px;font-size:14px;text-align:center;}
+.finance-cell.year{
+  font-size:18px;font-weight:700;font-family:'Inter',sans-serif;
+  text-align:left;color:#7fc4ff;
+}
+.finance-row.body:nth-child(2) .finance-cell.year{color:#7fc4ff;}
+.finance-row.body:nth-child(3) .finance-cell.year{color:#5b9eff;}
+.finance-row.body:nth-child(4) .finance-cell.year{color:#ffd28a;}
+.finance-cell.value{color:#fff;font-weight:500;}
+.finance-cell.total{
+  font-size:18px;font-weight:700;color:#ffd28a;
+  font-family:'Inter',sans-serif;
+}
+
+/* ====== CTA ====== */
+.cta-section{
+  background:linear-gradient(135deg,rgba(91,158,255,.12),rgba(168,158,255,.08));
+  border:1.5px solid rgba(127,196,255,.3);
+  border-radius:24px;
+  padding:48px 40px;text-align:center;margin-top:32px;
+  backdrop-filter:blur(20px);
+}
+.cta-title{
+  font-size:36px;font-weight:800;color:#fff;
+  margin-bottom:12px;letter-spacing:1px;
+}
+.cta-sub{
+  font-size:15px;color:rgba(220,235,255,.75);
+  margin-bottom:28px;
+}
+.cta-buttons{
+  display:flex;justify-content:center;gap:14px;flex-wrap:wrap;
+}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 28px;border-radius:10px;
+  font-size:14px;font-weight:600;letter-spacing:1px;
+  text-decoration:none;transition:all .25s;
+  cursor:pointer;border:none;font-family:inherit;
+}
+.cta-btn.primary{
+  background:linear-gradient(135deg,#5b9eff,#a89eff);
+  color:#fff;
+  box-shadow:0 6px 20px rgba(91,158,255,.4);
+}
+.cta-btn.primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 28px rgba(91,158,255,.55);
+}
+.cta-btn.secondary{
+  background:rgba(91,158,255,.12);color:#fff;
+  border:1px solid rgba(120,180,255,.35);
+}
+.cta-btn.secondary:hover{
+  background:rgba(91,158,255,.22);
+}
+
+/* 锚点章节间距 */
+section[id]{scroll-margin-top:80px;}
+
+/* 响应式 */
+@media (max-width:1100px){
+  .strategy-grid,.platforms-grid,.revenue-grid{grid-template-columns:1fr 1fr;}
+  .crisis-stats{grid-template-columns:1fr 1fr;}
+  .crisis-stat{border-bottom:1px solid rgba(255,107,138,.15);padding:14px 20px;}
+}
+@media (max-width:768px){
+  .top-nav{padding:14px 18px;flex-wrap:wrap;}
+  .nav-quick{display:none;}
+  .logo-text-en{display:none;}
+  .logo-emblem{width:36px;height:36px;font-size:13px;}
+  .logo-text-cn{font-size:13px;}
+  .back-btn{padding:6px 12px;font-size:11.5px;}
+  .section{padding:60px 20px 50px;}
+  .section.hero-section{padding-top:100px;}
+  .hero-title{font-size:34px;line-height:1.2;}
+  .hero-sub{font-size:14px;}
+  .section-title{font-size:26px;}
+  .section-sub{font-size:13.5px;}
+  .strategy-grid,.platforms-grid,.platforms-grid-2,.revenue-grid,
+  .compare-grid,.monopoly-grid,.transform-grid{
+    grid-template-columns:1fr;gap:14px;
+  }
+  .crisis-stats{grid-template-columns:1fr 1fr;padding:18px 0;}
+  .crisis-stat-num{font-size:30px;}
+  .hero-stats{grid-template-columns:1fr 1fr;}
+  .hero-stat-num{font-size:24px;}
+  .platforms-intro{grid-template-columns:1fr;text-align:center;}
+  .duopoly-banner{font-size:14px;padding:18px;}
+  .duopoly-banner .accent{font-size:16px;}
+  .finance-row{grid-template-columns:80px repeat(5,1fr);}
+  .finance-cell{padding:14px 8px;font-size:12px;}
+  .finance-cell.year{font-size:14px;}
+  .finance-cell.total{font-size:14px;}
+  .cta-title{font-size:26px;}
+  .cta-buttons{flex-direction:column;}
+  .cta-btn{width:100%;justify-content:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- 顶部导航 -->
+<div class="top-nav">
+  <a href="index.html" class="logo-top">
+    <div class="logo-emblem">联</div>
+    <div>
+      <div class="logo-text-cn">联合国采购投标专家平台</div>
+      <div class="logo-text-en">UN PROCUREMENT EXPERT</div>
+    </div>
+  </a>
+  <div class="nav-quick">
+    <a href="page2-platform.html" class="nav-link">一带一路</a>
+    <a href="page3-ungm-register.html" class="nav-link">联合国注册</a>
+    <a href="page4-ai-search.html" class="nav-link">AI对话搜索</a>
+    <a href="business.html" class="nav-link active">商业模式</a>
+  </div>
+  <a href="index.html" class="back-btn">← 返回首页</a>
+</div>
+
+<!-- ============ Hero ============ -->
+<section class="section hero-section">
+  <div class="hero-tag">BUSINESS MODEL · 国家战略级商业体系</div>
+  <h1 class="hero-title">
+    用 AI 让中国企业<br>
+    拿下 <span class="gold">$275 亿</span> 联合国采购市场
+  </h1>
+  <p class="hero-sub">
+    我们不是单一的 AI 工具，更不是普通的代理服务。<br>
+    我们是 <strong style="color:#fff;">联合国官方背景 + 国家级合规牌照 + AI 大模型 + 海外属地代理</strong> 的国家战略级商业平台。<br>
+    服务于<strong style="color:#7fc4ff;">中国制造的转型升级、一带一路、中华民族伟大复兴</strong>的国家议程。
+  </p>
+  
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">$275亿</div>
+      <div class="hero-stat-label">联合国年度采购</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">29</div>
+      <div class="hero-stat-label">采购平台 / 11种采购方式</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">&lt;1%</div>
+      <div class="hero-stat-label">中国企业当前份额</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">10年</div>
+      <div class="hero-stat-label">国家级合规资质</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 第1节：国家战略 ============ -->
+<section class="section" id="strategy">
+  <div class="section-tag">01 · NATIONAL STRATEGY</div>
+  <h2 class="section-title">国家战略 · 我们处在历史最重要的转型节点</h2>
+  <p class="section-sub">
+    联合国采购不只是商业项目，更是中国对外经济战略转型升级的样板工程。
+    我们的使命是：通过 AI 与官方资源，让中国企业从「贴牌代工」走向「全产业链」，
+    把中国制造、中国品牌、中国产业链直接送到世界终端市场。
+  </p>
+  
+  <div class="strategy-grid">
+    <div class="strategy-card" style="--card-color:#ffd28a;--card-glow:rgba(255,210,138,.2);">
+      <div class="strategy-num">01</div>
+      <div class="strategy-title">一带一路</div>
+      <div class="strategy-en">BELT & ROAD INITIATIVE</div>
+      <div class="strategy-desc">2013 国家最高层顶层设计，是中国跨境经济在政策层面的全面保证。</div>
+      <div class="strategy-detail">联合国采购是一带一路最直接、最高效的市场渠道，与 11 种采购方式无缝对接。</div>
+    </div>
+    
+    <div class="strategy-card" style="--card-color:#5b9eff;--card-glow:rgba(91,158,255,.2);">
+      <div class="strategy-num">02</div>
+      <div class="strategy-title">跨境经济融合</div>
+      <div class="strategy-en">M2C TRANSFORMATION</div>
+      <div class="strategy-desc">中国制造从「贴牌加工」走向「全产业链」 —— OEM 时代结束，M2C 时代开始。</div>
+      <div class="strategy-detail">OEM → 产品 + 品牌 + 市场渠道 + 终端市场，工厂从「找订单」变成「找市场」。</div>
+    </div>
+    
+    <div class="strategy-card" style="--card-color:#7fc4ff;--card-glow:rgba(127,196,255,.2);">
+      <div class="strategy-num">03</div>
+      <div class="strategy-title">中华民族伟大复兴</div>
+      <div class="strategy-en">NATIONAL REVIVAL</div>
+      <div class="strategy-desc">中国不再只赚 OEM 的加工费，与终端消费者直接做买卖，赢取全产业链利润。</div>
+      <div class="strategy-detail">联合国采购 = 跨境经济样板项目 = 中国制造转型升级的关键纽带。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 第2节：困境与机遇 ============ -->
+<section class="section" id="crisis">
+  <div class="section-tag">02 · CRISIS & OPPORTUNITY</div>
+  <h2 class="section-title">中国制造的生死困境 · 转型势在必行</h2>
+  <p class="section-sub">
+    中国制造已经到了生死存亡的关键时刻 —— 劳动力成本上涨、贸易战持续升级、出口退税政策收紧。
+    OEM 贴牌加工的传统商业模式已经失去利润空间，"产品 + 市场" 的全产业链转型是唯一出路。
+  </p>
+  
+  <div class="crisis-stats">
+    <div class="crisis-stat">
+      <div class="crisis-stat-num">$3.5万亿</div>
+      <div class="crisis-stat-label">中国制造年出口（2021）</div>
+    </div>
+    <div class="crisis-stat">
+      <div class="crisis-stat-num">≈100%</div>
+      <div class="crisis-stat-label">几乎全为 OEM 贴牌加工</div>
+    </div>
+    <div class="crisis-stat">
+      <div class="crisis-stat-num">&lt;1%</div>
+      <div class="crisis-stat-label">进入海外终端市场（中国品牌）</div>
+    </div>
+    <div class="crisis-stat">
+      <div class="crisis-stat-num">0.4%</div>
+      <div class="crisis-stat-label">直接供应联合国采购</div>
+    </div>
+  </div>
+  
+  <div class="compare-grid">
+    <div class="compare-card bad">
+      <div class="compare-header">
+        <div class="compare-icon">!</div>
+        <div class="compare-title">当下的困境（OEM 模式）</div>
+      </div>
+      <ul class="compare-list">
+        <li>劳动力成本飞涨，材料成本上升</li>
+        <li>中美贸易战持续升级，关税战压顶</li>
+        <li>出口退税政策即将取消，利润被挤压</li>
+        <li>90% 联合国采购物资来自中国，但中国直供占比 &lt; 1%</li>
+        <li>10 倍利差被外国中介贸易公司赚走</li>
+      </ul>
+    </div>
+    
+    <div class="compare-card good">
+      <div class="compare-header">
+        <div class="compare-icon">✓</div>
+        <div class="compare-title">未来的方向（M2C 跨境经济）</div>
+      </div>
+      <ul class="compare-list">
+        <li>Manufacturer to Consumer 直达终端</li>
+        <li>工厂从「找订单」变为「找市场」</li>
+        <li>利润空间放大 5-10 倍（终端价 vs OEM 价）</li>
+        <li>联合国采购 = 跨境经济的样板</li>
+        <li>一带一路 = 跨境经济的舞台</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 第3节：双垄断破局 ============ -->
+<section class="section" id="duopoly">
+  <div class="section-tag">03 · BREAKTHROUGH</div>
+  <h2 class="section-title">破局西方双垄断 · 联合国采购是唯一纽带</h2>
+  <p class="section-sub">
+    欧美主导的世界经济，依靠两大壁垒控制全球市场：质量体系垄断 + 终端市场垄断。
+    破解这两大壁垒，中国制造才能真正走向世界终端。
+    联合国采购系统 = 欧美政府采购系统的国际版本 = 破局唯一纽带。
+  </p>
+  
+  <div class="duopoly-banner">
+    西方双垄断 <span class="accent">=</span>
+    <span class="accent">质量体系垄断</span> + <span class="accent">终端市场垄断</span>
+  </div>
+  
+  <div class="monopoly-grid">
+    <div class="monopoly-card">
+      <div class="monopoly-num-big">01</div>
+      <div class="monopoly-num">01 · MONOPOLY 1</div>
+      <div class="monopoly-title">质量体系垄断</div>
+      <div class="monopoly-en">QUALITY SYSTEM CONTROL</div>
+      <ul class="monopoly-list">
+        <li>
+          <div class="monopoly-li-title">两大企业管理体系</div>
+          <div class="monopoly-li-desc">ISO 系列 · 企业责任 · ESG · 反腐败 · 反歧视 · 反童工</div>
+        </li>
+        <li>
+          <div class="monopoly-li-title">产品准入许可</div>
+          <div class="monopoly-li-desc">美国 FDA · 欧盟 CE · 澳大利亚 TGA · 新西兰 MPI</div>
+        </li>
+        <li>
+          <div class="monopoly-li-title">加工准入许可</div>
+          <div class="monopoly-li-desc">工程类强制认证 · 法律框架审批 · 行业准入</div>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="monopoly-card">
+      <div class="monopoly-num-big">02</div>
+      <div class="monopoly-num">02 · MONOPOLY 2</div>
+      <div class="monopoly-title">终端市场垄断</div>
+      <div class="monopoly-en">MARKET CHANNEL CONTROL</div>
+      <ul class="monopoly-list">
+        <li>
+          <div class="monopoly-li-title">品牌全球化</div>
+          <div class="monopoly-li-desc">用品牌入侵实现「商业模式占领」 · 国家概念被弱化</div>
+        </li>
+        <li>
+          <div class="monopoly-li-title">加盟商业模式</div>
+          <div class="monopoly-li-desc">锁住货架 · 锁住终端 · 锁住消费者购买决策</div>
+        </li>
+        <li>
+          <div class="monopoly-li-title">10 倍利差被外资赚走</div>
+          <div class="monopoly-li-desc">中国 OEM 600 元 / 件 → 欧美终端市场 6000 元 / 件</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="duopoly-conclusion">
+    ➜ 联合国采购系统 = 欧美政府采购系统的国际版本 · 是中国企业破局西方双垄断的唯一纽带
+  </div>
+</section>
+
+<!-- ============ 第4节：两转两升 ============ -->
+<section class="section" id="transform">
+  <div class="section-tag">04 · STRATEGIC TRANSFORMATION</div>
+  <h2 class="section-title">商业模式 · 两个战略转变 + 两个战略升级</h2>
+  <p class="section-sub">
+    中国对外经济的根本性变革，需要在商业模式上进行系统性转型。
+    从单点改良到全局升级，从国内市场到跨境经济，从招商引资到资本输出。
+  </p>
+  
+  <div class="transform-grid">
+    <div class="transform-card" style="--tf-color:#5b9eff;">
+      <div class="transform-tag">战略转变 01</div>
+      <div class="transform-arrow">订单贴牌加工 <span class="arrow">→</span> 产品 + 市场</div>
+      <div class="transform-detail">
+        由「订单加工」向「全产业链」转移。建立「产品加工 + 市场渠道 + 终端市场」全链条。
+        引入合伙人制度，让生产端与渠道端深度绑定。
+      </div>
+    </div>
+    
+    <div class="transform-card" style="--tf-color:#7fc4ff;">
+      <div class="transform-tag">战略转变 02</div>
+      <div class="transform-arrow">境内市场 <span class="arrow">→</span> 跨境市场</div>
+      <div class="transform-detail">
+        由「在国内建造市场」向「在国外建造市场」转变。
+        中国产品通过境外建造的市场，直接卖给世界各地的消费者，
+        而不是经过外国中介转手。
+      </div>
+    </div>
+    
+    <div class="transform-card" style="--tf-color:#ffd28a;">
+      <div class="transform-tag">战略升级 01</div>
+      <div class="transform-arrow">跨境电商 <span class="arrow">→</span> 跨境经济</div>
+      <div class="transform-detail">
+        从单一的跨境电商，升级为全方位的跨境经济：
+        跨境贸易 · 跨境市场 · 跨境工程 · 跨境金融 · 跨境服务，全链条整合。
+      </div>
+    </div>
+    
+    <div class="transform-card" style="--tf-color:#a89eff;">
+      <div class="transform-tag">战略升级 02</div>
+      <div class="transform-arrow">资本输入 <span class="arrow">→</span> 资本输出</div>
+      <div class="transform-detail">
+        从「招商引资」向「跨境投资」升级。在境外既找市场又造市场，
+        依靠资本的力量搭建跨境经济框架，
+        让中国资本成为全球经济的主导力量之一。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 第5节：商业平台架构 ============ -->
+<section class="section" id="platforms">
+  <div class="section-tag">05 · PLATFORM ARCHITECTURE</div>
+  <h2 class="section-title">七大商业平台 · 全方位帮中国企业入围联合国采购</h2>
+  <p class="section-sub">
+    根据中国制造的现状与特点，我们设计了「七大商业平台」体系，
+    采取「引流期 → 孵化期 → 成长期 → 成熟期」的渐进式商业策略，全方位赋能中国企业。
+  </p>
+  
+  <div class="platforms-intro">
+    <div class="platforms-intro-icon">🌐</div>
+    <div class="platforms-intro-text">
+      <strong style="color:#fff;font-size:16px;">第一岛链 → 第二岛链 → 第三岛链</strong><br>
+      平台之间联动升级：初级商业平台是入门，中级是培训实战，高级是高端定制服务。
+      企业通过我们的体系，从「联合国采购入门」走向「全球供应商主力」。
+    </div>
+  </div>
+  
+  <!-- 三大基础平台 -->
+  <div class="platforms-grid">
+    <div class="platform-card">
+      <div class="platform-num">01</div>
+      <div class="platform-title">初级商业平台</div>
+      <div class="platform-meta">第一岛链 · 引流期</div>
+      <div class="platform-info">
+        <div class="platform-info-row"><div class="platform-info-label">服务对象</div><div class="platform-info-value">中国中小企业 · 计划 40,000 家</div></div>
+        <div class="platform-info-row"><div class="platform-info-label">商业模式</div><div class="platform-info-value">合伙公司 + 大学生创业 · 对接联合国 16,262 家有效供应商</div></div>
+        <div class="platform-info-row"><div class="platform-info-label">盈利模式</div><div class="platform-info-value">合同居间费 2-6% · 银行保证金 5-6 万元</div></div>
+      </div>
+    </div>
+    
+    <div class="platform-card">
+      <div class="platform-num">02</div>
+      <div class="platform-title">中级商业平台</div>
+      <div class="platform-meta">第二岛链 · 孵化期</div>
+      <div class="platform-info">
+        <div class="platform-info-row"><div class="platform-info-label">服务对象</div><div class="platform-info-value">愿意接受高级专家培训的企业 · 计划 20,000 家</div></div>
+        <div class="platform-info-row"><div class="platform-info-label">商业模式</div><div class="platform-info-value">联合国高级采购专家实战培训 + 有效入围辅导</div></div>
+        <div class="platform-info-row"><div class="platform-info-label">盈利模式</div><div class="platform-info-value">培训费 + 入围费 · 计划产值 10 亿美元</div></div>
+      </div>
+    </div>
+    
+    <div class="platform-card">
+      <div class="platform-num">03</div>
+      <div class="platform-title">高级商业平台</div>
+      <div class="platform-meta">第三岛链 · 成熟期</div>
+      <div class="platform-info">
+        <div class="platform-info-row"><div class="platform-info-label">服务对象</div><div class="platform-info-value">年营业额 5000 万元以上、5 年进出口经验的企业</div></div>
+        <div class="platform-info-row"><div class="platform-info-label">商业模式</div><div class="platform-info-value">建立企业自有联合国采购订单获取团队</div></div>
+        <div class="platform-info-row"><div class="platform-info-label">盈利模式</div><div class="platform-info-value">高级培训费 · 入围费 · 长期合同分成</div></div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 高级支撑平台 -->
+  <div class="platforms-grid-2">
+    <div class="platform-card">
+      <div class="platform-num">04</div>
+      <div class="platform-title">订单获取专业团队平台</div>
+      <div class="platform-meta">第一/二/三岛链 · 全程</div>
+      <div class="platform-info">
+        <div class="platform-info-row"><div class="platform-info-label">团队组成</div><div class="platform-info-value">联合国前高级采购专家 + 6 种语言专业团队</div></div>
+        <div class="platform-info-row"><div class="platform-info-label">服务企业</div><div class="platform-info-value">中高级商业平台的企业</div></div>
+        <div class="platform-info-row"><div class="platform-info-label">盈利模式</div><div class="platform-info-value">2-3% 居间中介费 · 联合国付款后 3 天内结算</div></div>
+      </div>
+    </div>
+    
+    <div class="platform-card">
+      <div class="platform-num">05</div>
+      <div class="platform-title">乌克兰重建平台</div>
+      <div class="platform-meta">特殊商机 · 战后重建</div>
+      <div class="platform-info">
+        <div class="platform-info-row"><div class="platform-info-label">采购品类</div><div class="platform-info-value">发电设备（核电/火电/新能源）· 通信基建 · 建筑材料</div></div>
+        <div class="platform-info-row"><div class="platform-info-label">合作领域</div><div class="platform-info-value">人道主义救援 · 战后重建 · 智慧城市建设</div></div>
+        <div class="platform-info-row"><div class="platform-info-label">市场规模</div><div class="platform-info-value">欧盟一体化自贸区 · 工业产业园 · 跨境市场</div></div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 终极平台 -->
+  <div class="platforms-grid-2">
+    <div class="platform-card">
+      <div class="platform-num">06</div>
+      <div class="platform-title">亚太厂家产品展销会</div>
+      <div class="platform-meta">线下落地 · 跨境对接</div>
+      <div class="platform-info">
+        <div class="platform-info-row"><div class="platform-info-label">举办城市</div><div class="platform-info-value">广州 · 上海 · 长沙 · 成都 · 西安 · 北京</div></div>
+        <div class="platform-info-row"><div class="platform-info-label">指导单位</div><div class="platform-info-value">联合国秘书处 · 联合国全球市场采购中心</div></div>
+        <div class="platform-info-row"><div class="platform-info-label">主办单位</div><div class="platform-info-value">联合国难民署 · 开发署 · 儿童基金会 · 中国部级单位</div></div>
+      </div>
+    </div>
+    
+    <div class="platform-card">
+      <div class="platform-num">07</div>
+      <div class="platform-title">跨境经济融合平台</div>
+      <div class="platform-meta">数字经济 · 工业互联网 3.0</div>
+      <div class="platform-info">
+        <div class="platform-info-row"><div class="platform-info-label">技术架构</div><div class="platform-info-value">工业互联网 3.0 框架 · 共享数字经济新式物联网</div></div>
+        <div class="platform-info-row"><div class="platform-info-label">业务范围</div><div class="platform-info-value">联合国采购 + NGO 采购 + 各国政府采购 + 商业市场</div></div>
+        <div class="platform-info-row"><div class="platform-info-label">战略目标</div><div class="platform-info-value">中国企业、中国制造直达世界终端市场</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 第6节：收入模型 ============ -->
+<section class="section" id="revenue">
+  <div class="section-tag">06 · REVENUE MODEL</div>
+  <h2 class="section-title">三层收入结构 · 入门付费 + 服务佣金 + 增值服务</h2>
+  <p class="section-sub">
+    我们的盈利模式不依赖单一来源，而是通过多层次价值传递形成完整商业闭环。
+    低门槛获客 → 中等付费转化 → 高净值长期合作。
+  </p>
+  
+  <div class="revenue-grid">
+    <div class="revenue-card featured">
+      <div class="revenue-title">AI 智能采购会员</div>
+      <div class="revenue-en">AI MEMBERSHIP</div>
+      <div class="revenue-price">
+        <span class="revenue-price-num">¥5,000</span>
+        <span class="revenue-price-unit">/年</span>
+      </div>
+      <div class="revenue-desc">
+        联合国供应商注册 · 全套 AI 功能 · 标讯实时推送 · UNGM-Pro 直连数据 · 智能匹配
+      </div>
+      <div class="revenue-target">目标 1000+ 中小企业 · 年收入 500 万</div>
+    </div>
+    
+    <div class="revenue-card">
+      <div class="revenue-title">投标代理服务</div>
+      <div class="revenue-en">AGENCY COMMISSION</div>
+      <div class="revenue-price">
+        <span class="revenue-price-num">2-4%</span>
+        <span class="revenue-price-unit">合同额</span>
+      </div>
+      <div class="revenue-desc">
+        中标抽成 · 失败全额退还 · 5 万美金以上项目第三方资金监管 · 4% 对赌模式
+      </div>
+      <div class="revenue-target">目标 100+ 中标项目 · 杠杆效应巨大</div>
+    </div>
+    
+    <div class="revenue-card">
+      <div class="revenue-title">增值高端服务</div>
+      <div class="revenue-en">PREMIUM SERVICES</div>
+      <div class="revenue-price">
+        <span class="revenue-price-num">$200</span>
+        <span class="revenue-price-unit">/起</span>
+      </div>
+      <div class="revenue-desc">
+        联合国官员 1 对 1 咨询 · 8 大体系认证辅导 · 海外属地代理对接 · 高级培训
+      </div>
+      <div class="revenue-target">目标 200+ 高净值客户 · 单价高复购强</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 第7节：财务预测 ============ -->
+<section class="section" id="finance">
+  <div class="section-tag">07 · FINANCIAL PROJECTION</div>
+  <h2 class="section-title">3 年财务预测 · Year 3 营收过亿</h2>
+  <p class="section-sub">
+    基于真实的商业模式与已经验证的市场需求，我们制定了稳健的 3 年财务预测。
+    Year 1 跑通 MVP，Year 2 规模化获客，Year 3 进入多国市场。
+  </p>
+  
+  <div class="finance-table">
+    <div class="finance-row head">
+      <div class="finance-cell first">YEAR</div>
+      <div class="finance-cell">付费会员数</div>
+      <div class="finance-cell">会员收入</div>
+      <div class="finance-cell">代理佣金</div>
+      <div class="finance-cell">增值服务</div>
+      <div class="finance-cell">总收入</div>
+    </div>
+    <div class="finance-row body">
+      <div class="finance-cell year">Year 1</div>
+      <div class="finance-cell value">300</div>
+      <div class="finance-cell value">750 万</div>
+      <div class="finance-cell value">200 万</div>
+      <div class="finance-cell value">50 万</div>
+      <div class="finance-cell total">1,000 万</div>
+    </div>
+    <div class="finance-row body">
+      <div class="finance-cell year">Year 2</div>
+      <div class="finance-cell value">1,500</div>
+      <div class="finance-cell value">3,750 万</div>
+      <div class="finance-cell value">1,500 万</div>
+      <div class="finance-cell value">500 万</div>
+      <div class="finance-cell total">5,750 万</div>
+    </div>
+    <div class="finance-row body">
+      <div class="finance-cell year">Year 3</div>
+      <div class="finance-cell value">5,000</div>
+      <div class="finance-cell value">1.25 亿</div>
+      <div class="finance-cell value">8,000 万</div>
+      <div class="finance-cell value">2,000 万</div>
+      <div class="finance-cell total">2.25 亿</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA 行动号召 ============ -->
+<section class="section">
+  <div class="cta-section">
+    <h2 class="cta-title">天使+ 轮融资 · ¥2,000 - 5,000 万</h2>
+    <p class="cta-sub">出让股份 10%-15% · 对应估值 1.3-3 亿元 · 期待与战略投资人深度合作</p>
+    <div class="cta-buttons">
+      <a href="mailto:wsl@unpt.org" class="cta-btn primary">
+        立即联系 · wsl@unpt.org
+      </a>
+      <a href="index.html" class="cta-btn secondary">
+        体验产品 · www.unpt.org
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+// 滚动时高亮当前章节（可选）
+document.addEventListener('scroll', () => {
+  const sections = document.querySelectorAll('section[id]');
+  const scrollPos = window.scrollY + 120;
+  // 留作未来扩展
+});
+</script>
+
+</body>
+</html>
