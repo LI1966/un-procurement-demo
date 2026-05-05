@@ -109,6 +109,52 @@ body{font-family:'Noto Sans SC','Inter',-apple-system,sans-serif;color:#333;}
 .channel-arrow{font-size:13px;color:rgba(180,210,255,.3);transition:all .3s;font-weight:300;}
 .channel:hover .channel-arrow{color:#a8c9ff;transform:translateX(4px);}
 
+/* 商业模式入口（NEW） - 给 SOE/VC 看的入口 */
+.business-link{
+  display:flex;align-items:center;gap:14px;
+  margin-top:18px;padding:16px 18px;
+  text-decoration:none;
+  background:linear-gradient(135deg,rgba(255,210,138,.08),rgba(168,158,255,.05));
+  border:1px solid rgba(255,210,138,.25);
+  border-radius:12px;
+  position:relative;overflow:hidden;
+  transition:all .3s;
+}
+.business-link::before{
+  content:'';position:absolute;top:0;left:0;
+  width:3px;height:100%;
+  background:linear-gradient(180deg,#ffd28a,#ffb84a);
+}
+.business-link:hover{
+  background:linear-gradient(135deg,rgba(255,210,138,.14),rgba(168,158,255,.08));
+  border-color:rgba(255,210,138,.45);
+  transform:translateX(4px);
+  box-shadow:0 6px 24px rgba(255,210,138,.12);
+}
+.biz-icon{
+  width:36px;height:36px;border-radius:8px;
+  background:rgba(255,210,138,.12);
+  display:flex;align-items:center;justify-content:center;
+  color:#ffd28a;flex-shrink:0;
+}
+.biz-icon svg{width:20px;height:20px;}
+.biz-content{flex:1;min-width:0;}
+.biz-title{
+  font-size:14px;font-weight:600;color:#fff;
+  letter-spacing:.4px;margin-bottom:3px;
+}
+.biz-meta{
+  font-size:11px;color:rgba(255,210,138,.7);
+  letter-spacing:.3px;font-weight:300;line-height:1.5;
+}
+.biz-arrow{
+  font-size:14px;color:rgba(255,210,138,.5);
+  transition:all .3s;font-weight:300;flex-shrink:0;
+}
+.business-link:hover .biz-arrow{
+  color:#ffd28a;transform:translateX(4px);
+}
+
 .login-right{
   background:#f4f7fb;display:flex;align-items:center;justify-content:center;
   padding:32px;position:relative;overflow:hidden;
@@ -249,6 +295,15 @@ body{font-family:'Noto Sans SC','Inter',-apple-system,sans-serif;color:#333;}
     font-size:11px;line-height:1.5;
   }
   
+  /* 商业模式入口手机适配 */
+  .business-link{
+    margin-top:14px;padding:13px 14px;gap:11px;
+  }
+  .biz-icon{width:32px;height:32px;}
+  .biz-icon svg{width:17px;height:17px;}
+  .biz-title{font-size:13px;margin-bottom:2px;}
+  .biz-meta{font-size:10.5px;letter-spacing:.2px;line-height:1.45;}
+  
   .login-right{
     padding:32px 20px 40px;
     background:#f4f7fb;
@@ -378,6 +433,20 @@ body{font-family:'Noto Sans SC','Inter',-apple-system,sans-serif;color:#333;}
         </a>
 
       </div>
+
+      <!-- 商业模式入口（NEW） -->
+      <a href="business.html" class="business-link">
+        <div class="biz-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 17h18M5 17V9l7-5 7 5v8M9 17v-5M15 17v-5"/>
+          </svg>
+        </div>
+        <div class="biz-content">
+          <div class="biz-title">商业模式 · 国家战略级商业体系</div>
+          <div class="biz-meta">一带一路 · 跨境经济 · 双垄断破局 · 七大平台架构</div>
+        </div>
+        <div class="biz-arrow">→</div>
+      </a>
 
     </div>
   </div>
