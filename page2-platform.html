@@ -85,6 +85,42 @@ body::after{
   content:'←';font-size:16px;
 }
 
+/* 中间快捷导航条 */
+.nav-quick{
+  display:flex;align-items:center;gap:6px;
+}
+.nav-link{
+  padding:8px 14px;
+  background:transparent;
+  border:1px solid transparent;
+  border-radius:8px;
+  color:rgba(180,210,255,.7);
+  font-size:13px;font-weight:500;
+  text-decoration:none;
+  transition:all .25s;
+  letter-spacing:.3px;
+}
+.nav-link:hover{
+  background:rgba(91,158,255,.1);
+  color:#fff;
+}
+.nav-link.active{
+  background:rgba(91,158,255,.18);
+  border-color:rgba(120,180,255,.35);
+  color:#fff;
+  font-weight:600;
+}
+.nav-link.highlight{
+  background:linear-gradient(135deg,rgba(168,158,255,.18),rgba(127,196,255,.12));
+  border:1px solid rgba(168,158,255,.35);
+  color:#fff;
+}
+.nav-link.highlight:hover{
+  background:linear-gradient(135deg,rgba(168,158,255,.28),rgba(127,196,255,.2));
+  transform:translateY(-1px);
+  box-shadow:0 4px 12px rgba(168,158,255,.25);
+}
+
 .container{
   max-width:1300px;margin:0 auto;
   padding:110px 48px 80px;
@@ -340,6 +376,8 @@ body::after{
   .logo-text-en{font-size:9px;}
   .logo-emblem{width:36px;height:36px;font-size:13px;}
   .back-btn{padding:7px 14px;font-size:12px;}
+  .nav-quick{gap:3px;}
+  .nav-link{padding:7px 11px;font-size:12px;}
   
   .container{padding:90px 16px 36px;}
   
@@ -370,6 +408,7 @@ body::after{
   .logo-text-en{display:none;}
   .logo-emblem{width:32px;height:32px;font-size:12px;}
   .back-btn{padding:6px 11px;font-size:11px;}
+  .nav-quick{display:none;}
   
   .container{padding:80px 14px 30px;}
   
@@ -405,7 +444,7 @@ body::after{
 </head>
 <body>
 
-<!-- 顶部导航：Logo + 返回按钮 -->
+<!-- 顶部导航：Logo + 快捷导航 + 返回按钮 -->
 <div class="top-nav">
   <a href="index.html" class="logo-top">
     <div class="logo-emblem">联</div>
@@ -414,6 +453,11 @@ body::after{
       <div class="logo-text-en">UN PROCUREMENT EXPERT</div>
     </div>
   </a>
+  <div class="nav-quick">
+    <a href="page2-platform.html" class="nav-link active">一带一路</a>
+    <a href="page3-ungm-register.html" class="nav-link">联合国注册</a>
+    <a href="page4-ai-search.html" class="nav-link highlight">AI对话搜索</a>
+  </div>
   <a href="index.html" class="back-btn">返回登录</a>
 </div>
 
@@ -445,12 +489,12 @@ body::after{
         <div class="drop-content">
           <div class="drop-title">十大核心服务模块</div>
           <div class="sub-modules">
-            <div class="sub-mod" onclick="openModal('1-1')"><div class="sub-mod-num">01</div><div class="sub-mod-text">联合国主体注册</div><div class="sub-mod-arrow">→</div></div>
+            <div class="sub-mod" onclick="window.location.href='page3-ungm-register.html'"><div class="sub-mod-num">01</div><div class="sub-mod-text">联合国主体注册</div><div class="sub-mod-arrow">→</div></div>
             <div class="sub-mod" onclick="openModal('1-2')"><div class="sub-mod-num">02</div><div class="sub-mod-text">八大企业质量运营管理体系</div><div class="sub-mod-arrow">→</div></div>
-            <div class="sub-mod" onclick="openModal('1-3')"><div class="sub-mod-num">03</div><div class="sub-mod-text">29个采购平台标讯获取</div><div class="sub-mod-arrow">→</div></div>
+            <div class="sub-mod" onclick="window.location.href='page4-ai-search.html'"><div class="sub-mod-num">03</div><div class="sub-mod-text">29个采购平台标讯获取</div><div class="sub-mod-arrow">→</div></div>
             <div class="sub-mod" onclick="openModal('1-4')"><div class="sub-mod-num">04</div><div class="sub-mod-text">6种官方语言译制</div><div class="sub-mod-arrow">→</div></div>
             <div class="sub-mod" onclick="openModal('1-5')"><div class="sub-mod-num">05</div><div class="sub-mod-text">中文信息即时推送</div><div class="sub-mod-arrow">→</div></div>
-            <div class="sub-mod" onclick="openModal('1-6')"><div class="sub-mod-num">06</div><div class="sub-mod-text">AI智能投标分析</div><div class="sub-mod-arrow">→</div></div>
+            <div class="sub-mod" onclick="window.location.href='page4-ai-search.html'"><div class="sub-mod-num">06</div><div class="sub-mod-text">AI智能投标分析</div><div class="sub-mod-arrow">→</div></div>
             <div class="sub-mod" onclick="openModal('1-7')"><div class="sub-mod-num">07</div><div class="sub-mod-text">投标策略与价格建议</div><div class="sub-mod-arrow">→</div></div>
             <div class="sub-mod" onclick="openModal('1-8')"><div class="sub-mod-num">08</div><div class="sub-mod-text">合规风控审查</div><div class="sub-mod-arrow">→</div></div>
             <div class="sub-mod" onclick="openModal('1-9')"><div class="sub-mod-num">09</div><div class="sub-mod-text">企业资料数字备案</div><div class="sub-mod-arrow">→</div></div>

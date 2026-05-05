@@ -56,6 +56,30 @@ body::before{
 }
 .back-btn::before{content:'←';font-size:16px;}
 
+/* 中间快捷导航条 */
+.nav-quick{display:flex;align-items:center;gap:6px;}
+.nav-link{
+  padding:8px 14px;background:transparent;
+  border:1px solid transparent;border-radius:8px;
+  color:rgba(180,210,255,.7);font-size:13px;font-weight:500;
+  text-decoration:none;transition:all .25s;letter-spacing:.3px;
+}
+.nav-link:hover{background:rgba(91,158,255,.1);color:#fff;}
+.nav-link.active{
+  background:rgba(91,158,255,.18);
+  border-color:rgba(120,180,255,.35);
+  color:#fff;font-weight:600;
+}
+.nav-link.highlight{
+  background:linear-gradient(135deg,rgba(168,158,255,.18),rgba(127,196,255,.12));
+  border:1px solid rgba(168,158,255,.35);color:#fff;
+}
+.nav-link.highlight:hover{
+  background:linear-gradient(135deg,rgba(168,158,255,.28),rgba(127,196,255,.2));
+  transform:translateY(-1px);
+  box-shadow:0 4px 12px rgba(168,158,255,.25);
+}
+
 /* 主体 */
 .container{
   max-width:1100px;margin:0 auto;
@@ -693,6 +717,8 @@ body::before{
   .logo-text-en{font-size:9px;}
   .logo-emblem{width:36px;height:36px;font-size:13px;}
   .back-btn{padding:7px 14px;font-size:12px;}
+  .nav-quick{gap:3px;}
+  .nav-link{padding:7px 11px;font-size:12px;}
   
   .container{padding:90px 16px 36px;}
   .page-title{font-size:24px;}
@@ -713,6 +739,7 @@ body::before{
   .logo-text-en{display:none;}
   .logo-emblem{width:32px;height:32px;font-size:12px;}
   .back-btn{padding:6px 11px;font-size:11px;}
+  .nav-quick{display:none;}
   
   .container{padding:78px 12px 28px;}
   .page-title{font-size:20px;line-height:1.35;}
@@ -768,13 +795,18 @@ body::before{
 
 <!-- 顶部导航 -->
 <div class="top-nav">
-  <a href="page2-platform.html" class="logo-top">
+  <a href="index.html" class="logo-top">
     <div class="logo-emblem">联</div>
     <div>
       <div class="logo-text-cn">联合国采购投标专家平台</div>
       <div class="logo-text-en">UN PROCUREMENT EXPERT</div>
     </div>
   </a>
+  <div class="nav-quick">
+    <a href="page2-platform.html" class="nav-link">一带一路</a>
+    <a href="page3-ungm-register.html" class="nav-link active">联合国注册</a>
+    <a href="page4-ai-search.html" class="nav-link highlight">AI对话搜索</a>
+  </div>
   <a href="page2-platform.html" class="back-btn">返回平台</a>
 </div>
 
