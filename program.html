@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>项目介绍 · 一带一路跨境经济协作融合平台</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Serif+SC:wght@400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;600;700;800;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Noto Sans SC','Inter',-apple-system,sans-serif;
+  background:linear-gradient(165deg,#040814 0%,#0a1830 35%,#0f2347 70%,#0a1830 100%);
+  min-height:100vh;color:#fff;overflow-x:hidden;line-height:1.6;
+}
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:radial-gradient(circle at 1px 1px, rgba(255,255,255,.012) 1px, transparent 1px);
+  background-size:3px 3px;pointer-events:none;z-index:0;
+}
+
+/* 顶部导航 */
+.top-nav{
+  position:fixed;top:0;left:0;right:0;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px 40px;z-index:50;
+  background:linear-gradient(180deg,rgba(4,8,20,.95),rgba(4,8,20,.4));
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(120,180,255,.08);
+}
+.logo-top{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;}
+.logo-emblem{
+  width:42px;height:42px;border-radius:50%;
+  background:linear-gradient(135deg,#5b9eff,#3b7dd8);
+  color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:16px;font-weight:700;
+  box-shadow:0 4px 14px rgba(91,158,255,.4);
+}
+.logo-text-cn{font-size:15px;font-weight:600;color:#fff;letter-spacing:1px;line-height:1;}
+.logo-text-en{font-size:10px;color:rgba(180,210,255,.6);margin-top:5px;letter-spacing:1.6px;}
+
+.nav-quick{display:flex;align-items:center;gap:6px;}
+.nav-link{
+  padding:8px 14px;background:transparent;
+  border:1px solid transparent;border-radius:8px;
+  color:rgba(180,210,255,.7);font-size:13px;font-weight:500;
+  text-decoration:none;transition:all .25s;letter-spacing:.3px;
+}
+.nav-link:hover{background:rgba(91,158,255,.1);color:#fff;}
+.nav-link.active{
+  background:rgba(91,158,255,.18);border-color:rgba(120,180,255,.35);
+  color:#fff;font-weight:600;
+}
+
+.back-btn{
+  display:flex;align-items:center;gap:8px;
+  padding:9px 18px;background:rgba(91,158,255,.08);
+  border:1px solid rgba(91,158,255,.25);border-radius:8px;
+  color:rgba(220,235,255,.85);font-size:13px;font-weight:500;
+  text-decoration:none;transition:all .25s;
+}
+.back-btn:hover{background:rgba(91,158,255,.18);color:#fff;}
+
+/* ====== Hero 国务院级开场 ====== */
+.hero{
+  position:relative;z-index:1;
+  padding:160px 40px 100px;
+  max-width:1280px;margin:0 auto;
+  text-align:center;
+}
+.hero-classify{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:8px 22px;
+  background:rgba(255,210,138,.08);
+  border:1.5px solid rgba(255,210,138,.4);
+  border-radius:30px;
+  font-size:12px;color:#ffd28a;font-weight:600;
+  letter-spacing:3px;margin-bottom:32px;
+}
+.hero-classify::before{
+  content:'';width:8px;height:8px;border-radius:50%;background:#ffd28a;
+  box-shadow:0 0 14px #ffd28a;animation:pulse 2.5s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.2)}}
+
+.hero-title{
+  font-family:'Noto Serif SC',serif;
+  font-size:56px;font-weight:900;line-height:1.25;
+  letter-spacing:2px;margin-bottom:24px;
+  background:linear-gradient(180deg,#fff 25%,#a8d4ff 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-subtitle{
+  font-size:22px;color:#ffd28a;font-weight:500;
+  letter-spacing:6px;margin-bottom:20px;
+}
+.hero-en{
+  font-size:13px;color:rgba(168,212,255,.55);
+  letter-spacing:5px;font-weight:300;margin-bottom:36px;
+}
+
+.hero-meta{
+  display:inline-block;
+  background:rgba(20,40,75,.55);
+  border:1px solid rgba(120,180,255,.25);
+  border-radius:14px;
+  padding:18px 32px;
+  font-size:14px;color:rgba(220,235,255,.85);
+  line-height:2;margin-top:14px;
+  backdrop-filter:blur(10px);
+}
+.hero-meta strong{color:#fff;font-weight:600;}
+.hero-meta .gold{color:#ffd28a;font-weight:600;}
+
+/* ====== 章节通用 ====== */
+.section{
+  position:relative;z-index:1;
+  padding:80px 40px;
+  max-width:1280px;margin:0 auto;
+}
+.chapter-tag{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:18px;
+}
+.chapter-num{
+  font-family:'Noto Serif SC',serif;
+  font-size:60px;font-weight:900;
+  color:rgba(255,210,138,.18);
+  line-height:1;letter-spacing:-2px;
+}
+.chapter-num-text{
+  display:flex;flex-direction:column;gap:2px;
+}
+.chapter-en{
+  font-size:11px;color:#7fc4ff;
+  letter-spacing:4px;font-weight:600;
+}
+.chapter-cn{
+  font-size:13px;color:rgba(180,210,255,.6);
+  letter-spacing:3px;font-weight:500;
+}
+
+.chapter-title{
+  font-family:'Noto Serif SC',serif;
+  font-size:36px;font-weight:800;color:#fff;
+  letter-spacing:2px;margin-bottom:20px;
+  line-height:1.4;
+}
+.chapter-divider{
+  width:60px;height:3px;
+  background:linear-gradient(90deg,#ffd28a,transparent);
+  margin-bottom:32px;
+}
+
+/* ====== 第一章：40年两阶段 ====== */
+.eras-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:24px;
+  margin-top:32px;
+}
+.era-card{
+  background:rgba(20,40,75,.45);
+  border:1.5px solid rgba(120,180,255,.2);
+  border-radius:18px;
+  padding:36px 32px;backdrop-filter:blur(20px);
+  position:relative;overflow:hidden;
+  transition:all .3s;
+}
+.era-card.phase1{border-left:5px solid #5fe8a8;}
+.era-card.phase2{border-left:5px solid #ffd28a;}
+.era-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.3);}
+.era-period{
+  font-family:'Inter',sans-serif;
+  font-size:12px;font-weight:600;
+  color:rgba(180,210,255,.6);
+  letter-spacing:2px;margin-bottom:6px;
+}
+.era-card.phase1 .era-period{color:#5fe8a8;}
+.era-card.phase2 .era-period{color:#ffd28a;}
+.era-title{
+  font-family:'Noto Serif SC',serif;
+  font-size:22px;font-weight:700;color:#fff;
+  letter-spacing:1px;margin-bottom:18px;
+  padding-bottom:14px;
+  border-bottom:1px solid rgba(120,180,255,.12);
+}
+.era-content{
+  font-size:14px;color:rgba(220,235,255,.88);
+  line-height:1.95;text-align:justify;
+}
+.era-content p{margin-bottom:14px;}
+.era-content p:last-child{margin-bottom:0;}
+.era-content strong{color:#fff;font-weight:600;}
+.era-card.phase1 .era-content strong{color:#5fe8a8;}
+.era-card.phase2 .era-content strong{color:#ffd28a;}
+
+.gap-callout{
+  margin-top:36px;
+  background:linear-gradient(135deg,rgba(255,210,138,.08),rgba(168,158,255,.06));
+  border:1.5px solid rgba(255,210,138,.35);
+  border-radius:18px;
+  padding:32px 36px;
+  position:relative;
+}
+.gap-callout::before{
+  content:'⚠';position:absolute;top:24px;left:24px;
+  font-size:24px;color:#ffd28a;
+}
+.gap-callout-title{
+  font-family:'Noto Serif SC',serif;
+  font-size:18px;font-weight:700;color:#ffd28a;
+  margin-bottom:12px;padding-left:42px;
+  letter-spacing:.8px;
+}
+.gap-callout-content{
+  font-size:15px;color:rgba(220,235,255,.95);
+  line-height:1.85;padding-left:42px;
+}
+.gap-callout-content strong{color:#ffd28a;font-weight:700;}
+.gap-callout-mission{
+  margin-top:16px;padding:16px 20px;
+  background:rgba(255,210,138,.1);
+  border-left:4px solid #ffd28a;border-radius:6px;
+  font-size:16px;font-weight:600;color:#fff;
+  letter-spacing:.5px;line-height:1.7;
+}
+
+/* ====== 第二章：3+1战略地缘 ====== */
+.geo-banner{
+  background:linear-gradient(135deg,rgba(91,158,255,.1),rgba(168,158,255,.05));
+  border:1.5px solid rgba(127,196,255,.35);
+  border-radius:18px;
+  padding:32px;text-align:center;margin:24px 0 36px;
+}
+.geo-banner-question{
+  font-size:14px;color:rgba(180,210,255,.7);
+  margin-bottom:14px;letter-spacing:.5px;
+}
+.geo-banner-answer{
+  font-family:'Noto Serif SC',serif;
+  font-size:24px;color:#fff;font-weight:700;
+  line-height:1.7;letter-spacing:1px;
+}
+.geo-banner-answer .highlight{
+  color:#ffd28a;
+  border-bottom:2px solid #ffd28a;padding-bottom:2px;
+}
+
+.countries-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:28px;
+}
+.country-card{
+  background:rgba(20,40,75,.5);
+  border:1.5px solid rgba(120,180,255,.2);
+  border-radius:14px;
+  padding:24px;text-align:center;
+  position:relative;
+  transition:all .3s;
+}
+.country-card.eliminated{opacity:.45;}
+.country-card.eliminated::after{
+  content:'✗';position:absolute;top:16px;right:18px;
+  color:#ff7a8a;font-size:18px;font-weight:700;
+}
+.country-card.winner{
+  border-color:#ffd28a;
+  background:linear-gradient(135deg,rgba(255,210,138,.1),rgba(20,40,75,.6));
+  box-shadow:0 0 32px rgba(255,210,138,.15);
+}
+.country-card.winner::after{
+  content:'★';position:absolute;top:14px;right:18px;
+  color:#ffd28a;font-size:22px;
+}
+.country-flag{font-size:36px;margin-bottom:12px;}
+.country-name{
+  font-size:18px;font-weight:700;color:#fff;
+  margin-bottom:6px;letter-spacing:.5px;
+}
+.country-fta{
+  font-size:11px;color:rgba(180,210,255,.6);
+  letter-spacing:1.5px;margin-bottom:10px;
+}
+.country-card.winner .country-fta{color:#ffd28a;}
+.country-evaluation{
+  font-size:12.5px;color:rgba(220,235,255,.78);
+  line-height:1.65;margin-top:10px;padding-top:10px;
+  border-top:1px solid rgba(120,180,255,.15);
+}
+.country-card.winner .country-evaluation{
+  color:#ffd28a;font-weight:500;
+}
+
+.strategy-paths{
+  margin-top:36px;
+}
+.strategy-path-title{
+  font-family:'Noto Serif SC',serif;
+  font-size:18px;font-weight:700;color:#fff;
+  margin-bottom:20px;letter-spacing:.8px;
+  padding-left:14px;border-left:4px solid #ffd28a;
+}
+.path-list{display:flex;flex-direction:column;gap:14px;}
+.path-item{
+  display:flex;gap:18px;
+  background:rgba(20,40,75,.4);
+  border:1px solid rgba(120,180,255,.18);
+  border-radius:12px;
+  padding:20px 24px;
+  transition:all .25s;
+}
+.path-item:hover{
+  border-color:rgba(255,210,138,.4);
+  background:rgba(20,40,75,.55);
+}
+.path-num{
+  font-family:'Inter',sans-serif;
+  font-size:32px;font-weight:800;
+  color:#ffd28a;line-height:1;
+  flex-shrink:0;width:50px;
+}
+.path-content{flex:1;}
+.path-step-title{
+  font-size:16px;font-weight:600;color:#fff;
+  margin-bottom:6px;letter-spacing:.4px;
+}
+.path-step-desc{
+  font-size:13.5px;color:rgba(220,235,255,.82);
+  line-height:1.75;
+}
+.path-step-desc strong{color:#ffd28a;}
+
+/* ====== 第三章：双方资源互补 ====== */
+.complement-intro{
+  background:rgba(20,40,75,.4);
+  border:1px solid rgba(120,180,255,.2);
+  border-radius:12px;
+  padding:22px 28px;margin-bottom:32px;
+  font-size:15px;color:rgba(220,235,255,.88);
+  line-height:1.85;
+  border-left:4px solid #5b9eff;
+}
+
+.complement-grid{
+  display:grid;grid-template-columns:1fr auto 1fr;gap:18px;
+  align-items:center;
+}
+.complement-side{
+  background:rgba(20,40,75,.45);
+  border:1.5px solid rgba(120,180,255,.22);
+  border-radius:18px;
+  padding:30px 26px;
+  backdrop-filter:blur(20px);
+  height:100%;
+}
+.complement-side.china{border-top:4px solid #ff6b6b;}
+.complement-side.australia{border-top:4px solid #ffd28a;}
+.complement-flag{font-size:36px;margin-bottom:12px;}
+.complement-side-title{
+  font-family:'Noto Serif SC',serif;
+  font-size:20px;font-weight:700;color:#fff;
+  margin-bottom:6px;letter-spacing:.8px;
+}
+.complement-side-en{
+  font-size:11px;color:rgba(180,210,255,.55);
+  letter-spacing:2.5px;margin-bottom:24px;
+}
+.complement-list{list-style:none;}
+.complement-list li{
+  padding:11px 0;
+  font-size:13.5px;color:rgba(220,235,255,.88);
+  line-height:1.65;
+  border-bottom:1px dashed rgba(120,180,255,.1);
+  display:flex;gap:10px;
+}
+.complement-list li:last-child{border-bottom:none;}
+.complement-list li::before{
+  content:'◆';color:#7fc4ff;flex-shrink:0;
+  font-size:10px;line-height:1.8;
+}
+.complement-side.china .complement-list li::before{color:#ff6b6b;}
+.complement-side.australia .complement-list li::before{color:#ffd28a;}
+.complement-list strong{color:#fff;font-weight:600;}
+
+.complement-fusion{
+  width:80px;height:80px;border-radius:50%;
+  background:linear-gradient(135deg,#ff6b6b,#ffd28a);
+  display:flex;align-items:center;justify-content:center;
+  font-size:36px;
+  box-shadow:0 0 40px rgba(255,210,138,.3);
+  flex-shrink:0;
+}
+
+.fusion-result{
+  margin-top:36px;
+  padding:32px 36px;
+  background:linear-gradient(135deg,rgba(255,210,138,.08),rgba(168,158,255,.05));
+  border:1.5px solid rgba(255,210,138,.3);
+  border-radius:18px;
+}
+.fusion-chain{
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  margin-bottom:20px;flex-wrap:wrap;
+}
+.fusion-chain-item{
+  background:rgba(255,210,138,.12);
+  border:1px solid rgba(255,210,138,.35);
+  border-radius:10px;
+  padding:10px 18px;
+  font-size:14px;color:#fff;font-weight:600;
+  letter-spacing:.5px;
+}
+.fusion-chain-arrow{
+  color:#ffd28a;font-size:18px;font-weight:300;
+}
+.fusion-text{
+  font-size:15px;color:rgba(220,235,255,.92);
+  line-height:1.85;text-align:center;
+}
+.fusion-text strong{color:#ffd28a;font-weight:700;}
+
+.confidential-box{
+  margin-top:28px;
+  background:linear-gradient(135deg,rgba(168,158,255,.12),rgba(91,158,255,.06));
+  border:1.5px solid rgba(168,158,255,.4);
+  border-radius:14px;
+  padding:24px 28px;
+  position:relative;
+}
+.confidential-icon{
+  position:absolute;top:24px;left:24px;
+  font-size:22px;color:#a89eff;
+}
+.confidential-title{
+  font-size:14px;color:#a89eff;font-weight:700;
+  letter-spacing:2px;margin-bottom:10px;
+  padding-left:38px;
+}
+.confidential-content{
+  font-size:13.5px;color:rgba(220,235,255,.88);
+  line-height:1.85;padding-left:38px;
+}
+
+/* ====== 第四章：项目落地证明 ====== */
+.evidence-tabs{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:14px;
+  margin-bottom:24px;
+}
+.evidence-pillar{
+  background:rgba(20,40,75,.42);
+  border:1.5px solid rgba(120,180,255,.2);
+  border-radius:14px;
+  padding:24px;
+  position:relative;
+  transition:all .3s;
+}
+.evidence-pillar:hover{transform:translateY(-3px);}
+.evidence-pillar.cn{border-top:4px solid #ff6b6b;}
+.evidence-pillar.au{border-top:4px solid #ffd28a;}
+.evidence-pillar.tech{border-top:4px solid #5b9eff;}
+.evidence-pillar-title{
+  font-size:13px;font-weight:600;
+  letter-spacing:2px;margin-bottom:18px;
+}
+.evidence-pillar.cn .evidence-pillar-title{color:#ff6b6b;}
+.evidence-pillar.au .evidence-pillar-title{color:#ffd28a;}
+.evidence-pillar.tech .evidence-pillar-title{color:#5b9eff;}
+
+.evidence-list{list-style:none;}
+.evidence-list li{
+  padding:8px 0;
+  font-size:12.5px;color:rgba(220,235,255,.85);
+  line-height:1.6;
+  display:flex;gap:8px;
+}
+.evidence-list li::before{
+  content:'✓';flex-shrink:0;font-weight:700;
+}
+.evidence-pillar.cn .evidence-list li::before{color:#ff6b6b;}
+.evidence-pillar.au .evidence-list li::before{color:#ffd28a;}
+.evidence-pillar.tech .evidence-list li::before{color:#5b9eff;}
+.evidence-list strong{color:#fff;font-weight:600;}
+
+/* ====== 第五章：项目总结 ====== */
+.conclusion-hero{
+  background:linear-gradient(135deg,rgba(255,210,138,.1),rgba(168,158,255,.06));
+  border:1.5px solid rgba(255,210,138,.35);
+  border-radius:24px;
+  padding:48px 50px;
+  margin-top:24px;
+  position:relative;
+}
+.conclusion-quote{
+  font-family:'Noto Serif SC',serif;
+  font-size:20px;color:#fff;font-weight:600;
+  line-height:2;letter-spacing:.8px;
+  text-align:center;margin-bottom:30px;
+}
+.conclusion-quote strong{color:#ffd28a;font-weight:800;}
+.conclusion-quote em{
+  color:#a89eff;font-style:normal;font-weight:600;
+  border-bottom:2px solid #a89eff;padding-bottom:2px;
+}
+
+.value-pillars{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+  margin-top:28px;padding-top:28px;
+  border-top:1px solid rgba(255,210,138,.2);
+}
+.value-pillar{text-align:center;padding:16px 12px;}
+.value-pillar-icon{
+  font-size:30px;margin-bottom:8px;
+}
+.value-pillar-title{
+  font-size:14px;font-weight:700;color:#ffd28a;
+  margin-bottom:6px;letter-spacing:1px;
+}
+.value-pillar-desc{
+  font-size:11.5px;color:rgba(220,235,255,.7);
+  letter-spacing:.5px;line-height:1.5;
+}
+
+.final-statement{
+  margin-top:32px;text-align:center;padding:24px;
+  background:rgba(255,210,138,.06);
+  border-radius:12px;
+}
+.final-statement-text{
+  font-family:'Noto Serif SC',serif;
+  font-size:18px;color:#ffd28a;font-weight:700;
+  letter-spacing:1.5px;line-height:1.7;
+}
+
+/* ====== CTA ====== */
+.cta-section{
+  background:linear-gradient(135deg,rgba(91,158,255,.12),rgba(168,158,255,.08));
+  border:1.5px solid rgba(127,196,255,.3);
+  border-radius:24px;
+  padding:48px 40px;text-align:center;margin-top:32px;
+  backdrop-filter:blur(20px);
+}
+.cta-title{
+  font-family:'Noto Serif SC',serif;
+  font-size:32px;font-weight:800;color:#fff;
+  margin-bottom:14px;letter-spacing:1.2px;
+}
+.cta-sub{
+  font-size:14px;color:rgba(220,235,255,.7);
+  margin-bottom:30px;letter-spacing:.5px;
+}
+.cta-buttons{
+  display:flex;justify-content:center;gap:14px;flex-wrap:wrap;
+}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 32px;border-radius:10px;
+  font-size:14px;font-weight:600;letter-spacing:1px;
+  text-decoration:none;transition:all .25s;
+  cursor:pointer;border:none;font-family:inherit;
+}
+.cta-btn.primary{
+  background:linear-gradient(135deg,#5b9eff,#a89eff);
+  color:#fff;
+  box-shadow:0 6px 20px rgba(91,158,255,.4);
+}
+.cta-btn.primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 28px rgba(91,158,255,.55);
+}
+.cta-btn.secondary{
+  background:rgba(91,158,255,.12);color:#fff;
+  border:1px solid rgba(120,180,255,.35);
+}
+.cta-btn.secondary:hover{background:rgba(91,158,255,.22);}
+
+/* 锚点 */
+section[id]{scroll-margin-top:90px;}
+
+/* 底部 */
+.footer{
+  text-align:center;padding:40px 20px 30px;
+  border-top:1px solid rgba(120,180,255,.1);
+  margin-top:30px;
+}
+.footer-text{
+  font-size:11.5px;color:rgba(168,212,255,.4);
+  letter-spacing:2px;line-height:1.8;
+}
+
+/* ===== 响应式 ===== */
+@media (max-width:1100px){
+  .eras-grid,.complement-grid{grid-template-columns:1fr;gap:18px;}
+  .complement-fusion{margin:0 auto;}
+  .countries-grid{grid-template-columns:1fr;}
+  .evidence-tabs{grid-template-columns:1fr;}
+  .value-pillars{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:768px){
+  .top-nav{padding:14px 16px;flex-wrap:wrap;}
+  .nav-quick{display:none;}
+  .logo-text-en{display:none;}
+  .logo-emblem{width:36px;height:36px;font-size:13px;}
+  .logo-text-cn{font-size:13px;}
+  .back-btn{padding:6px 12px;font-size:11.5px;}
+  
+  .hero{padding:120px 18px 60px;}
+  .hero-title{font-size:30px;letter-spacing:1px;line-height:1.3;}
+  .hero-subtitle{font-size:15px;letter-spacing:3px;}
+  .hero-en{font-size:10px;letter-spacing:3px;}
+  .hero-meta{padding:14px 18px;font-size:12.5px;line-height:1.85;}
+  .hero-classify{font-size:10.5px;letter-spacing:2px;padding:6px 16px;margin-bottom:24px;}
+  
+  .section{padding:50px 18px;}
+  .chapter-num{font-size:42px;}
+  .chapter-title{font-size:23px;letter-spacing:1px;line-height:1.45;}
+  
+  .era-card{padding:24px 22px;}
+  .era-title{font-size:18px;}
+  .era-content{font-size:13.5px;}
+  
+  .gap-callout{padding:24px;}
+  .gap-callout-title,.gap-callout-content{padding-left:0;}
+  .gap-callout::before{display:none;}
+  .gap-callout-mission{font-size:14px;padding:12px 14px;}
+  
+  .geo-banner{padding:22px 18px;}
+  .geo-banner-answer{font-size:17px;line-height:1.6;}
+  
+  .strategy-paths{margin-top:28px;}
+  .path-item{padding:16px 18px;flex-direction:column;gap:8px;}
+  .path-num{font-size:24px;width:auto;}
+  .path-step-title{font-size:14.5px;}
+  .path-step-desc{font-size:13px;}
+  
+  .complement-side{padding:22px 20px;}
+  .complement-side-title{font-size:17px;}
+  
+  .fusion-result{padding:22px 18px;}
+  .fusion-chain-item{font-size:12px;padding:7px 12px;}
+  .fusion-text{font-size:13px;}
+  .fusion-chain-arrow{font-size:14px;}
+  
+  .confidential-box{padding:18px;}
+  .confidential-icon{display:none;}
+  .confidential-title,.confidential-content{padding-left:0;}
+  
+  .evidence-pillar{padding:18px 20px;}
+  
+  .conclusion-hero{padding:28px 22px;}
+  .conclusion-quote{font-size:15px;line-height:1.85;letter-spacing:.5px;}
+  .value-pillar-icon{font-size:24px;}
+  .value-pillar-title{font-size:12px;}
+  .value-pillar-desc{font-size:10.5px;}
+  .final-statement-text{font-size:14px;letter-spacing:.8px;}
+  
+  .cta-section{padding:32px 22px;}
+  .cta-title{font-size:22px;}
+  .cta-buttons{flex-direction:column;}
+  .cta-btn{width:100%;justify-content:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- 顶部导航 -->
+<div class="top-nav">
+  <a href="index.html" class="logo-top">
+    <div class="logo-emblem">联</div>
+    <div>
+      <div class="logo-text-cn">联合国采购投标专家平台</div>
+      <div class="logo-text-en">UN PROCUREMENT EXPERT</div>
+    </div>
+  </a>
+  <div class="nav-quick">
+    <a href="program.html" class="nav-link active">项目介绍</a>
+    <a href="business.html" class="nav-link">商业模式</a>
+    <a href="page2-platform.html" class="nav-link">一带一路</a>
+    <a href="page4-ai-search.html" class="nav-link">AI对话搜索</a>
+  </div>
+  <a href="index.html" class="back-btn">← 返回首页</a>
+</div>
+
+<!-- ============ Hero · 国务院级开场 ============ -->
+<section class="hero">
+  <div class="hero-classify">PROGRAM BRIEFING · 国家战略级项目</div>
+  <h1 class="hero-title">一带一路跨境经济<br>协作融合平台</h1>
+  <div class="hero-subtitle">联 合 国 采 购 项 目</div>
+  <div class="hero-en">BELT & ROAD · CROSS-BORDER ECONOMIC COLLABORATION PLATFORM</div>
+  
+  <div class="hero-meta">
+    项目目前已进入收尾阶段，<strong>AI 研发团队</strong>正在全力开发"联合国采购一体化平台"<br>
+    MVP 已上线运营 · <span class="gold">www.unpt.org</span> · 全球可访问<br>
+    现阶段正式进入<strong>融资落地周期</strong>
+  </div>
+</section>
+
+<!-- ============ 第一章：中国经济40年两阶段 ============ -->
+<section class="section" id="eras">
+  <div class="chapter-tag">
+    <div class="chapter-num">壹</div>
+    <div class="chapter-num-text">
+      <div class="chapter-en">CHAPTER ONE · ECONOMIC ERAS</div>
+      <div class="chapter-cn">第 一 章 · 历 史 维 度</div>
+    </div>
+  </div>
+  <h2 class="chapter-title">中国经济 40 余年发展两大历史阶段</h2>
+  <div class="chapter-divider"></div>
+  
+  <p style="font-size:15px;color:rgba(220,235,255,.85);line-height:1.9;margin-bottom:8px;">
+    中国改革开放四十余年经济发展，可清晰划分为<strong style="color:#fff;">红利增长阶段</strong>与<strong style="color:#fff;">转型探索阶段</strong>两个完整周期：
+  </p>
+  
+  <div class="eras-grid">
+    <!-- 第一阶段 -->
+    <div class="era-card phase1">
+      <div class="era-period">PHASE 1 · 改革开放 — 2013</div>
+      <div class="era-title">人口、政策、市场全面红利期</div>
+      <div class="era-content">
+        <p>自<strong>邓小平同志</strong>开启改革开放国策，对内打破固有体制、鼓励一部分人先富带动后富，激活国内市场经济活力；对外坚持韬光养晦发展战略，低调积累经济实力。</p>
+        <p>后续经<strong>朱镕基时代</strong>央国企深度改革、中国成功加入 <strong>WTO</strong>，全面融入全球贸易体系，依托国内廉价劳动力优势、外资市场准入政策红利、全产业链配套优势，实现经济数十年高速增长。</p>
+        <p>完成工业化基础积累、国民财富原始积累、制造业体系搭建，是<strong>中国经济腾飞的黄金红利周期</strong>。</p>
+      </div>
+    </div>
+    
+    <!-- 第二阶段 -->
+    <div class="era-card phase2">
+      <div class="era-period">PHASE 2 · 2013 至 今</div>
+      <div class="era-title">红利消退、时代变局与战略转型期</div>
+      <div class="era-content">
+        <p>2013 年之后，国内传统发展红利全面消退：人口劳动力成本大幅上涨、传统政策红利见底、粗放式增长模式走到尽头。</p>
+        <p>同时全球环境发生颠覆性变化：欧美对华发起<strong>全方位贸易博弈</strong>、地缘冲突持续爆发、全球经济下行、旧的全球贸易体系崩塌。</p>
+        <p>在此背景下，国家顶层推出<strong>一带一路重大发展战略</strong>，核心宗旨就是完成时代转型，把中国优质产能、中国制造、国内产品规模化输出全球，实现从"引进来"到<strong>"走出去"</strong>的历史性转变。</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 时代缺口 -->
+  <div class="gap-callout">
+    <div class="gap-callout-title">时代缺口 · 国家级历史任务</div>
+    <div class="gap-callout-content">
+      但从 2013-2014 年一带一路战略提出至今，新经济周期下国家这套顶层发展设计，<strong>始终没有一套完整、闭环、可落地、可商业化的底层载体与实操方案</strong>，战略愿景一直未能完全跑通、深度落地，存在<strong>巨大的时代缺口与市场空白</strong>。
+    </div>
+    <div class="gap-callout-mission">
+      → 而我们本项目，就是承接这份国家级历史任务。
+    </div>
+  </div>
+</section>
+
+<!-- ============ 第二章：3+1 战略地缘 ============ -->
+<section class="section" id="strategy">
+  <div class="chapter-tag">
+    <div class="chapter-num">贰</div>
+    <div class="chapter-num-text">
+      <div class="chapter-en">CHAPTER TWO · STRATEGIC POSITIONING</div>
+      <div class="chapter-cn">第 二 章 · 战 略 布 局</div>
+    </div>
+  </div>
+  <h2 class="chapter-title">项目核心战略底层布局</h2>
+  <div class="chapter-divider"></div>
+  
+  <p style="font-size:15px;color:rgba(220,235,255,.85);line-height:1.9;margin-bottom:8px;">
+    本项目全称<strong style="color:#fff;">一带一路跨境经济协作融合平台</strong>，以<strong style="color:#ffd28a;">【联合国采购平台】</strong>为核心流量与业务入口，依托独一无二的地缘经贸优势破局落地。
+  </p>
+  
+  <!-- 关键判断 -->
+  <div class="geo-banner">
+    <div class="geo-banner-question">▼ 全球范围内，和中国签署长效数十年高标准 FTA 的西方国家，仅有：</div>
+    <div class="geo-banner-answer">
+      <span class="highlight">澳大利亚</span> · <span class="highlight">新西兰</span> · <span class="highlight">瑞士</span>
+      &nbsp;&nbsp;<span style="color:rgba(180,210,255,.6);font-size:18px;">三个国家</span>
+    </div>
+  </div>
+  
+  <!-- 三国对比 -->
+  <div class="countries-grid">
+    <div class="country-card eliminated">
+      <div class="country-flag">🇨🇭</div>
+      <div class="country-name">瑞士</div>
+      <div class="country-fta">SWITZERLAND · FTA 2014</div>
+      <div class="country-evaluation">经济体量、市场体量、产业体量过小，<br>不具备规模化承载能力</div>
+    </div>
+    <div class="country-card eliminated">
+      <div class="country-flag">🇳🇿</div>
+      <div class="country-name">新西兰</div>
+      <div class="country-fta">NEW ZEALAND · FTA 2008</div>
+      <div class="country-evaluation">西方发达国家中第一个签署，<br>但市场承载量有限，作为协同支点</div>
+    </div>
+    <div class="country-card winner">
+      <div class="country-flag">🇦🇺</div>
+      <div class="country-name">澳大利亚</div>
+      <div class="country-fta">AUSTRALIA · ChAFTA 2015</div>
+      <div class="country-evaluation">规模 + 资源 + 市场 + 信用<br>全球唯一最优核心支点</div>
+    </div>
+  </div>
+  
+  <!-- 战略路径 -->
+  <div class="strategy-paths">
+    <div class="strategy-path-title">核心战略路径</div>
+    <div class="path-list">
+      <div class="path-item">
+        <div class="path-num">01</div>
+        <div class="path-content">
+          <div class="path-step-title">战略扎根 · 突破口落定</div>
+          <div class="path-step-desc">依托<strong>中澳长期自贸协定优势</strong>，以澳大利亚为<strong>第一海外落地突破口</strong>，完成战略扎根</div>
+        </div>
+      </div>
+      <div class="path-item">
+        <div class="path-num">02</div>
+        <div class="path-content">
+          <div class="path-step-title">产业升级 · 跨境数字物流自贸港</div>
+          <div class="path-step-desc">实现<strong>中国制造向澳大利亚制造升级转型</strong>，在澳洲落地建设跨境数字物流自贸港</div>
+        </div>
+      </div>
+      <div class="path-item">
+        <div class="path-num">03</div>
+        <div class="path-content">
+          <div class="path-step-title">体系入驻 · 补齐战略短板</div>
+          <div class="path-step-desc">将中澳两国<strong>海关、商检、外汇结算、贸易监管</strong>全套体系深度入驻自贸港内部，实现自贸协定全面深化、升级、落地，<strong>补齐一带一路战略多年未落地的关键短板</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 第三章：双方资源互补 ============ -->
+<section class="section" id="complement">
+  <div class="chapter-tag">
+    <div class="chapter-num">叁</div>
+    <div class="chapter-num-text">
+      <div class="chapter-en">CHAPTER THREE · RESOURCE COMPLEMENTARITY</div>
+      <div class="chapter-cn">第 三 章 · 资 源 互 补</div>
+    </div>
+  </div>
+  <h2 class="chapter-title">双方资源优势深度互补<br>构建全产业链闭环</h2>
+  <div class="chapter-divider"></div>
+  
+  <div class="complement-intro">
+    我方整合中澳两国核心优势资源，形成<strong style="color:#ffd28a;">全球独一无二的合作体系</strong>。
+  </div>
+  
+  <!-- 双方资源 -->
+  <div class="complement-grid">
+    <!-- 中国 -->
+    <div class="complement-side china">
+      <div class="complement-flag">🇨🇳</div>
+      <div class="complement-side-title">中国输出</div>
+      <div class="complement-side-en">CHINA OUTPUTS</div>
+      <ul class="complement-list">
+        <li><span><strong>成熟完备的全产业链制造</strong>设施设备</span></li>
+        <li><span><strong>专业产业人才</strong>储备库</span></li>
+        <li><span><strong>雄厚资金储备</strong>与产业资本</span></li>
+        <li><span><strong>成熟全球物流配套</strong>体系</span></li>
+        <li><span><strong>完整供应链产能</strong>，可快速规模化</span></li>
+      </ul>
+    </div>
+    
+    <!-- 融合 -->
+    <div class="complement-fusion">⚡</div>
+    
+    <!-- 澳大利亚 -->
+    <div class="complement-side australia">
+      <div class="complement-flag">🇦🇺</div>
+      <div class="complement-side-title">澳大利亚输出</div>
+      <div class="complement-side-en">AUSTRALIA OUTPUTS</div>
+      <ul class="complement-list">
+        <li><span><strong>全球顶尖自然资源</strong>禀赋</span></li>
+        <li><span><strong>严苛高标准质量认证</strong>体系</span></li>
+        <li><span><strong>成熟终端消费市场</strong>渠道</span></li>
+        <li><span><strong>国际高端信用</strong>体系背书</span></li>
+        <li><span><strong>完善健全法律合规</strong>体系</span></li>
+        <li><span><strong>西方主流商业市场</strong>准入资格</span></li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- 融合结果 -->
+  <div class="fusion-result">
+    <div class="fusion-chain">
+      <div class="fusion-chain-item">源头生产</div>
+      <div class="fusion-chain-arrow">→</div>
+      <div class="fusion-chain-item">跨境流通</div>
+      <div class="fusion-chain-arrow">→</div>
+      <div class="fusion-chain-item">终端销售</div>
+    </div>
+    <div class="fusion-text">
+      双方优势深度融合后，打通<strong>端到端全产业链闭环</strong>，<br>
+      <strong>打破西方数百年主导的虚拟经济、传统老旧商业模式、全球贸易运营体系与市场规则</strong>。<br>
+      自主打造<strong>从中国制造直达全球终端市场</strong>的全新商业运行模式。
+    </div>
+  </div>
+  
+  <!-- 核心机密 -->
+  <div class="confidential-box">
+    <div class="confidential-icon">🔒</div>
+    <div class="confidential-title">CONFIDENTIAL · 核心机密说明</div>
+    <div class="confidential-content">
+      现阶段整套核心底层商业模式（含<strong style="color:#a89eff;">8 大企业运营管理质量体系</strong>）属于项目核心商业机密，<strong style="color:#fff;">将在签订 NDA 后与战略合作方深度沟通</strong>。这是本项目最核心的壁垒与核心资产，是完全自主、不可复制、独家专属的全新商业运行模式、市场运营体系、产业链盈利逻辑。
+    </div>
+  </div>
+</section>
+
+<!-- ============ 第四章：项目落地证明 ============ -->
+<section class="section" id="evidence">
+  <div class="chapter-tag">
+    <div class="chapter-num">肆</div>
+    <div class="chapter-num-text">
+      <div class="chapter-en">CHAPTER FOUR · IMPLEMENTATION EVIDENCE</div>
+      <div class="chapter-cn">第 四 章 · 落 地 证 据</div>
+    </div>
+  </div>
+  <h2 class="chapter-title">国家战略 · 落地证据<br>双重支撑体系</h2>
+  <div class="chapter-divider"></div>
+  
+  <p style="font-size:15px;color:rgba(220,235,255,.85);line-height:1.9;margin-bottom:24px;">
+    本项目已建立完整的"<strong style="color:#fff;">国家战略 + 落地证据</strong>"双重支撑：
+  </p>
+  
+  <div class="evidence-tabs">
+    <!-- 中国侧 -->
+    <div class="evidence-pillar cn">
+      <div class="evidence-pillar-title">🇨🇳 中国侧 · CHINA SIDE</div>
+      <ul class="evidence-list">
+        <li><span><strong>北京代表处</strong> 10年合法资质<br>北京市市监局批准 No.1011837</span></li>
+        <li><span>对接联合国纽约总部<br><strong>采购主管 David</strong> 战略合作</span></li>
+        <li><span>已联合主办<strong>"联合国采购对接会"</strong><br>2026.4 中国杨凌</span></li>
+        <li><span>与上市公司<strong>心域数字</strong>（870366）<br>战略合作</span></li>
+        <li><span>河南省政府 + <strong>河南航空港集团</strong><br>核心战略支点</span></li>
+      </ul>
+    </div>
+    
+    <!-- 澳洲侧 -->
+    <div class="evidence-pillar au">
+      <div class="evidence-pillar-title">🇦🇺 澳洲侧 · AUSTRALIA SIDE</div>
+      <ul class="evidence-list">
+        <li><span><strong>澳中自由贸易协会</strong><br>2015.1 成立 · 悉尼总部</span></li>
+        <li><span>分会布局：<strong>北京/上海/深圳</strong><br>www.chafta.org.au</span></li>
+        <li><span>澳洲国会议员 <strong>Hon Bob Katter MP</strong><br>深度合作</span></li>
+        <li><span>3 位市长签约：<br><strong>汤兹维尔 / 里士满 / 查特斯塔</strong></span></li>
+        <li><span>万亩级土地项目：<br><strong>3+6+2 万亩 + 2000 万亩</strong>农业</span></li>
+      </ul>
+    </div>
+    
+    <!-- 数字基础设施 -->
+    <div class="evidence-pillar tech">
+      <div class="evidence-pillar-title">🌐 数字基础设施</div>
+      <ul class="evidence-list">
+        <li><span>MVP 已上线：<br><strong>www.unpt.org</strong> 全球可访问</span></li>
+        <li><span>协会官网：<br><strong>www.chafta.org.au</strong> 运营 10 年</span></li>
+        <li><span><strong>AI 大模型</strong>驱动的核心平台<br>已进入收尾阶段</span></li>
+        <li><span>4 大核心模块：登录 / 平台 / 注册 / AI</span></li>
+        <li><span>桌面 + 手机端<br><strong>完美适配</strong></span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 第五章：项目总结 ============ -->
+<section class="section" id="conclusion">
+  <div class="chapter-tag">
+    <div class="chapter-num">伍</div>
+    <div class="chapter-num-text">
+      <div class="chapter-en">CHAPTER FIVE · CONCLUSION</div>
+      <div class="chapter-cn">第 五 章 · 项 目 总 结</div>
+    </div>
+  </div>
+  <h2 class="chapter-title">超级体量战略项目 · 时代级机遇</h2>
+  <div class="chapter-divider"></div>
+  
+  <div class="conclusion-hero">
+    <div class="conclusion-quote">
+      本项目<strong>不是普通平台创业</strong>、<strong>不是普通互联网项目</strong>。<br><br>
+      是<em>踩中中国经济时代拐点</em>、<em>承接国家一带一路未完成战略</em>、<br>
+      <em>依托国家级自贸协定红利</em>、<em>重构全球跨境贸易规则</em><br>
+      的<strong>超级体量战略项目</strong>。
+    </div>
+    
+    <div class="value-pillars">
+      <div class="value-pillar">
+        <div class="value-pillar-icon">⏰</div>
+        <div class="value-pillar-title">时代机遇</div>
+        <div class="value-pillar-desc">经济周期拐点</div>
+      </div>
+      <div class="value-pillar">
+        <div class="value-pillar-icon">🏛️</div>
+        <div class="value-pillar-title">政策底座</div>
+        <div class="value-pillar-desc">一带一路顶层</div>
+      </div>
+      <div class="value-pillar">
+        <div class="value-pillar-icon">🛡️</div>
+        <div class="value-pillar-title">资源壁垒</div>
+        <div class="value-pillar-desc">3+1 国家独占</div>
+      </div>
+      <div class="value-pillar">
+        <div class="value-pillar-icon">🚀</div>
+        <div class="value-pillar-title">商业空间</div>
+        <div class="value-pillar-desc">超高天花板</div>
+      </div>
+    </div>
+    
+    <div class="final-statement">
+      <div class="final-statement-text">
+        当下唯一能完美承接<br>新旧经济周期转型的<br>落地型标杆项目
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="section">
+  <div class="cta-section">
+    <h2 class="cta-title">寻找战略合作伙伴</h2>
+    <p class="cta-sub">国家战略级项目 · 期待与央企、产业资本、战略投资人深度合作</p>
+    <div class="cta-buttons">
+      <a href="mailto:wsl@unpt.org" class="cta-btn primary">
+        战略对接 · wsl@unpt.org
+      </a>
+      <a href="business.html" class="cta-btn secondary">
+        商业模式详情 →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 底部 -->
+<div class="footer">
+  <div class="footer-text">
+    联合国全球市场采购培训服务中心北京代表处 · 澳大利亚中国自由贸易协会<br>
+    www.unpt.org · www.chafta.org.au
+  </div>
+</div>
+
+</body>
+</html>
