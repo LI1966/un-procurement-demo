@@ -109,50 +109,83 @@ body{font-family:'Noto Sans SC','Inter',-apple-system,sans-serif;color:#333;}
 .channel-arrow{font-size:13px;color:rgba(180,210,255,.3);transition:all .3s;font-weight:300;}
 .channel:hover .channel-arrow{color:#a8c9ff;transform:translateX(4px);}
 
-/* 商业模式入口（NEW） - 给 SOE/VC 看的入口 */
-.business-link{
-  display:flex;align-items:center;gap:14px;
-  margin-top:18px;padding:16px 18px;
+/* 双入口（NEW · 国家战略级 + 商业体系） */
+.vip-links{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+  margin-top:18px;
+}
+.vip-link{
+  display:flex;align-items:center;gap:11px;
+  padding:14px 14px;
   text-decoration:none;
-  background:linear-gradient(135deg,rgba(255,210,138,.08),rgba(168,158,255,.05));
-  border:1px solid rgba(255,210,138,.25);
   border-radius:12px;
   position:relative;overflow:hidden;
   transition:all .3s;
 }
-.business-link::before{
+.vip-link::before{
   content:'';position:absolute;top:0;left:0;
   width:3px;height:100%;
-  background:linear-gradient(180deg,#ffd28a,#ffb84a);
+  background:var(--accent-color);
 }
-.business-link:hover{
-  background:linear-gradient(135deg,rgba(255,210,138,.14),rgba(168,158,255,.08));
-  border-color:rgba(255,210,138,.45);
-  transform:translateX(4px);
-  box-shadow:0 6px 24px rgba(255,210,138,.12);
+
+/* 项目介绍 - 金色（国务院级） */
+.program-link{
+  --accent-color:linear-gradient(180deg,#ffd28a,#ffb84a);
+  background:linear-gradient(135deg,rgba(255,210,138,.1),rgba(168,158,255,.05));
+  border:1px solid rgba(255,210,138,.3);
 }
-.biz-icon{
-  width:36px;height:36px;border-radius:8px;
-  background:rgba(255,210,138,.12);
+.program-link:hover{
+  background:linear-gradient(135deg,rgba(255,210,138,.16),rgba(168,158,255,.08));
+  border-color:rgba(255,210,138,.5);
+  transform:translateX(3px);
+  box-shadow:0 6px 24px rgba(255,210,138,.15);
+}
+.program-link .vip-icon{background:rgba(255,210,138,.14);color:#ffd28a;}
+.program-link .vip-tag{color:#ffd28a;background:rgba(255,210,138,.14);}
+.program-link .vip-arrow{color:rgba(255,210,138,.5);}
+.program-link:hover .vip-arrow{color:#ffd28a;transform:translateX(3px);}
+
+/* 商业模式 - 蓝紫色（商业体系） */
+.business-link-new{
+  --accent-color:linear-gradient(180deg,#7fc4ff,#5b9eff);
+  background:linear-gradient(135deg,rgba(127,196,255,.08),rgba(91,158,255,.04));
+  border:1px solid rgba(127,196,255,.28);
+}
+.business-link-new:hover{
+  background:linear-gradient(135deg,rgba(127,196,255,.14),rgba(91,158,255,.08));
+  border-color:rgba(127,196,255,.45);
+  transform:translateX(3px);
+  box-shadow:0 6px 24px rgba(127,196,255,.15);
+}
+.business-link-new .vip-icon{background:rgba(127,196,255,.14);color:#7fc4ff;}
+.business-link-new .vip-tag{color:#7fc4ff;background:rgba(127,196,255,.14);}
+.business-link-new .vip-arrow{color:rgba(127,196,255,.5);}
+.business-link-new:hover .vip-arrow{color:#7fc4ff;transform:translateX(3px);}
+
+.vip-icon{
+  width:34px;height:34px;border-radius:8px;
   display:flex;align-items:center;justify-content:center;
-  color:#ffd28a;flex-shrink:0;
+  flex-shrink:0;
 }
-.biz-icon svg{width:20px;height:20px;}
-.biz-content{flex:1;min-width:0;}
-.biz-title{
-  font-size:14px;font-weight:600;color:#fff;
-  letter-spacing:.4px;margin-bottom:3px;
+.vip-icon svg{width:18px;height:18px;}
+.vip-content{flex:1;min-width:0;}
+.vip-tag{
+  display:inline-block;
+  padding:2px 7px;border-radius:4px;
+  font-size:9px;font-weight:600;
+  letter-spacing:1.5px;margin-bottom:4px;
 }
-.biz-meta{
-  font-size:11px;color:rgba(255,210,138,.7);
+.vip-title{
+  font-size:13.5px;font-weight:600;color:#fff;
+  letter-spacing:.4px;margin-bottom:2px;
+}
+.vip-meta{
+  font-size:10.5px;color:rgba(220,235,255,.6);
   letter-spacing:.3px;font-weight:300;line-height:1.5;
 }
-.biz-arrow{
-  font-size:14px;color:rgba(255,210,138,.5);
-  transition:all .3s;font-weight:300;flex-shrink:0;
-}
-.business-link:hover .biz-arrow{
-  color:#ffd28a;transform:translateX(4px);
+.vip-arrow{
+  font-size:14px;font-weight:300;
+  transition:all .3s;flex-shrink:0;
 }
 
 .login-right{
@@ -295,14 +328,17 @@ body{font-family:'Noto Sans SC','Inter',-apple-system,sans-serif;color:#333;}
     font-size:11px;line-height:1.5;
   }
   
-  /* 商业模式入口手机适配 */
-  .business-link{
-    margin-top:14px;padding:13px 14px;gap:11px;
+  /* 双入口手机适配（小屏改为单列） */
+  .vip-links{
+    grid-template-columns:1fr;gap:8px;
+    margin-top:14px;
   }
-  .biz-icon{width:32px;height:32px;}
-  .biz-icon svg{width:17px;height:17px;}
-  .biz-title{font-size:13px;margin-bottom:2px;}
-  .biz-meta{font-size:10.5px;letter-spacing:.2px;line-height:1.45;}
+  .vip-link{padding:11px 12px;gap:9px;}
+  .vip-icon{width:30px;height:30px;}
+  .vip-icon svg{width:16px;height:16px;}
+  .vip-tag{font-size:8.5px;padding:2px 6px;letter-spacing:1px;}
+  .vip-title{font-size:12.5px;margin-bottom:1px;}
+  .vip-meta{font-size:10px;letter-spacing:.2px;line-height:1.4;}
   
   .login-right{
     padding:32px 20px 40px;
@@ -434,19 +470,41 @@ body{font-family:'Noto Sans SC','Inter',-apple-system,sans-serif;color:#333;}
 
       </div>
 
-      <!-- 商业模式入口（NEW） -->
-      <a href="business.html" class="business-link">
-        <div class="biz-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 17h18M5 17V9l7-5 7 5v8M9 17v-5M15 17v-5"/>
-          </svg>
-        </div>
-        <div class="biz-content">
-          <div class="biz-title">商业模式 · 国家战略级商业体系</div>
-          <div class="biz-meta">一带一路 · 跨境经济 · 双垄断破局 · 七大平台架构</div>
-        </div>
-        <div class="biz-arrow">→</div>
-      </a>
+      <!-- 双入口（NEW · 国家战略级专属入口） -->
+      <div class="vip-links">
+        <!-- 项目介绍（金色 · 国务院级） -->
+        <a href="program.html" class="vip-link program-link">
+          <div class="vip-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="3" width="16" height="18" rx="1.5"/>
+              <line x1="8" y1="8" x2="16" y2="8"/>
+              <line x1="8" y1="12" x2="16" y2="12"/>
+              <line x1="8" y1="16" x2="13" y2="16"/>
+            </svg>
+          </div>
+          <div class="vip-content">
+            <div class="vip-tag">国家战略级</div>
+            <div class="vip-title">项目介绍</div>
+            <div class="vip-meta">一带一路·跨境经济协作融合平台</div>
+          </div>
+          <div class="vip-arrow">→</div>
+        </a>
+
+        <!-- 商业模式（蓝色 · 商业体系） -->
+        <a href="business.html" class="vip-link business-link-new">
+          <div class="vip-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 17h18M5 17V9l7-5 7 5v8M9 17v-5M15 17v-5"/>
+            </svg>
+          </div>
+          <div class="vip-content">
+            <div class="vip-tag">商业体系</div>
+            <div class="vip-title">商业模式</div>
+            <div class="vip-meta">双垄断破局·七大平台·收入结构</div>
+          </div>
+          <div class="vip-arrow">→</div>
+        </a>
+      </div>
 
     </div>
   </div>
